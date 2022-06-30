@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB ADMIN</title>
+    <link rel="stylesheet" href="/app/w3.css" prefetech>
+    <link rel="stylesheet" href="/app/style.css" prefetech>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" prefetech>
+    <link href="/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
+    <meta name="description" content="Aplikasi PPDB SD 2021/2022">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="/admin/exceltabel.js"></script>
+
+</head>
+
+<body>
+    <!-- top bar-->
+    <div class=" w3-top w3-blue w3-center">
+        <div class="w3-bar w3-padding" style="width: 90%;">
+
+
+            <div class="w3-teal w3-button  w3-bar-item" onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div class="w3-left w3-lobster font-effect-shadow-multiple w3-text-red w3-container">ADMIN PPDB SD
+            </div>
+            <!-- <img src="/app/favicon.png" class="w3-bar-item" /> -->
+
+            <div class="w3-right w3-bar-item w3-green w3-button barcari"><i class="fa fa-search"></i></div>
+        </div>
+
+    </div>
+    <!-- sidebar-->
+    <nav class="w3-sidebar w3-aqua w3-bar-block w3-top w3-animate-left" style="z-index:3;width:280px;display: none;">
+        <div class="w3-container w3-row">
+            <div class="w3-col s4  w3-center">
+                <img src="/app/logosekolah.png" class="w3-circle" style="width:85px" />
+            </div>
+            <div class="w3-col s8 w3-center  w3-lobster font-effect-shadow-multiple">
+                PPDB
+            </div>
+            <div class="w3-col s8 w3-center namasekolah">
+                SDN BETA 1
+            </div>
+            <div class="w3-col s8 w3-center">
+                2021/2022
+            </div>
+        </div>
+        <hr class="w3-border-gray w3-border w3-border-bottom" />
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="btn_logout()"><i class="fa fa-user"></i>
+            Logout</a>
+        <hr class="w3-border-gray w3-border w3-border-bottom" />
+        Menu:
+        <a class="w3-teal w3-button w3-bar-item" onclick="menu_beranda()"><i class="fa fa-home"></i>
+            Beranda</a>
+
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_jadwal()"><i
+                class="fa fa-calendar-check-o"></i> Jadwal</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_kuota()"><i class="fa fa-group"></i>
+            Kuota</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_persyaratan()"><i
+                class="fa fa-book"></i>
+            Persyaratan</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_alur()"><i class="fa fa-random"></i>
+            Alur</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_statistika()"><i
+                class="fa fa-line-chart"></i> Statistik</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_seleksi()"><i
+                class="fa fa-sort-alpha-asc"></i> Seleksi</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-button" onclick="menu_pesan()"><i class="fa fa-comment"></i>
+            Pesan</a>
+        <a href="javascript:void(0);" class="w3-bar-item w3-orange w3-hover-red w3-button" onclick="w3_close()"
+            title="Keluar dari menu">Keluar</a>
+
+    </nav>
+    <!-- bar searching-->
+    <div class="w3-white w3-padding w3-animate-top sidebarcari"
+        style="display:none;z-index: 3;top:0;position: fixed;width:100%;">
+        <div class="w3-left">
+            Anda dapat mencari data pendaftar berdasarkan:
+            <div class="w3-row">
+                <label>
+                    <input type="radio" name="pilihpencarian" value="nama_cpdb" class="kriteria_cari">
+                    Nama CPDB
+                </label>
+                <label>
+                    <input type="radio" name="pilihpencarian" value="id_pendaftar" class="kriteria_cari">
+                    ID Pendaftar
+
+                </label>
+                <input class="w3-bar-item w3-border w3-col s8 w3-input w3-border-black w3-round w3-left"
+                    placeholder="Masukan kode pendaftaran" name="inputcari" oninput="ketik_kapital(this)">
+                <button class="w3-button w3-left w3-green w3-left" onclick="caridatapendaftar()"><i
+                        class="fa fa-search"></i>Cari</button>
+            </div>
+        </div>
+
+        <div class="w3-clear"></div>
+    </div>
+    <!--overlay untuk "sidebar" dan "bar searching"-->
+    <div class="w3-overlay w3-animate-opacity overlaycari" style="z-index: 2;" title="Keluar">
+    </div>
+    <!--div Header-->
+    <div class="w3-main w3-opacity-min" style="margin-top:50px">
+        <header class="w3-center"
+            style="background-image: url(/app/Kantorcamatcipayungdepok.webp);background-size: 100% 100%;background-repeat: no-repeat;">
+            <!-- <div class="w3-white w3-opacity-min" style="width:90%;margin:0 auto"> -->
+            <img src="/app/logosekolah.png" alt="logo sekolah" style="width: 100px;" />
+            <br />
+            <span class="w3-xxlarge w3-white w3-lobster font-effect-shadow-multiple">
+                ADMIN PPDB SD </span><br />
+            <span class="w3-xxlarge w3-white  w3-lobster font-effect-shadow-multiple namasekolah">
+                SDN </span><br />
+            <span class="w3-large w3-white  w3-lobster font-effect-shadow-multiple">
+                Tahun Pelajaran 2021/2022</span>
+            <!-- </div> -->
+        </header>
+    </div>
+    <!-- PENGATURAN SISTEM PPDB-->
+    <div class="w3-container w3-large w3-yellow" style="width:95%;margin:0 auto">
+        <i class="fa fa-home"></i> Anda Login sebagai <span class="whoiam"></span>
+    </div>
+    <div class="w3-border-bottom w3-container breadcumb_setting pointerkan" style="width:95%;margin:0 auto">
+        <i class="fa fa-caret-right"></i> Pengaturan Sistem PPDB
+        <span class="w3-right pointerkan colapse_pengaturan" title="Tutup Pengaturan"><i
+                class="fa fa-angle-double-up"></i></span>
+    </div>
+    <div class="w3-main div_collapse_setting w3-hide">
+        <div class="w3-row " style="width:95%;margin:0 auto">
+            <div class="w3-col m1 l1 w3-hide-small">
+                <div class="w3-bar-block w3-dark-grey">
+                    <div class="w3-bar-item w3-button" title="Setting Jadwal" onclick="set_jadwal()"><i
+                            class="fa  fa-calendar-check-o "></i> Setting Jadwal
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Persyaratan" onclick="set_persyaratan()"><i
+                            class="fa  fa-book"></i> Setting Persyaratan
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Pagu" onclick="set_pagu()"><i
+                            class="fa fa-group"></i> Setting Pagu
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Seleksi" onclick="set_seleksi()"><i
+                            class="fa fa-sort-numeric-asc"></i> Seting Seleksi
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Konten Tutorial" onclick="set_yt()"><i
+                            class="fa fa-youtube"></i> Setting Tutorial
+                    </div>
+                     <div class="w3-bar-item w3-button" title="Setting Informasi di Web Pendaftar" onclick="set_info()"><i
+                        class="fa fa-info"></i> Setting Informasi
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m10 l10 w3-hide-large w3-hide-medium">
+                <div class="w3-bar w3-dark-grey">
+                    <div class="w3-bar-item w3-button" title="Setting Jadwal" onclick="set_jadwal()"><i class=" fa
+                        fa-calendar-check-o"></i> Setting Jadwal
+                    </div>
+                    <div class=" w3-bar-item w3-button" title="Setting Persyaratan" onclick="set_persyaratan()"><i
+                            class="fa  fa-book"></i> Setting Persyaratan
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Pagu" onclick="set_pagu()"><i
+                            class="fa fa-group"></i> Setting Pagu
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Seleksi" onclick="set_seleksi()"><i
+                            class="fa fa-sort-numeric-asc"></i> Setting Seleksi
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Setting Konten Tutorial" onclick="set_yt()"><i
+                            class="fa fa-youtube"></i> Setting Youtube
+                    </div>
+                     <div class="w3-bar-item w3-button" title="Setting Informasi di Web Pendaftar" onclick="set_info()"><i
+                        class="fa fa-info"></i> Setting Informasi
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m11 l11 s12 w3-padding div_setting" style="overflow-x: auto;">
+                <h2 class="w3-center">Selamat Datang di Aplikasi Web PPDB SD</h2>
+                Halaman ini adalah halaman Pengaturan konten Web Utama. Segala informasi yang Anda (Panitia PPDB) atur
+                disetting di halaman ini. Silakan pilih menu untuk mengaturnya.
+            </div>
+        </div>
+    </div>
+    <!-- PEKERJAAN ADMIN-->
+    <div class="w3-border-top w3-border-bottom w3-container breadcumb pointerkan" style="width:95%;margin:0 auto">
+        <i class="fa fa-caret-right"></i> Verifikasi dan Publikasi
+        <span class="w3-right pointerkan colapse_verifikasi" title="tutup"><i class="fa fa-angle-double-up"></i></span>
+    </div>
+    <div class=" w3-main div_collapse_verifikasi">
+        <div class="w3-row " style=" width:95%;margin:0 auto">
+            <div class="w3-col m2 l1 w3-hide-small w3-hide-medium">
+                <div class="w3-bar-block w3-light-gray">
+                    <div class="w3-bar-item w3-button" title="Data Pendaftar" onclick="verif_menu()"><i
+                            class="fa fa-file-text"></i> Data Pendaftar
+
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Tahap Seleksi" onclick="verif_seleksi()"><i
+                            class="fa fa-sort-numeric-asc"></i> Tahap Seleksi
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Pembagian Kelas" onclick="fn_finalppdb()"><i
+                            class="fa fa-group"></i> Daftar Ulang
+                    </div>
+                    <div class="w3-bar-item w3-button" title=""><i class="fa fa-home"></i></div>
+                </div>
+            </div>
+            <div class="w3-col m10 l10 w3-hide-large">
+                <div class="w3-bar w3-light-gray">
+                    <div class="w3-bar-item w3-button" title="Data Pendaftar" onclick="verif_menu()"><i
+                            class="fa fa-file-text"></i> Data Pendaftar
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Tahap Seleksi" onclick="verif_seleksi()"><i
+                            class="fa fa-sort-numeric-asc"></i> Tahap Seleksi
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Pembagian Kelas" onclick="fn_finalppdb()"><i
+                            class="fa fa-group"></i> Daftar Ulang
+                    </div>
+                    <div class="w3-bar-item w3-button" title=""><i class="fa fa-home"></i></div>
+                </div>
+            </div>
+            <div class="w3-col m11 l11 w3-container w3-border-bottom" style="overflow-x: auto;">
+                <h2 class="w3-center h2_judul_verif">Selamat Datang di Aplikasi Web PPDB SD</h2>
+                <p class="teks_tambahan_judul_verif">
+                    Halaman ini adalah halaman verifikasi, tempat Panitia PPDB mengolah data.
+                </p>
+            </div>
+            <br />
+            <br class="w3-clear" />
+            <div class="w3-col m11 l11 s12 w3-padding w3-card-4 w3-round-large result_verifikasi w3-jutify"
+                style="overflow-x: auto;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis esse delectus, nulla nobis ipsa nam!
+                Modi, vero soluta quo nisi est voluptatibus inventore magni nihil tempora exercitationem voluptatem non
+                officia.
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- <div class="w3-main">
+        <div class="w3-center w3-container w3-border" style="width:90%;margin:0 auto">
+            <i class="fa fa-gears w3-xlarge"></i> Atur Ulang Informasi PPDB <b class="namasekolah">SDN Beta 1</b>:
+            <div class="w3-row-padding w3-center ">
+                <div class="w3-third" onclick="menu_jadwal()">
+                    <div class="w3-container w3-center w3-border w3-padding w3-aqua">
+                        <i class="fa fa-calendar-check-o w3-xxxlarge"></i><br />
+                        Jadwal
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_persyaratan()">
+                    <div class="w3-container w3-center w3-border  w3-padding w3-pale-green">
+                        <i class="fa fa-book w3-xxxlarge"></i><br />
+                        Persyaratan
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_kuota()">
+                    <div class="w3-container w3-center w3-border w3-padding w3-aqua">
+                        <i class="fa fa-group w3-xxxlarge"></i><br />
+                        Kuota/Pagu
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_alur()">
+                    <div class="w3-container w3-center w3-border  w3-padding w3-light-blue">
+                        <i class="fa fa-random w3-xxxlarge"></i><br />
+                        Alur
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_statistika()">
+                    <div class="w3-container w3-center w3-border  w3-padding w3-cyan">
+                        <i class="fa fa-bar-chart w3-xxxlarge"></i><br />
+                        Statistik
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_seleksi()">
+                    <div class="w3-container w3-center w3-border  w3-padding w3-pale-green">
+                        <i class="fa fa-sort-numeric-asc w3-xxxlarge"></i><br />
+                        Seleksi
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_cari()">
+                    <div class="w3-container w3-center w3-border w3-padding w3-purple">
+                        <i class="fa fa-search w3-xxxlarge"></i><br />
+                        Cari
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_tutorial()">
+                    <div class="w3-container w3-center w3-border w3-padding w3-light-blue">
+                        <i class="fa fa-youtube w3-xxxlarge"></i><br />
+                        Tutorial
+                    </div>
+                </div>
+                <div class="w3-third" onclick="menu_pesan()">
+                    <div class="w3-container w3-center w3-border w3-padding w3-indigo">
+                        <i class="fa fa-comment w3-xxxlarge"></i><br />
+                        Pesan
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="viewscroll"></div>
+    </div>
+    <div class="w3-clear"></div>
+    <div class="w3-main w3-margin">
+        <div class="resultmenu " style="width:90%;margin:0 auto">
+            <h3>Informasi Umum</h3>
+            <div class="w3-card-4 w3-padding w3-round-large w3-justify">
+                Berikut adalah sekilas informasi mengenai PPDB <span class="namasekolah">SDN Beta 1</span> di Kota Depok
+                Tahun Pelajaran 2021 / 2022.<br />
+                Bagi anda calon peserta, harap membaca Sajian Informasi pendaftaran dengan seksama sebelum melakukan
+                proses pendaftaran. Demikian informasi ini dan terima kasih atas perhatian dan kerjasamanya.
+            </div>
+            <br />
+            <div class="w3-card-4 w3-padding w3-round">
+                <h3>
+                    Tahapan pendaftaran:
+                </h3>
+                <div class="w3-card-2 w3-padding">
+                    <h4>Calon Peserta Didik Baru Melakukan</h4>
+                    <ul class="w3-ul">
+                        <li>
+                            &checkmark; Membaca dengan baik Informasi pendaftaran
+                        </li>
+                        <li>
+                            &checkmark; Mempersiapkan dokumen persyaratan
+                        </li>
+                        <li>
+                            &checkmark; Pendaftaran Online dan unggah berkas
+                        </li>
+                    </ul>
+                </div>
+                <br />
+                <div class="w3-card-2 w3-padding">
+                    <h4>Panitia PPDB dan Tim Verifikasi</h4>
+                    <ul class="w3-ul">
+                        <li>
+                            &checkmark; memverifikasi persyaratan dan data ajuan persyaratan
+                        </li>
+                    </ul>
+                </div> <br />
+                <div class="w3-card-2 w3-padding">
+                    <h4>Calon Peserta Didik Baru Memantau</h4>
+                    <ul class="w3-ul">
+                        <li>
+                            &checkmark; Memantau hasil verifikasi persyaratan
+                        </li>
+                        <li>
+                            &checkmark; Mengunggah ulang jika tim verifikasi memintanya
+                        </li>
+                        <li>
+                            &checkmark; Memantau hasil seleksi
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ -->
+
+
+    <div id="previewpoto" class="w3-modal" onclick="this.style.display='none'">
+        <div class="w3-modal-content w3-animate-zoom">
+            <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+            <img id="zoompoto" style="width:100%" alt="zoom gambar">
+        </div>
+    </div>
+    <div class="w3-modal" id="overlayloading">
+        <button onclick="overlayloading.style.display='none'" class="w3-button w3-red w3-right"
+            title="Tutup Paksa">&times</button>
+        <div class="w3-animate-opacity" style="top:50%;left:25%;margin:0;position: absolute;">
+
+            <img src="/app/barloading.gif" alt="proses loading">
+
+        </div>
+    </div>
+    <div class="w3-modal w3-white w3-animate-zoom" id="id_modal_info">
+        <div class="w3-modal-content w3-card-4" style="width:58%">
+            <span class="w3-btn w3-red w3-right w3-card-4 tutupteksinfomodal"
+                onclick="id_modal_info.style.display='none';document.querySelector('.teks_info_modal').innerHTML=''">&times;</span>
+            <div class=" w3-container teks_info_modal w3-margin">
+                INI KONTEN MATERI
+            </div>
+        </div>
+    </div>
+    <div class="w3-modal w3-white" id="resultcari">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-center w3-container w3-teal">
+                <span class="w3-button w3-display-topright w3-red w3-hover-blue"
+                    onclick="fn_close_cari()">&times;</span>
+                <h3 class="w3-center">Hasil Pencarian</h3>
+            </header>
+            <div class="w3-container teksresultcari">
+            </div>
+
+        </div>
+    </div>
+    <iframe id="iframeprint" name="iframeprint" class="w3-hide"></iframe>
+    <div id="frameexcel" class="w3-hide"></div>
+
+    <script>
+        let lc, ipe
+        if (localStorage.hasOwnProperty("datalogin")) {
+            lc = JSON.parse(localStorage.getItem('datalogin'));
+            document.querySelector(".whoiam").innerHTML = lc.id_namaasli + "(admin " + lc.id_panitia + ")"
+            // console.log(lc);
+            ipe = lc.id_panitia
+            //console.log(ipe)
+            if (ipe == "super") {
+                document.querySelector(".breadcumb_setting").className = document.querySelector(".breadcumb_setting")
+                    .className.replace(" w3-hide", "");
+                document.querySelector(".div_collapse_setting").className = document.querySelector(
+                    ".div_collapse_setting").className.replace(" w3-hide", "");
+                setTimeout(() => {
+                    document.querySelector(".breadcumb").click();
+                }, 1000)
+            } else {
+                document.querySelector(".breadcumb_setting").className += " w3-hide"
+                document.querySelector(".div_collapse_setting").className += " w3-hide"
+
+            }
+            // console.log(localStorage)
+            // window.location.replace("/user/admin.html");
+
+
+        } else {
+            // console.log(localStorage)
+            window.location.replace("/index.html");
+        }
+    </script>
+   <script src="/user/script.js?v=4.01234"></script>
+    <script src="https://opk3scipayung.net/rekap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+h1 {
+    font-family: "Raleway", sans-serif
+}
+
+body,
+html {
+    height: 100%
+}
+
+.bgimg {
+    opacity: 0.3;
+    background-image: url('https://s.yimg.com/ny/api/res/1.2/0ExUTXyIhpSNisBHUcoTRw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTU0MC42MjQwNzEzMjI0MzY5/https://s.yimg.com/uu/api/res/1.2/WYJ6axvAqttGL2ue_t4QWQ--~B/aD0zNzk7dz02NzM7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/id/liputan6_hosted_772/32be6a6ce44568caaa03d7185ce36e98');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+
+
+}
+
+.bgimg2 {
+    background-image: url('/hero-bg.png');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.container {
+    position: relative;
+    /* max-width: 800px; Maximum width */
+    margin: 0 auto;
+    /* Center it */
+}
+
+.container .content {
+    position: absolute;
+    /* Position the background text */
+    bottom: -15;
+    /* At the bottom. Use top:0 to append it to the top */
+    background: rgb(0, 0, 0);
+    /* Fallback color */
+    background: rgba(0, 0, 0, 0.5);
+    /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    /* Grey text */
+    width: 100%;
+    /* Full width */
+    padding: 20 px;
+    /* Some padding */
+    text-align: center;
+}
