@@ -1,0 +1,17 @@
+.w3-third {
+    cursor:pointer;
+}
+.pointerkan {
+    cursor:pointer;
+
+}
+.w3-third > .w3-container:hover {color:#fff!important;background-color:#f44336!important}
+.versii-table{width:950px;max-width:100%;border-collapse:collapse}.versi-table{width:auto;max-width:100%;border-collapse:collapse}.versi-table td,.versi-table th,.versi-table tr,.versii-table td,.versii-table th,.versii-table tr{border:1px solid #000;color:#000;padding:5px 10px 5px 10px}.versi-table th,.versii-table th{background-color:#eee;color:#00f;vertical-align:middle;text-align:center}.versi-table tr:nth-of-type(even) td,.versii-table tr:nth-of-type(even) td{border:0;background-color:#fff;border:1px solid #000}.versi-table tr:nth-of-type(odd) td,.versii-table tr:nth-of-type(odd) td{border:0;background-color:#eef;border:1px solid #000}
+.containerbaru{position:relative;overflow:hidden;width:100%;padding-top:56.25%}.responsive-iframebaru{position:absolute;top:0;left:0;bottom:0;right:0;width:100%;height:100%}
+.garis td,.garis th,.garis tr{border:0.5px solid rgb(119, 116, 116)}
+.garis th{border:1px solid #000;text-align:center;vertical-align:middle}
+.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}
+.tab button{background-color:inherit;float:left;border:none;outline:outset;cursor:pointer;padding:7px 8px;transition:.3s}
+.tab button:hover{background-color:#ddd}
+.tab button.active{background-color:rgb(0, 247, 95)}
+.tabcontent{display:none;margin:0;border:1px solid #e6aeae;border-top:none}

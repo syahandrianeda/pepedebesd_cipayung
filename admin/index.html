@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ADMIN PPDB</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <meta name="description" content="Aplikasi PPDB SDN Kecamatan Cipayung 2022/2023">
+
+  <link rel="stylesheet" href="../w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" prefetech>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  
+<style>
+
+.bgimg3 {
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+<script>
+    if (localStorage.hasOwnProperty("datalogin")) {
+        // console.log(localStorage)
+        window.location.replace("/admin/admin.html");
+    } else {
+        // console.log(localStorage)
+        // window.location.replace("/index.html");
+    }
+</script>
+</head>
+
+<body>
+
+  <!-- <div class="w3-bar w3-top w3-white w3-card-2 w3-container w3-padding" style="height:60px">
+    <div class="w3-bar-item w3-large w3-lobster font-effect-shadow-multiple">Halaman Admin</div>
+    <div class="w3-bar-item w3-right w3-button w3-blue"><i class="fa fa-bars w3-large"></i></div>
+    <div class="w3-bar-item"></div>
+  </div> -->
+  <!-- <div class="w3-main">
+    <div class="w3-row-padding w3-margin" style="height: 700px;">
+      
+      <div class="w3-half w3-left bgimg2 w3-display-container">
+        <p class="w3-display-left w3-center ">
+          <span class="w3-jumbo w3-lobster font-effect-shadow-multiple">
+            Admin PPDB<br>
+        </span><span class="w3-xxlarge">
+            SDN Kecamatan Cipayung<br />Tahun Pelajaran 2022/2023
+            </span><br>
+          <span class="w3-large ">
+            Kota Depok<br />
+            Tahun Pelajaran 2022/2023<br />
+          </span>
+         </p>
+      </div>
+    </div>
+  </div> -->
+  
+<div class="bgimg3 w3-display-container w3-animate-opacity w3-text-white w3-margin-top">
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+        <img src="/img/Lambang_Kota_Depok.png" style="width:30px">
+        PPDB SDN <br><span class="w3-large">KECAMATAN CIPAYUNG</span>
+    </div>
+
+    <div class="w3-display-middle">
+        <div class="w3-xlarge w3-animate-top w3-center" style="margin:auto;width:40%">
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/ratujaya1.png" style="width:80px" />
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/ratujaya2.png" style="width:80px">
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/pondokterong1.png" style="width:80px">
+              
+            </div>
+  
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/cipayung4.png" style="width:80px">
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/utanjaya.png" style="width:80px">
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/citayam1.png" style="width:80px">
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/cipayung2.png" style="width:80px">
+              
+            </div>
+            <div class="mySlides w3-animate-fading container">
+              <img src="/img/pondokterong4.png" style="width:80px">
+              
+            </div>
+  
+  
+  
+  
+          </div>
+          <hr class="w3-border-grey" style="margin:auto;width:40%">
+      <div class="w3-xlarge w3-animate-top w3-center">
+        <button class="w3-yellow w3-bottombar w3-border-black w3-round-xlarge w3-button" onclick="document.getElementById('modalFormulirPendaftaran').style.display='block';">LOGIN</button>
+      </div>
+      <hr class="w3-border-grey" style="margin:auto;width:40%">
+      <p class="w3-large w3-center">PPDB SDN CIPAYUNG TAHUN PELAJARAN 2022/2023</p>
+    </div>
+    <div class="w3-display-bottomleft w3-padding-large">
+      Created By. Syahandrian Eda
+    </div>
+    <!-- tes corusel -->
+    <div class="w3-display-middle">
+        
+      </div>
+    <!-- selesei tes corusel -->
+  </div>
+<div class="w3-clear"></div>
+  <div class="w3-modal w3-animate-zoom" id="modalFormulirPendaftaran">
+    <div class="w3-modal-content">
+      <button class="w3-blue w3-btn w3-tiny w3-right" onclick="document.getElementById('modalFormulirPendaftaran').style.display='none';">&times;</button>
+      <header class="w3-red w3-center w3-padding">LOGIN ADMIN</header>
+        <div class="w3-container w3-center">
+            <h5>Sekolah</h5>
+            <select class="w3-select idsekolah w3-center w3-pale-green w3-round-large">
+                <option value="2">SDN Cipayung 1</option>
+                <option value="3">SDN Cipayung 2</option>
+                <option value="4">SDN Cipayung 3</option>
+                <option value="5">SDN Cipayung 4</option>
+                <option value="6">SDN Citayam 1</option>
+                <option value="7">SDN Citayam 4</option>
+                <option value="8">SDN Pondok Terong 1</option>
+                <option value="9">SDN Pondok Terong 3</option>
+                <option value="10">SDN Pondok Terong 4</option>
+                <option value="11">SDN Ratujaya 1</option>
+                <option value="12">SDN Ratujaya 2</option>
+                <option value="13">SDN Ratujaya 3</option>
+                <option value="14">SDN Utanjaya</option>
+            </select>
+            <h4>Username</h4>
+            <input type="text" class="w3-input username w3-border w3-pale-green w3-round-large w3-center"><br>
+            <h4>Password</h4>
+            <input type="text" class="w3-input password w3-border w3-pale-green w3-round-large w3-center"><br>
+            <button class="w3-border w3-button w3-round-xlarge w3-small w3-yellow w3-bottombar w3-border-black" onclick="loginadmin(this)">Login</button>
+        </div>
+      <footer class="w3-red w3-small w3-center w3-padding w3-margin-top">PPDB SDN Kecamatan Cipayung Tahun Pelajaran 2022/2023</footer>
+    </div>
+  </div>
+  <iframe id="pracetak" name="pracetak" class="w3-hide"></iframe>
+  <!-- <script src="../app/js.js"></script> -->
+  <script>
+    const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+    var myIndex = 0;
+  carousel();  
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {
+      myIndex = 1
+    }
+    x[myIndex - 1].style.display = "block";
+    setTimeout(carousel, 5000);
+  }
+  const loginadmin = (el) =>{
+    el.innerHTML = `<img src="/img/barloading.gif"> ....`;
+    let us = document.querySelector(".username");
+    let ps = document.querySelector(".password");
+    let sel = document.querySelector(".idsekolah")
+    let data = new FormData();
+    data.append("action", "loginadmin");
+    data.append("username", us.value);
+    data.append("pass", ps.value);
+    data.append("idsekolah", sel.value);
+
+    
+    fetch(terminal, { method: "post", body: data })
+        .then(m => m.json()).then(r => {
+            console.log(r)
+            let lr = r.login.akses;
+            if (lr == "Sukses") {
+                //alert(lr)
+               localStorage.setItem("datalogin", JSON.stringify(r.login));
+               localStorage.setItem("datasetting", JSON.stringify(r.setting));
+                window.location.replace("/admin/admin.html");
+            } else {
+                alert("Anda tidak bisa login dengan user dan password ini.")
+                window.localStorage.clear();
+            }
+            //animasi.className += " w3-hide";//(animasi.className.indexOf("w3-hide") == "1")? replace("w3-show", "w3-hide");
+            el.innerHTML = "Login";
+            us.value = "";
+            ps.value = "";
+            sel.value = "";
+        })
+  }
+  </script>
+
+
+</body>
+
+
+</html>

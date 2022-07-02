@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPDB ADMIN</title>
-    <link rel="stylesheet" href="/app/w3.css" prefetech>
-    <link rel="stylesheet" href="/app/style.css" prefetech>
+    <link rel="stylesheet" href="../w3.css" prefetech>
+    <link rel="stylesheet" href="../app/style.css" prefetech>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" prefetech>
-    <link href="/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="../app/favicon.png" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
-    <meta name="description" content="Aplikasi PPDB SD 2021/2022">
+    <meta name="description" content="Admin PPDB SD 2022/2023">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="/admin/exceltabel.js"></script>
+    <script src="../admin/exceltabel.js"></script>
 
 </head>
 
@@ -38,7 +38,7 @@
     <nav class="w3-sidebar w3-aqua w3-bar-block w3-top w3-animate-left" style="z-index:3;width:280px;display: none;">
         <div class="w3-container w3-row">
             <div class="w3-col s4  w3-center">
-                <img src="/app/logosekolah.png" class="w3-circle" style="width:85px" />
+                <img id="idlogoseskolah" src="/app/logosekolah.png" class="w3-circle" style="width:85px" />
             </div>
             <div class="w3-col s8 w3-center  w3-lobster font-effect-shadow-multiple">
                 PPDB
@@ -47,7 +47,7 @@
                 SDN BETA 1
             </div>
             <div class="w3-col s8 w3-center">
-                2021/2022
+                2022/2023
             </div>
         </div>
         <hr class="w3-border-gray w3-border w3-border-bottom" />
@@ -105,18 +105,18 @@
     <div class="w3-overlay w3-animate-opacity overlaycari" style="z-index: 2;" title="Keluar">
     </div>
     <!--div Header-->
-    <div class="w3-main w3-opacity-min" style="margin-top:50px">
+    <div class="w3-main w3-opacity-min" style="margin-top:60px">
         <header class="w3-center"
             style="background-image: url(/app/Kantorcamatcipayungdepok.webp);background-size: 100% 100%;background-repeat: no-repeat;">
             <!-- <div class="w3-white w3-opacity-min" style="width:90%;margin:0 auto"> -->
-            <img src="/app/logosekolah.png" alt="logo sekolah" style="width: 100px;" />
+            <img src="/img/Lambang_Kota_Depok.png" alt="logo sekolah" style="width: 100px;" />
             <br />
             <span class="w3-xxlarge w3-white w3-lobster font-effect-shadow-multiple">
                 ADMIN PPDB SD </span><br />
             <span class="w3-xxlarge w3-white  w3-lobster font-effect-shadow-multiple namasekolah">
                 SDN </span><br />
             <span class="w3-large w3-white  w3-lobster font-effect-shadow-multiple">
-                Tahun Pelajaran 2021/2022</span>
+                Tahun Pelajaran 2022/2023</span>
             <!-- </div> -->
         </header>
     </div>
@@ -151,6 +151,9 @@
                      <div class="w3-bar-item w3-button" title="Setting Informasi di Web Pendaftar" onclick="set_info()"><i
                         class="fa fa-info"></i> Setting Informasi
                     </div>
+                     <div class="w3-bar-item w3-button" title="Atur Akun Admin Verifikasi" onclick="set_akunverif()"><i
+                        class="fa fa-user"></i> Akun Admin
+                    </div>
                 </div>
             </div>
             <div class="w3-col m10 l10 w3-hide-large w3-hide-medium">
@@ -172,6 +175,9 @@
                     </div>
                      <div class="w3-bar-item w3-button" title="Setting Informasi di Web Pendaftar" onclick="set_info()"><i
                         class="fa fa-info"></i> Setting Informasi
+                    </div>
+                    <div class="w3-bar-item w3-button" title="Atur Akun Admin Verifikasi" onclick="set_akunverif()"><i
+                        class="fa fa-user"></i> Akun Admin
                     </div>
                 </div>
             </div>
@@ -380,6 +386,7 @@
                 INI KONTEN MATERI
             </div>
         </div>
+        
     </div>
     <div class="w3-modal w3-white" id="resultcari">
         <div class="w3-modal-content w3-animate-top w3-card-4">
@@ -426,7 +433,7 @@
             window.location.replace("/index.html");
         }
     </script>
-   <script src="/user/script.js?v=4.01234"></script>
+   <script src="/admin/script.js"></script>
     <script src="https://opk3scipayung.net/rekap.js"></script>
 </body>
 

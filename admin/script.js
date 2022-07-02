@@ -1,3 +1,11 @@
+const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+let datasekolahkecamatan = [];
+    fetch(terminal + "?action=settingPerSekolah")
+        .then(m => m.json())
+        .then(r => {
+            console.log(r)                
+            datasekolahkecamatan = r.setting;
+        }).catch(er => console.log(er)) 
 const barcari = document.querySelector(".barcari");
 const div_overlaycari = document.querySelector(".overlaycari");
 const div_sidebarcari = document.querySelector(".sidebarcari");
@@ -6,18 +14,26 @@ const div_resultmenu = document.querySelector(".resultmenu");
 const div_namasekolah = document.querySelectorAll(".namasekolah");
 const div_view = document.querySelector(".viewscroll");
 
-const val_namasekolah = "SDN CIPAYUNG 1";
+const jlo = JSON.parse(window.localStorage.getItem("datasetting"));
+const id_sekolah = parseInt(jlo.id_sekolah);
+const val_namasekolah = jlo.nama_sekolah;//"SDN RATUJAYA 1";
 div_namasekolah.forEach(m => m.innerHTML = val_namasekolah);
+const setting_kecamatan = "CIPAYUNG";
 
-const idss = "1E1LoeoUXVn7raLQFHeUtpvrt2Ns1ZWFziZahV-UoZO0"; // SETTING
-const urllogin = "https://script.google.com/macros/s/AKfycbysXu3g6jkD-OAdjzAmSjvkpFdCYOmqbPPcfvCWpNMPTBA6GyaggTvg3o6n3c2ymI-d/exec";
-const idsss = "1zqh1Yzhg71M0EscH0IgBhN95D2k0VEvMb-iGZVNEwgI";//pendaftar
-const idsssampel = "1z2Bfs5L_LcgeKdnnG1yp6pJ3oK2Q4QDxwIlmlAq2lLg";
-const urlppdb = "https://script.google.com/macros/s/AKfycbzte3aD7Awq-x95rUuy9Rr4Mphd-kqCViMSqFfHAf3RcjbgkSM9c4EMJNvRIw9NNnuf/exec";
+const idss = jlo.ss_settingppdb;//"1s24WrNwz6qsMGM7V-pLobef166UkjK7uQf-3kIrCLXA"; // // SS SETTING DB
+const idsss = jlo.ss_pendaftar ;//"1P4LG4JzeT2_PhDYSz8Xfisv_2hQ7QFouHB86XGdbpPA";//ss PENDAFTAR
+const idsssampel = jlo.ss_simulasi;//"1kXfKJKKDUaPwu0ZfGEchLAUxcINcNQHDhrmquwBqVM8";//
+
+//urllogin (lama) = urlsetting (baru)
+const urllogin = jlo.url_settingppdb;//"https://script.google.com/macros/s/AKfycbyU7U42HWFPCD4d1aB1yXovmfqYi2UkB0h-TWLvA50Wo6JR7UbasHkwmL75lzA2cRhs/exec";
+//const urlppdbpendaftar = "https://script.google.com/macros/s/AKfycbw2GgXXO7cITQPEokNsZ6rLhD5YF7wHNBkaT0BCGcuQqAXCs-JEZ-zpjtXdUwNJ2eQMYA/exec";
+//URL ADMIN VERIF
+// urlppdb (lama) == urlpendaftaran
+const urlppdb = jlo.url_pendaftar ;//"https://script.google.com/macros/s/AKfycbzAvwGaQEHZoMnoB6-jfFPzyYedpmw_UlILch3AdNGqIvpdg9f4T8tqdGCg7M-s3eEE/exec";
 
 
-
-
+let idimg = document.getElementById("idlogoseskolah");
+idimg.setAttribute("src",jlo.logosekolah);
 
 const arraybulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
 let db_pendaftar = [];
@@ -492,7 +508,7 @@ const menu_pesan = () => {
 const menu_seleksi = () => {
     let html = `
     <div class="w3-card-4 w3-padding w3-round-large">
-        <h3 class="w3-center"> Tahap Seleksi</h3>
+        <h3 class="w3-center"> Proses Jurnal</h3>
     </div>
     <div class="w3-card-4  w3-round-large w3-padding"  style="overflow-x:auto">
         <div class=" w3-pale-red w3-opacity w3-container">
@@ -517,7 +533,7 @@ const adminlogin = () => {
     load_login.style.display = "block";
 };
 const btn_logout = () => {
-    window.location.replace("/index.html")
+    window.location.replace("../admin/index.html")
     window.localStorage.clear();
 };
 
@@ -1251,9 +1267,9 @@ const html_setpagu = (s) => {
     let pub_sel_afirmasi = (r.publikasi_seleksi_afirmasi == true) ? `<button class="w3-red w3-btn w3-round-large btn_set_pub_seleksi_afirmasi" onclick="set_pub_seleksi('afirmasi',false)"> Sembunyikan!</button>` : `<button class="w3-green w3-btn w3-round-large btn_set_pub_seleksi_afirmasi" onclick="set_pub_seleksi('afirmasi',true)"> Publikasikan!</button>`;
     let pub_sel_ptk = (r.publikasi_seleksi_ptk == true) ? `<button class="w3-red w3-btn w3-round-large btn_set_pub_seleksi_ptk" onclick="set_pub_seleksi('ptk',false)"> Sembunyikan!</button>` : `<button class="w3-green w3-btn w3-round-large btn_set_pub_seleksi_ptk" onclick="set_pub_seleksi('ptk',true)"> Publikasikan!</button>`;
 
-    let v_thp_sel_zonasi = (r.publikasi_seleksi_zonasi == true) ? `Proses Tahap Seleksi Zonasi <b>DIPUBLIKASIKAN</b>` : `Proses Tahap Seleksi Zonasi <b>DISEMBUNYIKAN</b>`;
-    let v_thp_sel_afirmasi = (r.publikasi_seleksi_afirmasi == true) ? `Proses Tahap Seleksi Afirmasi <b>DIPUBLIKASIKAN</b>` : `Proses Tahap Seleksi Afirmasi <b>DISEMBUNYIKAN</b>`;
-    let v_thp_sel_ptk = (r.publikasi_seleksi_ptk == true) ? `Proses Tahap Seleksi Pindah Tugas (Anak PTK) <b>DIPUBLIKASIKAN</b>` : `Proses Tahap Seleksi Pindah Tugas (Anak PTK) <b>DISEMBUNYIKAN</b>`;
+    let v_thp_sel_zonasi = (r.publikasi_seleksi_zonasi == true) ? `Proses Proses Jurnal Zonasi <b>DIPUBLIKASIKAN</b>` : `Proses Proses Jurnal Zonasi <b>DISEMBUNYIKAN</b>`;
+    let v_thp_sel_afirmasi = (r.publikasi_seleksi_afirmasi == true) ? `Proses Proses Jurnal Afirmasi <b>DIPUBLIKASIKAN</b>` : `Proses Proses Jurnal Afirmasi <b>DISEMBUNYIKAN</b>`;
+    let v_thp_sel_ptk = (r.publikasi_seleksi_ptk == true) ? `Proses Proses Jurnal Pindah Tugas (Anak PTK) <b>DIPUBLIKASIKAN</b>` : `Proses Proses Jurnal Pindah Tugas (Anak PTK) <b>DISEMBUNYIKAN</b>`;
 
     let html = `
     <div class="w3-card-4 w3-padding w3-round-large"> <h3> Pengaturan Daya Tampung (Pagu/Kuota)</h3> 
@@ -1352,12 +1368,12 @@ const html_setpagu = (s) => {
     <div class="w3-card-4 w3-padding w3-small w3-round-large">
     <table class="w3-table-all  w3-small w3-centered">
             <tr class="w3-pale-red">
-                <td colspan="3"> Pengaturan di bawah ini Anda dapat mengontrol publikasi (dipublikasikan/disembunyikan) hasil dari <b>TAHAP SELEKSI TIAP JALUR</b>. Sistem pada tahap seleksi akan otomatis menjurnal sendiri namun Anda dapat mengatur apakah selama proses penjurnalan web utama (web yang ditunjukan pendaftar) menampilkan proses penseleksian atau tidak.</td>
+                <td colspan="3"> Pengaturan di bawah ini Anda dapat mengontrol publikasi (dipublikasikan/disembunyikan) hasil dari <b>Proses Jurnal TIAP JALUR</b>. Sistem pada Proses Jurnal akan otomatis menjurnal sendiri namun Anda dapat mengatur apakah selama proses penjurnalan web utama (web yang ditunjukan pendaftar) menampilkan proses penseleksian atau tidak.</td>
             </tr>
             <tr class="w3-pale-green">
-                <td class="w3-border-right">TAHAP SELEKSI ZONASI<br>${pub_sel_zonasi}</td>
-                <td class="w3-border-right">TAHAP SELEKSI AFIRMASI<br>${pub_sel_afirmasi}</td>
-                <td>TAHAP SELEKSI PINDAH TUGAS (PTK}<br>${pub_sel_ptk}</td>
+                <td class="w3-border-right">Proses Jurnal ZONASI<br>${pub_sel_zonasi}</td>
+                <td class="w3-border-right">Proses Jurnal AFIRMASI<br>${pub_sel_afirmasi}</td>
+                <td>Proses Jurnal PINDAH TUGAS (PTK}<br>${pub_sel_ptk}</td>
             </tr>
             <tr class="w3-pale-green">
                 <td class="thp_sel_zonasi w3-border-right">${v_thp_sel_zonasi}</td>
@@ -1610,17 +1626,17 @@ const html_setpagu = (s) => {
 const set_pub_seleksi = (zon, bol) => {
     //`<button class="w3-red w3-btn w3-round-large btn_set_pub_seleksi_zonasi" onclick="set_pub_seleksi('zonasi',false)"> Sembunyikan</button>` 
     // `<button class="w3-green w3-btn w3-round-large btn_set_pub_seleksi" onclick="set_pub_seleksi('zonasi',true)"> Publikasikan</button>`;
-    //`Proses Tahap Seleksi Zonasi <b>DIPUBLIKASIKAN</b>` 
-    //: `Proses Tahap Seleksi Zonasi <b>DISEMBUNYIKAN</b>`;
+    //`Proses Proses Jurnal Zonasi <b>DIPUBLIKASIKAN</b>` 
+    //: `Proses Proses Jurnal Zonasi <b>DISEMBUNYIKAN</b>`;
     let a = "btn_set_pub_seleksi_" + zon;
     let b = "thp_sel_" + zon;
     let c
     if (zon == "zonasi") {
-        c = "Proses Tahap Seleksi Zonasi";
+        c = "Proses Proses Jurnal Zonasi";
     } else if (zon == "afirmasi") {
-        c = "Proses Tahap Seleksi Afirmasi";
+        c = "Proses Proses Jurnal Afirmasi";
     } else {
-        c = "Proses Tahap Seleksi Pindah Tugas (Anak PTK)";
+        c = "Proses Proses Jurnal Pindah Tugas (Anak PTK)";
     }
     let tombol = document.querySelector("." + a);
     let sel = document.querySelector("." + b);
@@ -1760,8 +1776,9 @@ const showkuotawebutama = (el, divkelas) => {
 };
 const save_setpagu = (kelastabel) => {
     // alert(kelastabel);
-    // data = new FormData()
+    // data = new FormData();
     if (kelastabel == "tabel_setting_pagu") {
+        let sT = {};
         let sel = [];
         let isi = [];
         let kol1 = document.querySelector(".tb_result_pagukelas").innerHTML.replace(/\s+/g, "");
@@ -1804,6 +1821,20 @@ const save_setpagu = (kelastabel) => {
         sel.push(kol11);
         sel.push(kol12);
 
+        sT.kuota_kelas= kol1;
+        sT.kuota_perkelas=kol2;
+        sT.total_cpdb=kol3;
+        sT.sistem_zonasi=kol4;
+        sT.sistem_afirmasi=kol5;
+        sT.sistem_ptk=kol6;
+        sT.kuota_zonasi=kol7;
+        sT.kuota_afirmasi=kol8;
+        sT.kuota_ptk=kol9;
+        sT.showutama_total=kol10;
+        sT.showutama_perjalur=kol11;
+        sT.showutama_khusus=kol12
+
+        
         // sel.push(kol13);
         // sel.push(kol14);
         // sel.push(kol15);
@@ -1821,6 +1852,7 @@ const save_setpagu = (kelastabel) => {
                 body: data
             }).then(m => m.json())
             .then(r => {
+                console.log(r)
                 alert(r.result);
                 html_setpagu(r.records);
                 objek_settingpagu = r.records;
@@ -1829,7 +1861,16 @@ const save_setpagu = (kelastabel) => {
                 console.log(er);
                 document.querySelector(".res_simulasi_kuota").innerHTML = `Maaf, Terjadi kesalahan. Data tidak berhasil tersimpan di server.`
             });
-
+        
+        let paguterminal = new FormData();
+        paguterminal.append("action","updatepaguterminal");
+        paguterminal.append("row",id_sekolah);
+        paguterminal.append("objek",JSON.stringify(sT))
+        fetch(terminal, {method:"post",body:paguterminal})
+        .then(r=>{
+            console.log(r);
+        }).catch(er => console.log(er));
+            
     } else if (kelastabel == "tabel_dokumenkhusus_pagu") {
 
         document.querySelector(".res_simulasi_dokumen").innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;;
@@ -3015,7 +3056,8 @@ const verif_menu = () => {
     divverif_result.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
     let html = `
     <div class="tab">
-    <button class="w3-button tabverif active" onclick="pindahTab(this,'all')">Semua Pendaftar</button>
+    <button class="w3-button tabverif active" onclick="pindahTab(this,'terminal')">dB Terminal</button>
+    <button class="w3-button tabverif active" onclick="pindahTab(this,'all')">Daftar Peserta</button>
     <button class="w3-button tabverif " onclick="pindahTab(this,'dobel')">Indikasi Pendaftar Ganda</button>
     <button class="w3-button tabverif " onclick="pindahTab(this,'yet')">Pendaftar Belum Verifikasi</button>
     <button class="w3-button tabverif " onclick="pindahTab(this,'gagal')">Tidak Lolos Verifikasi</button>
@@ -3031,6 +3073,7 @@ const verif_menu = () => {
     divverif_result.innerHTML = html;
     document.querySelectorAll('.tabverif')[0].click();
 };
+
 
 const cekpendaftarmasuk = () => {
     let div = document.querySelector(".verif_verivikator");
@@ -3070,6 +3113,385 @@ const cekpendaftarmasuk = () => {
             console.log(er);
         })
 };
+
+const cekdataterminal = ()=>{
+    let div = document.querySelector(".verif_verivikator");
+    div.innerHTML = `<div class="w3-center w3-margin-top"><img src="/app/barloading.gif" alt="proses loading"> ... sedang memanggil data</div>`;
+    let datakirim = new FormData();
+    datakirim.append("action","databaseterminal");
+    datakirim.append("idsekolah",id_sekolah);
+    
+    fetch(urlppdb,{method:"post",body:datakirim})
+    .then(m => m.json()).then(r => {
+        db_pendaftar = r.records;
+            let data = r.records;
+            let html = `
+            Data Pendaftar (Diurutkan berdasarkan waktu pendaftaran terkini):<hr/>
+            <button class="w3-button w3-green w3-round-large" onclick="exportTabel('tabel_pendaftarmasuk')"><i class="fa fa-download"></i> Export Ms. Excel</button><hr/> 
+            <table class="w3-table-all garis w3-small tabel_pendaftarmasuk"><thead>
+        <tr>
+            <th>Sistem Jalur</th> 
+            <th>ID Pendaftar</th>
+            <th>Nama Pendaftar</th>
+            <th>Status Pendaftaran</th>
+            <th>Detail</th>
+         
+        </tr> </thead> <tbody>`;
+            for (let i = data.length - 1; i >= 0; i--) {
+                html += `<tr>
+                <td>${data[i].jalur_cpdb}</td>
+                <td>${data[i].id_pendaftar}</td>
+                <td>${data[i].nama_cpdb}</td>
+                <td>${data[i].id_status}</td>
+                <td><button onclick="detailpendaftarTerminal('${data[i].baris_terminal}')"><i class="fa fa-edit w3-large"></i> Verifikasikan</button>
+                </td>
+            
+        </tr>`;
+            }
+            html += ` </tbody> </table> `;
+            div.innerHTML = html;
+    }).catch(er=>{
+        div.innerHTML = er;
+    })
+}
+const detailpendaftarTerminal = async (row) =>{
+    let divid = document.getElementById("id_modal_info");
+    divid.style.display = "block"
+    let dividinfo = document.querySelector(".teks_info_modal");
+    dividinfo.innerHTML = `<div class="w3-center w3-margin-top"><img src="/app/barloading.gif" alt="proses loading"></div>`;
+    //ga perlu pagu dulu nih, langsung deteksi dB terminal untuk memindahkan dB CPDB ke dB Pendaftar sekolah;
+    let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
+    await fetch(linkpagu).then(m => m.json()).then(r => {
+        console.log("getpagu", r)
+        objek_settingpagu = r.records;
+    }).catch(er => console.log(er));
+
+    fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+row)
+    .then(m => m.json()).then(r =>{
+        console.log(r)
+   
+    db_pendaftar = r.records;
+            let data = r.records;
+            let d = data[0];//.filter(k => k.id_pendaftar == id)[0];
+            let html = `<h3 class="w3-center">Verifikasi Identitas CPDB</h3>
+            Form ini untuk mencocokkan data utama dalam proses penseleksian (sistem jurnal prioritas). Adapun apabila ada ketidakcocokan data-data selain dalam form ini, dapat dilakukan dalam proses daftar ulang
+            <div class="w3-card w3-container w3-center w3-margin-top">
+            ID PENDAFTAR : ${d.id_pendaftar}<hr/>`
+            html +=`<table class="w3-table-all w3-striped w3-tiny"><thead>`;
+                html +=`<tr><th colspan="4" class="w3-center">Riwayat Pendaftaran CPDB ini</th></tr>`
+                html +=`<tr>`;
+                    html+=`<th class="w3-border w3-center">No.</th>`;
+                    html+=`<th class="w3-border w3-center">Sekolah Tujuan</th>`;
+                    html+=`<th class="w3-border w3-center">Status Pendaftaran</th>`;
+                    html+=`<th class="w3-border w3-center">Keterangan</th>`;
+                html +=`</tr></thead><tbody>`;
+            let riwayat = JSON.parse(d.riwayat_pendaftaran);
+            for(let i = 0 ; i < riwayat.length ; i++){
+                let ids = riwayat[i].tujuan_mendaftar;
+                let namasekolah = datasekolahkecamatan.filter(s => s.id_sekolah == ids)[0]
+                html +=`<tr>`;
+                    html +=`<td class="w3-border">${i+1}</td>`;
+                    html +=`<td class="w3-border">${namasekolah.nama_sekolah.toUpperCase()}</td>`;
+                    html +=`<td class="w3-border">${riwayat[i].id_status}</td>`;
+                    html +=`<td class="w3-border">${riwayat[i].ket_status}</td>`;
+                html +=`</tr>`;
+            }
+            html +=`</tbody></table><br>`
+            html +=`WAKTU MENDAFTAR : <br/><br/>${tanggalfulllengkap(d.waktu_daftar)}<hr/>
+            Status Pendaftaran : <br/><br/><span class="w3-red w3-padding">${d.id_status}</span><hr/>
+            Keterangan Status : <br/><br/><span class="w3-pale-green w3-padding">${d.ket_status}</span><hr/>`;
+
+            if (d.editable === true && d.id_status == "Dikembalikan") {
+                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
+            } else {
+
+                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
+            }
+
+
+            html += `</div><h4 class="w3-green">Dokumen Akta Kelahiran/Surat Kenal Lahir</h4>
+            <div class="containerbaru">
+                <iframe class="responsive-iframebaru" 
+                src="https://drive.google.com/file/d/${(d.cpdb_id_file_akta == "") ? "18Zvo5idM92xYEIzqKDDFnc0iqI6JvUnS" : d.cpdb_id_file_akta}/preview"
+                 title="akte"></iframe>
+            </div>
+            <table class="w3-table-all garis w3-small">
+                <tr class="w3-aqua">
+                    <th>Keterangan</th>
+                    <th>Isian Pendaftar</th>
+                    <th>Sesuai/ Tidak Sesuai</td>
+                </tr>
+                <tr><td>Nama CPDB</td>
+                    <td>${d.nama_cpdb}</td>
+                    <td>
+                        <label for="y_cocok_nama">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_nama" name="cocok_nama">Sesuai</label><br/>
+                        <label for="t_cocok_nama">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_nama" name="cocok_nama">Tidak</label>
+                    </td>
+                </tr>
+                <tr><td>Tempat Lahir</td>
+                    <td>${d.cpdb_tempat_lahir}</td>
+                    <td>
+                        <label for="y_cocok_tempatlahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_tempatlahir" name="cocok_tml">Sesuai</label><br/>
+                        <label for="t_cocok_tempat">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_tempatlahir" name="cocok_tml">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>${tanggalfull(d.cpdb_tanggal_lahir)}</td>
+                    <td>
+                        <label for="y_cocok_tgllahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_tgllahir" name="cocok_ttl">Sesuai</label><br/>
+                        <label for="t_cocok_tgllahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_tgllahir" name="cocok_ttl">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Skor Umur</td>
+                    <td>${d.cpdb_umur}</td>
+                    <td>
+                    <label for="y_cocok_umur">
+                    <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_umur" name="cocok_umur">Sesuai</label><br/>
+                    <label for="t_cocok_umur">
+                    <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_umur" name="cocok_umur">Tidak</label>
+                
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>${(d.cpdb_jk == "L") ? "Laki-laki" : "Perempuan"}</td>
+                    <td>
+                        <label for="y_cocok_jk">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_jk" name="cocok_jk">Sesuai</label><br/>
+                        <label for="t_cocok_jk">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_jk" name="cocok_jk">Tidak</label>
+                    </td>
+                </tr>
+            </table><hr/><div class="w3-card-4 w3-container">
+            Simulasi Umur <br/><input type="date" onchange="konversi_tanggal(this,'sub_arti_tanggal')"><hr/>
+            Detail umur: <span class="sub_arti_tanggal"></span><br/>
+            Skor Umur: <span class="sub_skor_umur"></span></div>
+            <hr/>
+            <h4 class="w3-green">Dokumen Tempat Tinggal</h4>
+            Berikut ini dokumen Kartu Keluarga (KK) yang menjadi rujukan pengisian alamat Calon Peserta Didik Baru.
+            <div class="containerbaru">
+                <iframe class="responsive-iframebaru" 
+                src="https://drive.google.com/file/d/${(d.cpdb_id_file_kk == "") ? "18Zvo5idM92xYEIzqKDDFnc0iqI6JvUnS" : d.cpdb_id_file_kk}/preview"
+                 title="akte"></iframe>
+            </div>
+            <table class="w3-table-all garis w3-small">
+                <tr class="w3-aqua">
+                    <th>Keterangan</th>
+                    <th>Isian Pendaftar</th>
+                    <th>Sesuai/Tidak Sesuai</td>
+                </tr>
+                <tr>
+                    <td>Kota/Kab</td>
+                    <td>${d.cpdb_kota}</td>
+                    <td>
+                        <label for="y_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kota" name="cocok_kota">Sesuai</label><br/>
+                        <label for="t_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kota" name="cocok_kota">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kecamatan</td>
+                    <td>${d.cpdb_kec}</td>
+                    <td>
+                        <label for="y_cocok_kec">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kec" name="cocok_kec">Sesuai</label><br/>
+                        <label for="t_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kec" name="cocok_kec">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Kelurahan</td>
+                    <td>${d.cpdb_kel}</td>
+                    <td>
+                        <label for="y_cocok_kel">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kel" name="cocok_kel">Sesuai</label><br/>
+                        <label for="t_cocok_kel">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kel" name="cocok_kel">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>RW</td>
+                    <td>${d.cpdb_rw}</td>
+                    <td>
+                        <label for="y_cocok_rw">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_rw" name="cocok_rw">Sesuai</label><br/>
+                        <label for="t_cocok_rw">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_rw" name="cocok_rw">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>RT</td>
+                    <td>${d.cpdb_rt}</td>
+                    <td>
+                        <label for="y_cocok_rt">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_rt" name="cocok_rt">Sesuai</label><br/>
+                        <label for="t_cocok_rt">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_rt" name="cocok_rt">Tidak</label>
+                    </td>
+                </tr>
+            </table>
+            <h4 class="w3-green">Dokumen Pendukung Sistem Zalur ${d.jalur_cpdb}</h4>
+            <div class="w3-card-4 w3-light-gray w3-container w3-small w3-round-xlarge">
+            `;
+            let key = "ket_doc_" + (d.jalur_cpdb).toLowerCase();
+            //console.log(key);
+            let docsyarat = objek_settingpagu.filter(k => k[key] !== "");
+            //console.log(docsyarat)
+            for (let j = 0; j < docsyarat.length; j++) {
+                let kz = "cpdb_id_file_filependukung_" + j;
+                let show = "";
+                if (d[kz] !== "") {
+                    show = ` <div class="containerbaru">
+                    <iframe class="responsive-iframebaru" 
+                 src="https://drive.google.com/file/d/${d[kz]}/preview"
+                  title="akte"></iframe>
+             </div>`
+                } else {
+                    show = "Tidak Diunggah"
+                }
+
+                html += `<table class="w3-table-all garis w3-centered"><tbody>
+                <tr class="w3-aqua">
+                    <td>${docsyarat[j][key]}</td>
+                    </tr><tr>
+                    <td>${show}</td>
+                    </tr><tr>
+                    <td>
+                        <label for="y_cocok_dok${j}">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_dok${j}" name="cocok_dok${j}">Sesuai</label>
+                        <label for="t_cocok_dok${j}">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_dok${j}" name="cocok_dok${j}">Tidak</label>
+                    </td>
+                </tr></tbody></table><hr/>
+                `;
+            };
+            html += `</div>
+            <hr/>
+            <div class="w3-card-4 w3-pale-green kesimpulan_verifikasi w3-padding w3-center">
+            Kesimpulan:
+            </div>
+            <div class="w3-card-4 w3-pale-red  w3-padding w3-center">
+            <button class="w3-button w3-green w3-round-xlarge" onclick="masukkankeTahapSeleksiDariTerminal('${d.baris_terminal}')" title="Masukkan ke Proses Jurnal">Proses Jurnal</button>
+            <button class="w3-button w3-yellow w3-round-xlarge" onclick="kembalikankependaftar('${d.baris_terminal}')" title=" Kembalikan ke pendaftar (Minta pendaftar mengisi Ulang)">Kembalikan ?????</button>
+            
+            </div><hr/>
+            `;
+            // <button class="w3-button w3-red w3-round-xlarge" onclick="EditOlehAdmin('${d.id_pendaftar}')">Edit by Tim</button>
+            dividinfo.innerHTML = html; 
+    }).catch(er =>{
+        console.log(er);
+        dividinfo.innerHTML = er;
+    });
+}
+const masukkankeTahapSeleksiDariTerminal = (id) =>{
+    
+    let lr = id;//parseInt(id.split("_")[0]);
+    let lr_status = "Proses Jurnal";
+    let lr_ket = "Proses Jurnal.";
+    let dividinfo = document.querySelector(".teks_info_modal");
+    dividinfo.innerHTML = `<div class="w3-center w3-margin-top w3-margin-bottom"><img src="/img/barloading.gif"> ...</div>`;
+    
+    fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+id)
+    .then(m => m.json()).then(r =>{
+        console.log(r)
+   
+    db_pendaftar = r.records;
+            let data = r.records;
+            let d = data[0];
+
+    let html = `<h3 class="w3-center">Verifikasi Identitas CPDB</h3>
+    <div class="w3-card-4 w3-round-xlarge w3-container w3-center lr_kirim_status">
+        Anda yakin pendaftar ini pendaftar berikut ini telah lolos seleksi dokumen pendaftaran?<br/><br/>
+        Data singkat pendaftar:
+        <div class="w3-border w3-container">
+            <ul class="w3-ul">
+                <li>Jalur:<br> ${d.jalur_cpdb}</li>
+                <li>Nama:<br> ${d.nama_cpdb}</li>
+                <li>ID Pendaftar:<br> ${d.id_pendaftar}</li>
+                <li>Status Yang akan dikirim:<br> Proses Jurnal</li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <div class="w3-center lr_tombol_kirim">
+        <button onclick="req_verifikasiDariTerminal('${lr}','${lr_status}','${lr_ket}',this)"><i class="fa fa-paper-plane-o"></i> Kirim</button>
+        <button onclick="id_modal_info.style.display='none'"><i class="fa fa-times-circle-o"></i> Batal</button>
+    </div>
+    <hr/>
+    `;
+
+    dividinfo.innerHTML = html;;
+    }).catch(er =>{
+        console.log(er);
+        dividinfo.innerHTML = er
+    })
+}
+
+const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
+    el.setAttribute("onclick","alert('Sedang proses kirim')");
+    let data = db_pendaftar.filter(s => s.baris_terminal == baristerminal);
+    let dt = data[0]
+    
+    let riwayat = JSON.parse(dt.riwayat_pendaftaran);
+    //id_status	ket_status	riwayat_pendaftaran
+    let dataverif = {};
+    dataverif.id_status = idstatus;
+    dataverif.ket_status = ketstatus;
+
+
+    // //console.log(riwayat);
+
+    let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
+    updateRiwayat.id_status = idstatus;
+    updateRiwayat.ket_status = ketstatus;
+    console.log(updateRiwayat);
+    
+    let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
+    console.log(newState);
+    //dt.riwayat_pendaftaran = JSON.stringify(newState)
+    //console.log(dt);
+    dataverif.riwayat_pendaftaran = JSON.stringify(newState)
+
+
+    let datakirimTerminal = new FormData();
+    datakirimTerminal.append("action","verifikasiKeTerminal");
+    datakirimTerminal.append("baris",baristerminal);
+    datakirimTerminal.append('dataverif',JSON.stringify(dataverif));
+    
+    let dividinfo = document.querySelector(".teks_info_modal");
+    dividinfo.innerHTML = `<div class="w3-center w3-margin-top w3-margin-bottom"><img src="/img/barloading.gif"> ...</div>`;
+    
+    fetch(urlppdb,{method:"post",body:datakirimTerminal})
+    .then(m => m.json()).then(r =>{
+        console.log(r)
+        alert(r.result)
+        cekdataterminal();
+        dividinfo.innerHTML =r.result;
+        setTimeout(()=>{
+            id_modal_info.style.display='none'
+
+        },2000)
+
+    }).catch(er =>{
+
+    })
+    //verifikasiKeTerminal,baris, dataverif
+
+    //untuk dbTerminal nantinya ini yang akan dipanggil
+
+    //untukdB Respon dan Jurnal
+
+}
+
 const cekpendaftarmasukbelumverif = () => {
     let div = document.querySelector(".verif_verivikator");
     div.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
@@ -3078,7 +3500,7 @@ const cekpendaftarmasukbelumverif = () => {
         .then(r => {
             // console.log(r);
             db_pendaftar = r.records;
-            let data = r.records.filter(k => k.id_status == "Menunggu Verifikasi");
+            let data = r.records.filter(k => k.id_status == "Perlu Verifikasi");
             let html = `Data Pendaftar (Diurutkan berdasarkan waktu pendaftaran terkini):<table class="w3-table-all garis w3-small"><thead>
         <tr>
             <th>Sistem Jalur</th> 
@@ -3115,8 +3537,8 @@ const cekditolakverif = () => {
         .then(r => {
             // console.log(r);
             db_pendaftar = r.records;
-            let data = r.records.filter(k => !(k.id_status == "Menunggu Verifikasi" || k.id_status == "TAHAP SELEKSI"));
-            let html = `Data Pendaftar yang tidak lolos seleksi dokumen (tidak masuk ke dalam TAHAP SELEKSI dengan status DITOLAK, DIKEMBALIKAN, dan/atau GANDA PENDAFTARAN) (Diurutkan berdasarkan waktu pendaftaran terkini):
+            let data = r.records.filter(k => !(k.id_status == "Perlu Verifikasi" || k.id_status == "Proses Jurnal"));
+            let html = `Data Pendaftar yang tidak lolos seleksi dokumen (tidak masuk ke dalam Proses Jurnal dengan status DITOLAK, DIKEMBALIKAN, dan/atau GANDA PENDAFTARAN) (Diurutkan berdasarkan waktu pendaftaran terkini):
             <hr/>
             <button onclick="newPrint('nTB_tidaklolosseleksi')" class="w3-btn w3-blue"> <i class="fa fa-print"></i> Print</button>
             <button onclick="newExcel('nTB_tidaklolosseleksi')" class="w3-btn w3-green"> <i class="fa fa-file-excel-o"></i> Export XLs</button>
@@ -3528,9 +3950,11 @@ const detailpendaftar = async (id) => {
 }
 
 const pindahTab = (el, a) => {
-    if (a == "all") {
+    if (a == "terminal"){
+        cekdataterminal()
+    }else if (a == "all") {
         cekpendaftarmasuk();
-    } else if (a == "yet") {
+    }else if (a == "yet") {
         cekpendaftarmasukbelumverif();
     } else if (a == "dobel") {
         cekpendaftarganda();
@@ -3552,6 +3976,7 @@ const pindahTab = (el, a) => {
     el.className += " active";
 
 };
+
 
 const cekpendaftarganda = () => {
     let div = document.querySelector(".verif_verivikator");
@@ -3734,7 +4159,7 @@ const verifikasikan_berkasini = async (id) => {
             Status Pendaftaran : <br/><br/><span class="w3-red w3-padding">${d.id_status}</span><hr/>
             Keterangan Status : <br/><br/><span class="w3-pale-green w3-padding">${d.ket_status}</span><hr/>`;
 
-            if (d.editable === true && d.id_status == "DIKEMBALIKAN") {
+            if (d.editable === true && d.id_status == "Dikembalikan") {
                 html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
             } else {
 
@@ -3912,7 +4337,7 @@ const verifikasikan_berkasini = async (id) => {
             Kesimpulan:
             </div>
             <div class="w3-card-4 w3-pale-red  w3-padding w3-center">
-            <button class="w3-button w3-green w3-round-xlarge" onclick="masukkankeTahapSeleksi('${d.id_pendaftar}')" title="Masukkan ke Tahap Seleksi">Tahap Seleksi</button>
+            <button class="w3-button w3-green w3-round-xlarge" onclick="masukkankeTahapSeleksi('${d.id_pendaftar}')" title="Masukkan ke Proses Jurnal">Proses Jurnal</button>
             <button class="w3-button w3-yellow w3-round-xlarge" onclick="kembalikankependaftar('${d.id_pendaftar}')" title=" Kembalikan ke pendaftar (Minta pendaftar mengisi Ulang)">Kembalikan</button>
             
             </div><hr/>
@@ -3928,7 +4353,7 @@ const verifikasikan_berkasini = async (id) => {
 
 };
 const masukkankeTahapSeleksi = (id) => {
-    // alert('masukin ke tahap seleksi' + id);
+    // alert('masukin ke Proses Jurnal' + id);
     //let divid = document.getElementById("id_modal_info");
     // divid.style.display = "block";
 
@@ -3936,8 +4361,8 @@ const masukkankeTahapSeleksi = (id) => {
     let d = data.filter(k => k.id_pendaftar == id)[0];
     let dividinfo = document.querySelector(".teks_info_modal");
     let lr = parseInt(id.split("_")[0]);
-    let lr_status = "TAHAP SELEKSI";
-    let lr_ket = "Silakan pantau pendaftaran Tahap Seleksi."
+    let lr_status = "Proses Jurnal";
+    let lr_ket = "Silakan pantau pendaftaran Proses Jurnal."
 
     let html = `<h3 class="w3-center">Verifikasi Identitas CPDB</h3>
     <div class="w3-card-4 w3-round-xlarge w3-container w3-center lr_kirim_status">
@@ -3948,7 +4373,7 @@ const masukkankeTahapSeleksi = (id) => {
                 <li>Jalur:<br> ${d.jalur_cpdb}</li>
                 <li>Nama:<br> ${d.nama_cpdb}</li>
                 <li>ID Pendaftar:<br> ${d.id_pendaftar}</li>
-                <li>Status Yang akan dikirim:<br> TAHAP SELEKSI</li>
+                <li>Status Yang akan dikirim:<br> Proses Jurnal</li>
             </ul>
         </div>
     </div>
@@ -4000,11 +4425,11 @@ const req_verifikasi = (lr, status, ket_status, editable) => {
 const kembalikankependaftar = (id) => {
     // alert('kembalikan ke pendaftar' + id);
     let data = db_pendaftar;
-    let d = data.filter(k => k.id_pendaftar == id)[0];
+    let d = data.filter(k => k.baris_terminal == id)[0];
     let dividinfo = document.querySelector(".teks_info_modal");
-    let lr = parseInt(id.split("_")[0]);
-    // let lr_status = "TAHAP SELEKSI";
-    // let lr_ket = "Silakan pantau pendaftaran Tahap Seleksi."
+    let lr = parseInt(id);
+    // let lr_status = "Proses Jurnal";
+    // let lr_ket = "Silakan pantau pendaftaran Proses Jurnal."
 
     let html = `<h3 class="w3-center">Verifikasi Identitas CPDB</h3>
     <div class="w3-card-4 w3-round-xlarge w3-container lr_kirim_status">
@@ -4021,13 +4446,13 @@ const kembalikankependaftar = (id) => {
         Verifikasi Kembalikan bertujuan untuk mengembalikan informasi pendaftaran kepada pendaftar. Tim verifikasi dan/atau Panitia PPDB silakan memberikan keterangan mengenai 
         informasi pendaftaran yang dikembalikan.
         <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding w3-center">
-        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_tolak" value="DITOLAK">
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_tolak" value="Ditolak">
         <label for="p_tolak">Ditolak</label>
-        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_kembali" value="DIKEMBALIKAN">
-        <label for="p_kembali">Dikembalikan</label>
-        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_ganda" value="MENDAFTAR GANDA">
-        <label for="p_ganda">Mendaftar Ganda</label>
-        </div>
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_kembali" value="Dikembalikan">
+        <label for="p_kembali">Dikembalikan</label>`;
+        // `<input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_ganda" value="MENDAFTAR GANDA">
+        // <label for="p_ganda">Mendaftar Ganda</label>`
+        html +=`</div>
         <hr/>
         Alasan:<br/>
             <textarea class="w3-input w3-border w3-border-blue isian_alasan" placeholder="Silakan isikan alasan mengapa Anda mengembalikan pendaftaran ini"></textarea>
@@ -4048,11 +4473,13 @@ const kembalikankependaftar = (id) => {
             </li>
             <li>
                 Pilih <b>Dikembalikan</b> jika Anda mendapati kelengkapan data informasi pendaftaran dari pendaftar kurang lengkap atau ada isian yang salah (Jika sekolah berkomitmen isian data mutlak diisi oleh pendaftar, bukan oleh Panitia.). Berikan keterangan pendaftaran tersebut.
-            </li>
-            <li>
-                Pilih <b>Mendaftar Ganda</b> jika Anda mendapati pendaftar ini telah melakukan pendaftaran lebih dari sekali di sekolah Anda. Berikan keterangan ID PENDAFTAR lain yang merupakan data sebenarnya dari pendaftar. Kolom ALASAN contoh diisi dengan kata "Ganda dengan ID PENDAFTAR 100_FFFFFF".
-            </li>
-            <li>Menu PENDAFTAR DIMINTA MEMPERBAIKI DAN MENGIRIMKAN ULANG PENDAFTARAN bertujuan pendaftar tidak bisa mengirimkan balik isian pendaftar ke Server (Sebaiknya diceklis untuk pilihan DITOLAK dan MENDAFTAR GANDA). Jika pendaftar diijinkan untuk mengirimkan balik, maka pendaftar dapat merevisi isian pendaftaran ini dan akan masuk ke Antrian MENUNGGU PERSETUJUAN.
+            </li>`;
+
+            // `<li>
+            //     Pilih <b>Mendaftar Ganda</b> jika Anda mendapati pendaftar ini telah melakukan pendaftaran lebih dari sekali di sekolah Anda. Berikan keterangan ID PENDAFTAR lain yang merupakan data sebenarnya dari pendaftar. Kolom ALASAN contoh diisi dengan kata "Ganda dengan ID PENDAFTAR 100_FFFFFF".
+            // </li>`
+            
+            html +=`<li>Menu PENDAFTAR DIMINTA MEMPERBAIKI DAN MENGIRIMKAN ULANG PENDAFTARAN bertujuan pendaftar tidak bisa mengirimkan balik isian pendaftar ke Server (Sebaiknya diceklis untuk pilihan DITOLAK dan MENDAFTAR GANDA). Jika pendaftar diijinkan untuk mengirimkan balik, maka pendaftar dapat merevisi isian pendaftaran ini dan akan masuk ke Antrian MENUNGGU PERSETUJUAN.
             </li>
         </ul>
 
@@ -4060,6 +4487,11 @@ const kembalikankependaftar = (id) => {
     
     <hr/>
     `;
+    // html +=`<div class="w3-card-4 w3-container w3-center">`;
+    // html +=`<input type="tel" id="nowasiswa" value="${d.ortu_hp_ibu}" placeholder="Gunakan Format +62, contoh +628123456789" style="width:100%;height:30px" name="nowasiswa">`;
+    // html +=`<textarea id="tekssiswa" style="width:100%:height:300px"></textarea>`;
+    // html +=`<button class="w3-button w3-green w3-bottombar w3-border w3-border-black" onclick="btnkirimwasiswa()"><i class="fa fa-whatsapp"></i> Kirim Pesan</button>`
+    // html +=`</div>`;
 
     dividinfo.innerHTML = html;;
     let tm = document.querySelector(".tmbl_kirimbalikin_api");
@@ -4078,7 +4510,7 @@ const kembalikankependaftar = (id) => {
             // return;
         } else {
 
-            req_verifikasi(lr, status, ket_status, edit);
+            req_verifikasiDariTerminal(lr, status, ket_status, tm);
         }
     });
 
@@ -4096,7 +4528,7 @@ const kembalikankependaftar = (id) => {
         el.addEventListener("click", () => {
             if (el.checked) {
                 elli.innerHTML = el.value;
-                if (el.value == "DIKEMBALIKAN" || el.value == "DITOLAK") {
+                if (el.value == "Dikembalikan" || el.value == "Ditolak") {
                     cegah.checked = true;
                     cegah.disabled = true;
                 } else {
@@ -4107,7 +4539,34 @@ const kembalikankependaftar = (id) => {
             }
         })
     })
+    
+   
+    
 };
+function getLinkWhastapp(number, message) {
+    var url = 'https://api.whatsapp.com/send?phone=' +
+        number +
+        '&text=' +
+        encodeURIComponent(message)
+
+    return url
+}
+function btnkirimwasiswa() {
+    //pesanawalwa.innerHTML = "";
+    var teksnya = "Assalamualaikum, Kami dari Panitia PPDB memberikan informasi bahwa: ";
+    var nowaa = document.getElementById("nowasiswa").value;
+    var nowa;
+    if (nowaa.slice(0, 1) == "0") {
+        nowa = "+62" + nowaa.slice(1, 12);
+    } else if (nowaa.slice(0, 1) == "6") {
+        nowa = "+" + nowaa;
+    } else {
+        nowa = nowaa
+    }
+    var urlnya = getLinkWhastapp(nowa, teksnya + "\n \n " + document.getElementById("tekssiswa").value);
+    window.open(urlnya)
+    
+}
 const EditOlehAdmin = (id) => {
     alert('idnya: ' + id)
 };
@@ -4128,11 +4587,11 @@ const cekradioverifikasi = () => {
     div.innerHTML = html;
 
 };
-///////////////////// Tahap Seleksi
+///////////////////// Proses Jurnal
 
 const verif_seleksi = async () => {
-    divverif_judul.innerHTML = "Halaman Tahap Seleksi (Penjurnalan)";
-    divverif_teksplus.innerHTML = "Di sini Admin/Tim Verifikasi/Panitia PPDB melakukan tugasnya dalam mengatur publikasi tahap seleksi. Tim Verifikator/Panitia PPDB dapat melihat dan mengatur sistem publikasi Tahap Seleksi."
+    divverif_judul.innerHTML = "Halaman Proses Jurnal (Penjurnalan)";
+    divverif_teksplus.innerHTML = "Di sini Admin/Tim Verifikasi/Panitia PPDB melakukan tugasnya dalam mengatur publikasi Proses Jurnal. Tim Verifikator/Panitia PPDB dapat melihat dan mengatur sistem publikasi Proses Jurnal."
     divverif_result.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
     let html = `
     <div class="tab">
@@ -4249,7 +4708,7 @@ const rekap_jalur = () => {
             <td>${loloszonasi.length}</td>
             <td>${ga_zonasi.length}</td>
             <td>${kr_zonasi.length}</td>
-            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "ZONASI" && (k.id_status == "DIKEMBALIKAN" || k.id_status == "MENDAFTAR GANDA")).length}</td>
+            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "ZONASI" && (k.id_status == "Dikembalikan" || k.id_status == "MENDAFTAR GANDA")).length}</td>
             </tr>
             <tr>
             <td>AFIRMASI</td>
@@ -4258,7 +4717,7 @@ const rekap_jalur = () => {
             <td>${lolosafirmasi.length}</td>
             <td>${ga_afirmasi.length}</td>
             <td>${kr_afirmasi.length}</td>
-            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "AFIRMASI" && (k.id_status == "DIKEMBALIKAN" || k.id_status == "MENDAFTAR GANDA")).length}</td>
+            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "AFIRMASI" && (k.id_status == "Dikembalikan" || k.id_status == "MENDAFTAR GANDA")).length}</td>
             </tr>
             <tr>
             <td>PINDAH TUGAS (ANAK PTK)</td>
@@ -4267,7 +4726,7 @@ const rekap_jalur = () => {
             <td>${lolosptk.length}</td>
             <td>${ga_ptk.length}</td>
             <td>${kr_ptk.length}</td>
-            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "PTK" && (k.id_status == "DIKEMBALIKAN" || k.id_status == "MENDAFTAR GANDA")).length}</td>
+            <td>${db_pendaftar.filter(k => k.jalur_cpdb == "PTK" && (k.id_status == "Dikembalikan" || k.id_status == "MENDAFTAR GANDA")).length}</td>
         </tr>
         <tr>
             <td>Jumlah</td>
@@ -4276,7 +4735,7 @@ const rekap_jalur = () => {
             <td>${rekapcpdblolos.length}</td>
             <td>${ts.length}</td>
             <td>${nonkr.length}</td>
-            <td>${db_pendaftar.filter(k => k.id_status == "DIKEMBALIKAN" || k.id_status == "MENDAFTAR GANDA").length}</td>
+            <td>${db_pendaftar.filter(k => k.id_status == "Dikembalikan" || k.id_status == "MENDAFTAR GANDA").length}</td>
         </tr>
      
     </table></div>
@@ -4356,7 +4815,7 @@ const fungsi_html_jurnal = (zonasi) => {
     let html = ``;
     let htmlnonkuota = ``;
     let prioritas = objek_settingseleksi;
-    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "TAHAP SELEKSI");
+    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
     let count = 0;
     let urut = 1;
 
@@ -4459,7 +4918,7 @@ const cek_real_prioritas = (zonasi) => {
     let kuota = objek_settingpagu[0][zonasi];
     let aa = zonasi.replace("kuota_", "");
     let div = document.querySelector(".verif_resultseleksi");
-    let html = `<h3  class="w3-container">Tahap Seleksi ${zonasi.replace("kuota_", "")} </h3>
+    let html = `<h3  class="w3-container">Proses Jurnal ${zonasi.replace("kuota_", "")} </h3>
     
     Data Pendaftar yang memilih jalur ${zonasi.replace("kuota_", "")} dengan Daya Tampung / kuota Jalur tersebut sebanyak ${kuota} Calon PDB (Berdasarkan pengaturan Pagu sebelumnya.)
     <div class="w3-border w3-center w3-margin w3-padding"><button class="w3-button w3-round-large w3-green" onclick="printSeleksi('tuS_${zonasi}','${aa}')" title="Print Tabel Ini"><i class="fa fa-print"></i> Print </button>
@@ -4471,7 +4930,7 @@ const cek_real_prioritas = (zonasi) => {
          <th rowspan="2">Prioritas</th> <th rowspan="2">No. Urut</th> <th rowspan="2">ID Pendaftar</th> <th rowspan="2">Nama CPDB</th> <th rowspan="2">Umur</th> <th colspan="5">Alamat</th> <th rowspan="2">Detail</th> </tr> <tr> <th>RT</th> <th>RW</th> <th>Kelurahan</th> <th>Kecamata</th> <th>Kota</th> </tr></thead><tbody>`;
     // div.innerHTML = `<i class="fa fa-spin fa-spinner"></i>`;
     let prioritas = objek_settingseleksi;
-    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "TAHAP SELEKSI");
+    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
     let count = 0;
     let urut = 1;
     for (let a = 0; a < prioritas.length; a++) {
@@ -4594,17 +5053,17 @@ const html_publikasi_jurnal = () => {
     Admin (Kepala Sekolah, Ketua Panitia PPDB, atau OPS) yang ditunjuk sebagai kontrol pengaturan web Aplikasi PPDB ini telah mengatur sistem publikasi untuk setipa jurnal sebagai berikut:
     <hr/><table class="versi-table" style="margin:0 auto">
     <tr>
-        <td>Tahap Seleksi Zonasi</td>
+        <td>Proses Jurnal Zonasi</td>
         <td>:</td>
         <td>${(objek_settingpagu[0].publikasi_seleksi_zonasi) ? "Dipublikasikan" : "Disembunyikan"}</td>
     </tr>
     <tr>
-        <td>Tahap Seleksi Afirmasi</td>
+        <td>Proses Jurnal Afirmasi</td>
         <td>:</td>
         <td>${(objek_settingpagu[0].publikasi_seleksi_afirmasi) ? "Dipublikasikan" : "Disembunyikan"}</td>
     </tr>
     <tr>
-        <td>Tahap Seleksi Pindah Tugas (Anak PTK)</td>
+        <td>Proses Jurnal Pindah Tugas (Anak PTK)</td>
         <td>:</td>
         <td>${(objek_settingpagu[0].publikasi_seleksi_ptk) ? "Dipublikasikan" : "Disembunyikan"}</td>
     </tr>
@@ -4737,7 +5196,7 @@ const cekdataT = (id) => {
         <td>${cek.ortu_nama_ibu}</td>
     </tr>
     </table>
-    Catatan: Data ini menunjukkan data dalam tahap seleksi berkas/dokumen. Keputusan diterima/ditolak ada pada tahap penjurnalan di menu SELEKSI.
+    Catatan: Data ini menunjukkan data dalam Proses Jurnal berkas/dokumen. Keputusan diterima/ditolak ada pada tahap penjurnalan di menu SELEKSI.
     `;
 
     mod_teks.innerHTML = html;
@@ -4754,7 +5213,7 @@ const printSeleksi = (kelas, jalur) => {
     let head = doc.head;
     let body = doc.body;
     //isikan HEAD dengan title, style, link, dll.
-    head.innerHTML = `<title>DATA TAHAP SELEKSI</title>`;
+    head.innerHTML = `<title>DATA Proses Jurnal</title>`;
     head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
     head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
     head.innerHTML += `<link href="https://fonts.googleapis.com/css?family=Raleway">`;
@@ -4776,7 +5235,7 @@ const printSeleksi = (kelas, jalur) => {
 
 
     body.innerHTML = `<h3 class="w3-center">PPDB ${val_namasekolah.toUpperCase()} TAHUN PELAJARAN 2021/2022</h3>`;
-    body.innerHTML += `<h4 class="w3-center">Tahap Seleksi Jalur ${jalur} per ${tanggalfulllengkap(new Date())}</h4>`;
+    body.innerHTML += `<h4 class="w3-center">Proses Jurnal Jalur ${jalur} per ${tanggalfulllengkap(new Date())}</h4>`;
     body.innerHTML += `${isibody}<div style="break-after:page"></div>`;
     body.innerHTML += `<h4 class="w3-center">Pendaftar Jalur ${jalur} Tidak Lolos Kriteria Prioritas per ${tanggalfulllengkap(new Date())}</h4>`;
     body.innerHTML += `${tabel2}<br/>`;
@@ -4790,8 +5249,8 @@ const excelSeleksi = (kelas, teks) => {
     //alert(kelas + teks);
     try {
         let zonasi = teks;
-        let ket = (kelas.indexOf("tuS_") > -1) ? " JURNAL PROSES TAHAP SELEKSI " + teks.toUpperCase() : "JURNAL TIDAK LOLOS PRIORITAS " + teks.toUpperCase() + ""
-        let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "TAHAP SELEKSI");
+        let ket = (kelas.indexOf("tuS_") > -1) ? " JURNAL PROSES Proses Jurnal " + teks.toUpperCase() : "JURNAL TIDAK LOLOS PRIORITAS " + teks.toUpperCase() + ""
+        let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
         let div = document.getElementById("frameexcel");
         //div.innerHTML = "";
 
@@ -5097,7 +5556,7 @@ const exportTabel = (kelas) => {
 
 const fn_finalppdb = async () => {
     divverif_judul.innerHTML = "Halaman Final Seleksi PPDB";
-    divverif_teksplus.innerHTML = "Di sini berisi laman informasi mengenai data CPDB yang telah diterima berdasarkan penjurnalan di Tahap Seleksi. "
+    divverif_teksplus.innerHTML = "Di sini berisi laman informasi mengenai data CPDB yang telah diterima berdasarkan penjurnalan di Proses Jurnal. "
     divverif_result.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
     let html = `
     <div class="tab">
@@ -6165,8 +6624,24 @@ const save_alamat_sekolah = (el) => {
         .then(r => {
             console.log(r);
             el.innerHTML = "SIMPAN";
-        }).catch(er => console.log(er))
+        }).catch(er => console.log(er));
+    
+    //alamat_rt	alamat_rw	alamat_kelurahan	alamat_kecamatan	alamat_kota
 
+    let ob = {};
+    ob.alamat_rt = kol1;
+    ob.alamat_rw = kol2;
+    ob.alamat_kelurahan = kol3;
+    ob.alamat_kecamatan = kol4;
+    ob.alamat_kota = "KOTA DEPOK";
+    let updatealamat = new FormData();
+    updatealamat.append("action","updatesettingalamat");
+    updatealamat.append("row",id_sekolah);
+    updatealamat.append("objek",JSON.stringify(ob));
+    fetch(terminal,{method:"post",body:updatealamat})
+    .then(m => m.json()).then(r =>{
+        console.log(r);
+    }).catch(er => console.log(er));
 
 };
 
@@ -6647,39 +7122,181 @@ const set_info = () =>{
                 }
             //let bol = r.rerords[0].
             let teks  = `
-            <div class="w3-card-4 w3-container">
+            <div class="w3-card-4 w3-container w3-center">
            
-                <h5 class="w3-center">Tampilan tombol DAFTAR</h5>
+                <h5 class="w3-center w3-pale-green">Tampilan tombol DAFTAR</h5>
                 <h6 class="tekspublikasidaftar"">${teksbol}</h6>
                 <div class="tmb_tekspublikasidaftar">${tekboltombol}</div>
                 <hr>
             </div>
             <hr>
             <div class="w3-card-4 w3-container">
-                <h5 class="w3-center">Teks Informasi yang akan muncul di web pendaftar:</h5>
+                <h5 class="w3-center w3-pale-green">Teks Informasi yang akan muncul di web pendaftar:</h5>
                 <div contenteditable="true" class="w3-border w3-border-blue w3-padding w3-round-large teksinfoeditable">${r.records[0].teks_info}</div>
                 <br>
                 <div><button class="w3-button w3-blue w3-round-large" onclick="simpan_teksinfo(this)">Publikasikan Info</button></div>    
             <br></div>
             <hr/>
             <div class="w3-card-4 w3-container">
-            <h5 class="w3-center">Akses terhadap formulir yang dikembalikan:</h5>
+            <h5 class="w3-center w3-pale-green">Akses terhadap formulir yang dikembalikan:</h5>
             Ketika ada verifikasi pendaftar dengan status <b>DIKEMBALIKAN</b> maka pendaftar tersebut bisa merevisi isian formulirnya ke admin/panitia PPDB. Namun, Anda bisa di sini, bisa mengatur pengaturan terhadap pendaftar yang formulirnya DIKEMBALIKAN untuk diberik akses mengirimkan revisi formulir atau tidak. Berikut keterangannya:
             <div class="ketformulirdikembalikan w3-border w3-container w3-border-blue w3-round-large">${teksfk}</div><br>
             Silakan edit akses formulir yang dikembalikan dengan tombol berikut:
              <div class="w3-center tmbl_formulirdikembalikan">${htltmbl}</div>   
             </div>
             `;
+            let nomorWa = r.records[0].no_wa;
+            let urlgrupWa = r.records[0].urlgrup_wa;
+            teks +=`<hr><div class="w3-card-4 w3-container">`;
+                teks +=`<h5 class="w3-center w3-pale-green">No Whatsapp Sebagai Narahubung</h5>`;
+                teks +=`Cantumkan nomor WhatsApp yang bisa dihubungi oleh Calon Peserta Didik atau Anda dapat mencamtukan Link Whatsapp Grup`;
+                teks +=`<div class="w3-center w3-margin">`;
+                    teks +=`<br>Nomor Whatsapp<br><input type="text" value="${nomorWa}" class="w3-input w3-border w3-pale-red new_wa w3-border w3-pale-red" style="width:350px;margin:0 auto" placeholder="Gunakan Format: +628xxxxxxx"><br>`;
+                    teks +=`Atau masukkan url link grup Whatsapp`;
+                    teks +=`<input type="text" value="${urlgrupWa}" class="w3-input w3-border w3-pale-red new_grupwa" >`;
+                    teks += `<br><button class="w3-button w3-yellow w3-border w3-bottombar w3-border-black w3-round-xlarge w3-small" onclick="publikasikannomorwa(this)">Publikasikan</button>`;
+                teks +=`</div>`;
+            teks +=`</div>`;
             
-
             
             html_setting.innerHTML = teks;
         }).catch(er => {
-            console.log(er);
+            //console.log(er);
             html_setting.innerHTML = "Oups, Maaf. Terjadi kesalahan! ";
             alert("Maaf, terjadi kesalahan. Silakan ulangi sesi Anda sesaat lagi.");
         })
 };
+const set_akunverif = () =>{
+    html_setting.innerHTML = `<div class="w3-center w3-margi-top"><img src="/app/barloading.gif" alt="proses loading"></div>`;
+    let dataakun = new FormData();
+    dataakun.append("action","dataakun");
+    dataakun.append("id",id_sekolah);
+    fetch(terminal,{method:"post",body:dataakun})
+    .then(m => m.json()).then(r => {
+        console.log(r);
+        let dataakun = r.setting
+        let html = `<div class="w3-card-4 w3-round-large w3-border w3-container" style="overflow-x:auto">`;
+            html +=`<h5 class="w3-center">Data Akun Admin</h5>`;
+            html +=`Anda sebagai Admin Super, berhak untuk menambahkan, mengedit, atau menghapus akun admin lainnya. Setiap yang diedit atau dihapus mungkin saja akan tetap mengakses selama tidak login ulang.`;
+                html +=`<table class="w3-table-all w3-centered tabelakunadmin w3-tiny"><thead>`;
+                html +=`<tr class="w3-pale-green">
+                <th class="w3-border">No.</th>
+                <th class="w3-border">Username</th>
+                <th class="w3-border">Password</th>
+                <th class="w3-border">Nama Profil</th>
+                <th class="w3-border">Nama Asli</th>
+                <th class="w3-border">ID Panitia</th>
+                <th class="w3-border" style="width:30px">ID Akun</th>
+                <th class="w3-border" style="width:30px">ID<br>Sekolah</th>
+                <th class="w3-border">Nama Sekolah</th>
+                <th class="w3-border">Aksi</th>
+                </tr></thead><tbody>`;
+                    for(let i = 0 ; i < dataakun.length ; i++){
+                        //username	password	nama_profil	id_namaasli	id_panitia	id_akun	id_sekolah	namasekolah
+                        html +=`<tr>`;
+                            html +=`<td class="w3-border">${(i+1)}</td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="username" value="${dataakun[i].username}" style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="password"  value="${dataakun[i].password}" style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="nama_profil"  value="${dataakun[i].nama_profil}" style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="id_namaasli"  value="${dataakun[i].id_namaasli}" style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="id_panitia" value="${dataakun[i].id_panitia}" style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="id_akun" value="${dataakun[i].id_akun}" disabled style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="id_sekolah" value="${dataakun[i].id_sekolah}" disabled style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><input type="text" data-akunadmin="namasekolah"  value="${dataakun[i].namasekolah}" disabled style="width:100%;border: none transparent;outline: none;background:transparent"></td>`;
+                            html +=`<td class="w3-border"><button onclick="kirimdataakunadmin(this, ${i},'edit')" title="Simpan Perubahan"><i class="fa fa-save"></i></button><button onclick="kirimdataakunadmin(this, ${i},'hapus')" title="Hapus Akun"><i class="fa fa-trash"></i></button></td>`;
+                        html +=`</tr>`;
+                    }
+                html +=`</tbody>`
+                html +=`</table><br>`
+                html +=`<div class="w3-center"><button class="w3-button w3-yellow w3-round-xlarge w3-border w3-bottombar w3-border-black w3-tiny" onclick="html_tambahakun()">Tambah Admin</button></div>`
+        html +=`</div>`;
+        html_setting.innerHTML = html;
+    })
+}
+const html_tambahakun = ()=>{
+    let html =`<div class="w3-card-4 w3-round-large w3-border w3-container" style="overflow-x:auto">`;
+        html +=`<h3 class="w3-center w3-pale-blue">Tambah Akun Admin</h3><hr>`;
+            html +=`<h6 class="w3-center">Username</h6>`;
+                html +=`<input type="text" data-akunadmin="username" style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">Password</h6>`;
+            html +=`<input type="text" data-akunadmin="password"  style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">Nama Profil</h6>`;
+            html +=`<input type="text" data-akunadmin="nama_profil" style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">Nama Asli</h6>`;
+            html +=`<input type="text" data-akunadmin="id_namaasli" style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">ID Panitia (default sistem)</h6>`;
+            html +=`<input type="text" data-akunadmin="id_panitia" value="tim verif" disabled style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">ID Akun (default sistem)</h6>`;
+            html +=`<input type="text" data-akunadmin="id_akun" value="new" disabled style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">ID Sekolah (default sistem)</h6>`;
+            html +=`<input type="text" data-akunadmin="id_sekolah" value="${id_sekolah}" disabled style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<h6 class="w3-center">Nama Sekolah (default sistem)</h6>`;
+            html +=`<input type="text" data-akunadmin="namasekolah"  value="${val_namasekolah}" disabled style="width:100%;border: black transparent;outline: none;background:transparent;text-align:center;width:300px">`;
+            html +=`<div class="w3-center"><button class="w3-button w3-yellow w3-round-xlarge w3-border w3-bottombar w3-border-black" onclick="tambahkanakunadmin(this)">Tambahkan Akun</button></div>`
+        html +=`</div>`;
+    html_setting.innerHTML = html;
+}
+const kirimdataakunadmin = (el, indek, kondisi) =>{
+    el.innerHTML= `<i class="fa fa-spin fa-spinner"></i> ...`;
+    let tabel = document.querySelector(".tabelakunadmin");
+    let tbody = tabel.querySelector("tbody");
+    console.log(tabel, tbody);
+    
+}
+const tambahkanakunadmin = (el) =>{
+    el.innerHTML = `<i class="fa fa-spin fa-spinner"></i> ...`
+}
+const publikasikannomorwa = (el)=>{
+    el.innerHTML = `<i class="fa fa-spin fa-spinner"></i> ... Memproses`;
+    let nowa = document.querySelector(".new_wa");
+    let grupwa = document.querySelector(".new_grupwa");
+    let tab = [];
+    let ob = {};
+    let tabel = []
+    tab.push(nowa.value);
+    tab.push(grupwa.value);
+    ob.no_wa = nowa.value;
+    ob.urlgrup_wa = grupwa.value;
+    
+    tabel.push(tab)
+
+    let tabels = JSON.stringify(tabel);
+    
+    let data = new FormData();
+
+    data.append("action", "simpanTabel");
+    data.append("idss", idss);
+    data.append("tab", "pagu");
+    data.append("tabel", tabels);
+    data.append("kolom", 25);
+    fetch(urllogin, {
+        method: 'post',
+        body: data
+    }).then(m => m.json())
+    .then(r => {
+        console.log(r);
+        el.innerHTML = `Publikasikan`;
+    })
+    .catch(er => console.log (er));
+    
+    let dataa = new FormData();
+
+    dataa.append("action", "simpanTabel");
+    dataa.append("idss", "14P1-pKe0T_1XOHODe4IdH_95YQz9FDSIYpzOrgaDCnI");
+    dataa.append("tab", "id_sekolah");
+    dataa.append("tabel", tabels);
+    dataa.append("kolom", 27);
+    fetch(urllogin, {
+        method: 'post',
+        body: dataa
+    }).then(m => m.json())
+    .then(r => {
+        console.log(r);
+        //el.innerHTML = `Publikasikan`;
+    })
+    .catch(er => console.log (er));
+
+}
 const simpan_teksinfo = (el) =>{
     el.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
     let div = document.querySelector(".teksinfoeditable");
@@ -6710,44 +7327,56 @@ const simpan_teksinfo = (el) =>{
     
 };
 const hiddenshow_tomboldaftar = (bol)=>{
-let infoakses = document.querySelector(".tekspublikasidaftar");
-let infotombol = document.querySelector(".tmb_tekspublikasidaftar");
-infotombol.innerHTML = ` <img src="/app/barloading.gif" alt="proses loading">`;
-let arrbaris = [];
-let kosong = [bol];
-arrbaris.push(kosong);
-let tabels = JSON.stringify(arrbaris);
-let data = new FormData();
-data.append("action", "simpanTabel");
-data.append("idss", idss);
-data.append("tab", "pagu");
-data.append("tabel", tabels);
-data.append("kolom", 22);
+    let infoakses = document.querySelector(".tekspublikasidaftar");
+    let infotombol = document.querySelector(".tmb_tekspublikasidaftar");
+    infotombol.innerHTML = ` <img src="/app/barloading.gif" alt="proses loading">`;
+    let arrbaris = [];
+    let kosong = [bol];
+    arrbaris.push(kosong);
+    let tabels = JSON.stringify(arrbaris);
+    let data = new FormData();
+    data.append("action", "simpanTabel");
+    data.append("idss", idss);
+    data.append("tab", "pagu");
+    data.append("tabel", tabels);
+    data.append("kolom", 22);
 
-fetch(urllogin, {
-        method: 'post',
-        body: data
-    }).then(m => m.json())
-    .then(r => {
-        console.log(r);
-        objek_settingpagu = r.records;
-        let bolakses = objek_settingpagu[0].setingan_formdaftar;
+    fetch(urllogin, {
+            method: 'post',
+            body: data
+        }).then(m => m.json())
+        .then(r => {
+            console.log(r);
+            objek_settingpagu = r.records;
+            let bolakses = objek_settingpagu[0].setingan_formdaftar;
 
-        if (bolakses === true) {
-            infoakses.innerHTML = `Pendaftar <b class="w3-text-blue">bisa</b> melihat tombol Daftar`;
-            infotombol.innerHTML = `<button class="w3-red w3-button w3-round-large w3-small " onclick="hiddenshow_tomboldaftar(false)"> Sembunuikan Tombol Daftar</button>`;
-        } else {
-            infoakses.innerHTML = `Pendaftar <b class="w3-text-red">tidak bisa</b> melihat tombol Daftar`;
-            infotombol.innerHTML = `<button class="w3-green w3-button w3-round-large w3-small"  onclick="hiddenshow_tomboldaftar(true)"> Tampilkan Tombol Daftar</button>`;
-        }
+            if (bolakses === true) {
+                infoakses.innerHTML = `Pendaftar <b class="w3-text-blue">bisa</b> melihat tombol Daftar`;
+                infotombol.innerHTML = `<button class="w3-red w3-button w3-round-large w3-small " onclick="hiddenshow_tomboldaftar(false)"> Sembunuikan Tombol Daftar</button>`;
+            } else {
+                infoakses.innerHTML = `Pendaftar <b class="w3-text-red">tidak bisa</b> melihat tombol Daftar`;
+                infotombol.innerHTML = `<button class="w3-green w3-button w3-round-large w3-small"  onclick="hiddenshow_tomboldaftar(true)"> Tampilkan Tombol Daftar</button>`;
+            }
 
 
-    })
-    .catch(er => {
-        console.log(er);
-        alert("Maaf, Terjadi kesalahan. Silakan ulangi sesi Anda sesaat lagi.")
-    })
+        })
+        .catch(er => {
+            console.log(er);
+            alert("Maaf, Terjadi kesalahan. Silakan ulangi sesi Anda sesaat lagi.")
+        })
+    let obj = {};
+    obj.boleanformulirpendaftaran = bol;
+    let boleanformulirpendaftaran = new FormData();
+    boleanformulirpendaftaran.append("action","tomboldaftar");
+    boleanformulirpendaftaran.append("row", id_sekolah);
+    boleanformulirpendaftaran.append("objek",JSON.stringify(obj));
+    fetch(terminal, {method:"post",body:boleanformulirpendaftaran})
+    .then(m => m.json()).then(r => {
+        console.log(r)
+    }).catch(er => console.log(er));
 };
+
+
 const formkembalifn = (bol)=>{
 let infoakses = document.querySelector(".ketformulirdikembalikan");
 let infotombol = document.querySelector(".tmbl_formulirdikembalikan");

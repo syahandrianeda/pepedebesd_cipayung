@@ -164,7 +164,7 @@ let classCollection =[
     "header":"h_citayam1",
     "urlsetting":""
 },{"id":7,
-"img":"Lambang_Kota_Depok.png",
+"img":"citayam4.jpg",
     "kelas":"kuota_citayam4",
     "header":"h_citayam4",
     "urlsetting":""
@@ -267,11 +267,36 @@ const formPendaftaranCPDB = ()=>{
   let modal = document.getElementById("modalFormulirPendaftaran");
   let tambahanformformulircpdbawal = document.querySelector(".tambahanformformulircpdbawal");
   let cekformulircpdbawal = document.querySelector(".cekformulircpdbawal");
+  let formulircpdbawal = document.querySelector(".formulircpdbawal");
+  if(formulircpdbawal.className.indexOf("w3-hide")>-1){
+    formulircpdbawal.classList.remove("w3-hide")
+  }
   
   modal.style.display = 'block';
+
   tambahanformformulircpdbawal.innerHTML = `<div class="w3-center"><button class="w3-purple w3-button w3-bottombar w3-border w3-border-yellow w3-round-xxlarge w3-margin-top" onclick="periksaNIKCPDB(this)">PILIH SEKOLAH</button></div>`;
   
   cekformulircpdbawal.innerHTML = "";
+
+  let input_namasiswa = document.querySelector("[data-formulircpdb='nama_cpdb']");
+        if(input_namasiswa.hasAttribute("disabled")){
+          input_namasiswa.removeAttribute("disabled");
+        };
+  let input_tempatlahir = document.querySelector("[data-formulircpdb='cpdb_tempat_lahir']");
+        if(input_tempatlahir.hasAttribute("disabled")){
+          input_tempatlahir.removeAttribute("disabled");
+        };
+  let input_tgllahir = document.querySelector("[data-formulircpdb='cpdb_tanggal_lahir']");
+        if(input_tgllahir.hasAttribute("disabled")){
+          input_tgllahir.removeAttribute("disabled");
+        };
+  let input_nik = document.querySelector("[data-formulircpdb='cpdb_nik']");
+        if(input_nik.hasAttribute("disabled")){
+          input_nik.removeAttribute("disabled");
+        };
+  
+
+  
 
 }
 const toCapitalize = (e) =>{
@@ -314,17 +339,31 @@ const periksaNIKCPDB = (el)=>{
   .then(m => m.json())
   .then(r =>{ 
     console.log(r);
-    let bolehlanjut = r.bolehlanjut;
-    if(bolehlanjut == "Boleh"){
+    // let bolehlanjut = r.bolehlanjut;
+    let bolehlanjut = r.result;
+    if(bolehlanjut == "tidak ditemukan"){
       //html_formulir("zonasi");
       html_cpdbpilihsekolah();
     }else{
       
       let data = r.records[0];
-      html_dilaranglanjutdaftar(data);
+      let cekid_status = data.id_status;
+
+      if(cekid_status == "Proses Jurnal"){
+        html_dilaranglanjutdaftar(data);
+      }else{
+        html_maucobalagidaftar(data, cekid_status)
+      }
 
     }
-
+    let input_namasiswa = document.querySelector("[data-formulircpdb='nama_cpdb']");
+        input_namasiswa.setAttribute("disabled","true");
+    let input_tempatlahir = document.querySelector("[data-formulircpdb='cpdb_tempat_lahir']");
+        input_tempatlahir.setAttribute("disabled","true");
+    let input_tgllahir = document.querySelector("[data-formulircpdb='cpdb_tanggal_lahir']");
+        input_tgllahir.setAttribute("disabled","true");
+    let input_nik = document.querySelector("[data-formulircpdb='cpdb_nik']");
+        input_nik.setAttribute("disabled","true");
   //   let tes = `{
   //     "records": "",
   //     "bolehlanjut": "Boleh",
@@ -335,19 +374,638 @@ const periksaNIKCPDB = (el)=>{
     
   }).catch(er => console.log(er))
 }
+
+const html_maucobalagidaftar = (data, idstts) =>{
+  //ini kondisinya bisa jadi:
+  // Dikembalikan, bisa daftar di sekolah sebelumnya
+  // Ditolak, Keluar Jurnal, tidak bisa daftar di sekolah yang ada di riwayat;
+  
+  let divform = document.querySelector(".tambahanformformulircpdbawal");
+  let html ="";//[//] =`<div class="w3-card-4 w3-container w3-pale-red w3-margin-top">`;
+  
+  if(idstts == "Dikembalikan"){
+    let id = data.tujuan_mendaftar;
+  let row = data.baris_terminal;
+  let idpendaftar = data.id_pendaftar;
+  let jalurppdb = data.jalur_cpdb;
+      let dbSetting = db_settingppdbsekolah.filter(s=> s.id_sekolah == id);
+      let alamat = dbSetting[0].alamat_kelurahan + ",<br>RT " + dbSetting[0].alamat_rt + ", RW " + dbSetting[0].alamat_rw;
+    let tekstitle = `Alamat: ${alamat}`;
+    html += `<div class="w3-card-4 w3-container w3-pale-red w3-margin-top">`;
+      html +=`Status pendaftaran Ananda CPDB <b>Dikembalikan</b> di sekolah tujuan <b>${dbSetting[0].nama_sekolah}</b> dengan keterangan <b>${data.ket_status}</b>, bisa saja status ini karena kesalahan/ketidaklengkapan dokumen yang dibutuhkan. Segera lengkapi!`;
+      // start
+      html +=`<div class="w3-row w3-card-4 w3-margin-top w3-white">`;
+            html +=`<div class="w3-col l12 s12 w3-center w3-border-bottom w3-border-black">Jalur PPDB Yang Dipilih Sebelumnya</div>`;
+                html +=`<div class="w3-col l4 s12 w3-border-right"><div class="w3-center">Anda Memilih Sekolah:</div>`;
+                
+                    
+                      html +=`<div class="w3-row w3-tiny w3-border w3-card-4 w3-margin w3-round-xlarge">`;
+                        html +=`<img src="${dbSetting[0].logosekolah}" class="w3-col l4 s4" style="height:65px">`;
+                        html +=`<div class="w3-col s8 w3-hide-large w3-margin-top"></div>`;
+                        html +=`<div class="w3-col l8 s8 w3-center">${dbSetting[0].nama_sekolah.toUpperCase()}</div>`;
+                        html +=`<div class="w3-col l8 s8 w3-center">Kuota Total: ${dbSetting[0].total_cpdb}<span class="w3-tiny"><br>${tekstitle}</span></div>`;
+                        html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+                      html +=`</div>`;
+                      //html +=`<div class="w3-center w3-tiny">Atau</div>`;
+                      //html +=`<div class="w3-center"><div class="w3-tiny w3-border w3-card-4 w3-margin w3-btn w3-padding" onclick="html_cpdbpilihsekolah()">PILIH SEKOLAH LAIN</div></div>`;
+              
+              html +=`</div>`;
+
+              html +=`<div class="w3-col l8 s12">`;
+                html +=`<div class="w3-center">Jalur yang dipilih sebelumnya</div>`;
+                html+=`<div id="cekjalurppdb_idsekolahini" class="w3-margin-bottom">`;
+                  // html +=`<button class="w3-btn w3-border w3-pale-green w3-small w3-round w3-margin" onclick="html_formulir('${jalurppdb.toLowerCase()}',${id},'${dbSetting[0].nama_sekolah}')">${jalurppdb}</button>`;
+                  html +=`<button class="w3-btn w3-border w3-pale-green w3-small w3-round w3-margin" onclick="alert('Anda harus menyelesaikan kesalahan/ketidaklengkapan formulir ini')">${jalurppdb}</button>`;
+                html +=`</div>`;
+              html +=`</div>`;
+        html +=`</div>`;
+      // end
+      html +=`<hr class="w3-clear">Sistem akan mengembalikan data yang pernah Anda input sebelumnya:`
+    html += `</div>`;
+    html +=`<div class="w3-card-4 w3-padding w3-margin-top"><h4 class="w3-center w3-card-2 w3-pale-red">Pilihan Sekolah dan Jalur yang Dipilih:</h4>Kode Sekolah Tujuan:<input type="number" data-formulircpdb="tujuan_mendaftar" class="w3-input w3-border w3-light-grey" value="2" disabled><br>Tujuan Sekolah: <span class="w3-input w3-border w3-light-grey">SDN CIPAYUNG 1</span><br>Jalur yang Dipilih:<input type="text" data-formulircpdb="jalur_cpdb" id="jalur_cpdb" class="w3-input w3-border w3-light-grey" value="ZONASI" disabled><br></div><div class="w3-card-4 w3-padding w3-margin-top"><h4 class="w3-center w3-card-2 w3-blue">Form Pendaftaran Jalur zonasi</h4><label for="cpdb_umur">Skor Umur:<input type="text" data-formulircpdb="cpdb_umur" id="cpdb_umur" class="w3-border" style="width:80px" value="0" disabled></label><br><br><label for="cpdb_jk">Jenis Kelamin: <select id="cpdb_jk" data-formulircpdb="cpdb_jk" class="w3-select w3-light-grey"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select></label><br><br><label for="cpdb_agama">Agama yang dianut CPDB:<select id="cpdb_agama" data-formulircpdb="cpdb_agama" class="w3-border w3-select w3-light-gray"><option value="">Pilih Agama yang Dianut?</option><option value="ISLAM">ISLAM</option><option value="KRISTEN">KRISTEN(PROTESTAN)</option><option value="KATHOLIK">KATHOLIK</option><option value="HINDU">HINDU</option><option value="BUDHA">BUDHA</option><option value="KHONGHUCU">KHONGHUCU</option><option value="LAINNYA">LAINNYA</option></select></label><br><br>
+            <label for="cpdb_abk">Berkebutuhan Khusus?:<select id="cpdb_abk" data-formulircpdb="cpdb_abk" class="w3-select w3-border"><option value="BELUM PILIH" selected="">Silakan Pilih</option><option value="TIDAK">Tidak</option><option value="NETRA (A)">Netra (A)</option><option value="RUNGU (B)">Rungu (B)</option><option value="GRAHITA RINGAN (C)">Grahita Ringan (C)</option><option value="GRAHITA SEDANG (C1)">Grahita Sedang (C1)</option><option value="DAKSA RINGAN (D)">Daksa Ringan (D)</option><option value="DAKSA SEDANG (D1)">Daksa Sedang (D1)</option><option value="INDIGO (O)">Indigo (O)</option><option value="DOWN SINDROME (P)">Down Sindrome (P)</option><option value="AUTIS (Q)">Autis (Q)</option><option value="LARAS (E)">Laras ( E)</option><option value="WICARA (F)">Wicara (F)</option><option value="TUNA GANDA (G)">Tuna Ganda (G)</option><option value="HIPERAKTIF (H)">Hiperaktif (H)</option><option value="CERDAS ISTIMEWA (I)">Cerdas Istimewa (i)</option><option value="BAKAT ISTIMEWA (J)">Bakat Istimewa (J)</option><option value="KESULITAN BELAJAR (K)">Kesulitan Belajar (K)</option></select></label><br><br><label for="cpdb_anakke">ANAK KE-</label><input type="number" class="w3-border" min="1" style="width:250px" id="cpdb_anakke" data-formulircpdb="cpdb_anakke"><br><br><label for="cpdb_kewarganegaraan">Kewarganegaraan:</label><select id="cpdb_kewarganegaraan" data-formulircpdb="cpdb_kewarganegaraan" class="w3-select w3-border"><option value="BELUM PILIH WNA" selected="">Silakan Pilih</option><option value="WNI">WNI</option> <option value="WNA">WNA</option></select><br><br><label for="cpdb_no_reg_akte">No. Registrasi Akte:<input type="text" id="cpdb_no_reg_akte" data-formulircpdb="cpdb_no_reg_akte" class="w3-border w3-input"></label><br><br>File Pendukung: 
+                        <ul class="w3-ul">
+                          <li>1. Akta Kelahiran/Surat Kenal Lahir 
+                              <label for="up_akta" class="w3-button w3-round w3-green w3-small"><i class="fa fa-upload"></i> Upload </label>
+                          </li>
+                        </ul>
+                        
+                        <table class="w3-table-all w3-tiny">
+                          <tbody><tr>
+                            <td class="preview_akta">Preview Akta</td>
+                          </tr>
+                          <tr>
+                            <td><input type="text" class="cpdb_id_file_akta w3-input" id="cpdb_id_file_akta" data-formulircpdb="cpdb_id_file_akta" disabled>
+                            </td>
+                          </tr>
+                        </tbody></table></div><div class="w3-card-4 w3-padding w3-margin-top"><h5 class="w3-center w3-card-2 w3-aqua">Alamat CPDB dan Dokumen Kartu Keluarga</h5><label for="cpdb_no_kk">No Kartu Keluarga CPDB</label>
+                                  <input type="text" data-formulircpdb="cpdb_no_kk" id="cpdb_no_kk" class="w3-input w3-border"><br><br>
+                          <label for="cpdb_kota">Kota(atau Kabupaten)</label>
+                              <select data-formulircpdb="cpdb_kota" id="cpdb_kota" class="w3-select w3-border" onchange="pilih_kota(this,'kondisi_alamat')">
+                                <option value="">Pilih Kota Tinggal</option>
+                                <option value="KOTA DEPOK">KOTA DEPOK</option>
+                                <option value="Lainnya">LAINNYA</option>
+                              </select>
+                        <div class="kondisi_alamat"><br><label for="cpdb_kec">Kecamatan:</label>
+          <select class="w3-border w3-select" id="cpdb_kec" data-formulircpdb="cpdb_kec" onchange="pilih_kec(this,'kondisi_kel')">
+          <option value="" selected="">Pilih Kecamatan</option>
+          <option value="CIPAYUNG">CIPAYUNG</option>
+          <option value="CILODONG">CILODONG</option>
+          <option value="BOJONG SARI">BOJONG SARI</option>
+          <option value="SAWANGAN">SAWANGAN</option>
+          <option value="BEJI">BEJI</option>
+          <option value="CIMANGGIS">CIMANGGIS</option>
+          <option value="LIMO">LIMO</option>
+          <option value="CINERE">CINERE</option>
+          <option value="PANCORAN MAS">PANCORAN MAS</option>
+          <option value="SUKMAJAYA">SUKMAJAYA</option>
+          <option value="TAPOS">TAPOS</option>
+          </select>
+          
+          </div>
+                        <div class="kondisi_kel"><br><label for="cpdb_kel">Kelurahan:</label>
+          <select class="w3-border w3-select" id="cpdb_kel" data-formulircpdb="cpdb_kel">
+          <option value="">Pilih Kelurahan</option>
+          <option value="CIPAYUNG">CIPAYUNG</option>
+          <option value="RATUJAYA">RATUJAYA</option>
+          <option value="BOJONG PONDOK TERONG">BOJONG PONDOK TERONG</option>
+          <option value="PONDOK JAYA">PONDOK JAYA</option>
+          <option value="CIPAYUNG JAYA">CIPAYUNG JAYA</option>
+          </select><br>
+          <label for="cpdb_rw">RW</label>
+          <input type="number" class="w3-input w3-border" min="1" style="width:123px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
+          <br><label for="cpdb_rt">RT</label>
+          <input type="number" class="w3-input w3-border" min="1" style="width:123px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
+          <br><label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
+          <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border" x="" oninput="ketik_kapital(this)">
+          <br>File Pendukung:
+                  <ul class="w3-ul"><li>1. Kartu Keluarga <label for="up_kk" class="w3-button w3-round w3-green w3-small"><i class="fa fa-upload"></i> Upload </label> </li></ul>
+                  <table class="w3-table-all w3-tiny">
+                  <tbody><tr>
+                      <td class="preview_kk"></td>
+                  </tr><tr>
+                      <td><input type="text" class="cpdb_id_file_kk w3-input" id="cpdb_id_file_kk" data-formulircpdb="cpdb_id_file_kk" disabled>
+                      </td>
+                  </tr>
+                  </tbody></table>
+          </div></div><div class="w3-card-4 w3-padding w3-margin-top">
+                        <h4 class="w3-center w3-card-2 w3-aqua">Data Riwayat PAUD/TK/RA</h4>
+    
+                          <label for="cpdb_npsn">NPSN (Nomor Pokok Sekolah Nasional)</label>
+                            <input type="text" data-formulircpdb="cpdb_npsn" id="cpdb_npsn" class="w3-input w3-border"> 
+                        <label for="cpdb_nisn">NISN (Nomor Induk Siswa Nasional)</label>
+                            <input type="text" data-formulircpdb="cpdb_nisn" id="cpdb_nisn" class="w3-input w3-border">
+                        <label for="cpdb_sekolahasal">Nama Sekolah Asal PAUD/TK/RA</label>
+                            <input type="text" data-formulircpdb="cpdb_sekolahasal" id="cpdb_sekolahasal" class="w3-input w3-border" oninput="ketik_kapital(this)"> 
+                        
+                        File Pendukung: 
+                          <ul class="w3-ul">
+                              <li>1. Ijazah/STSB PAUD/TK
+                                  <label for="up_ijazah" class="w3-button w3-round w3-green w3-small"><i class="fa fa-upload"></i> Upload </label>
+                              </li>
+                          </ul>
+                          
+                          <table class="w3-table-all w3-tiny">
+                              <tbody><tr>
+                                  <td class="preview_ijazah"></td>
+                              </tr>
+                              <tr>
+                                <td><input type="text" class="cpdb_id_file_ijazah w3-input" id="cpdb_id_file_ijazah" data-formulircpdb="cpdb_id_file_ijazah" disabled>
+                                </td>
+                              </tr>
+                          </tbody></table></div><div class="w3-card-4 w3-padding w3-margin-top"><h4 class="w3-center w3-card-2 w3-aqua">Data Orang Tua</h4>
+                          <h5 class="w3-pale-green">Data Ayah Kandung</h5> 
+                            <label for="ortu_nama_ayah">Nama Ayah</label>
+                                <input type="text" id="ortu_nama_ayah" data-formulircpdb="ortu_nama_ayah" class="w3-input w3-border" oninput="ketik_kapital(this)">
+                            <label for="ortu_nik_ayah">NIK Ayah</label>
+                                <input type="text" id="ortu_nik_ayah" data-formulircpdb="ortu_nik_ayah" class="w3-input w3-border"><br>
+                            <label for="ortu_ttl_ayah">Tanggal Lahir Ayah</label>
+                                <input type="date" data-formulircpdb="ortu_ttl_ayah" value="1987-07-01" id="ortu_ttl_ayah" class="w3-select w3-border" onchange="konversi_tanggal(this,'sub_arti_tanggal_ayah')" style="width:150px"><br><sub class="w3-text-red sub_sub sub_arti_tanggal_ayah"></sub><br> 
+                            <label for="ortu_pendidikan_ayah">Pendidikan Ayah</label>
+                                <select id="ortu_pendidikan_ayah" data-formulircpdb="ortu_pendidikan_ayah" class="w3-select w3-border">
+                                    <option value="Tidak Sekolah">Tidak Sekolah</option>
+                                    <option value="Putus SD">Putus SD</option>
+                                    <option value="SD Sederajat">SD Sederajat</option>
+                                    <option value="SMP Sederajat">SMP Sederajat</option>
+                                    <option value="SMA Sederajat">SMA Sederajat</option>
+                                    <option value="D1">D1</option>
+                                    <option value="D2">D2</option>
+                                    <option value="D3">D3</option>
+                                    <option value="D4/S1">D4/S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S2">S3</option>
+                                </select><br><br>
+                                
+                            <label for="ortu_pekerjaan_ayah">Pekerjaan Ayah</label> 
+                                <select id="ortu_pekerjaan_ayah" data-formulircpdb="ortu_pekerjaan_ayah" class="w3-select w3-border">
+                                    <option value="Belum Memilih" selected="">Pilih Pekerjaan</option>
+                                    <option value="Tidak Bekerja">Tidak bekerja</option>
+                                    <option value="Nelayan">Nelayan</option>
+                                    <option value="Petani">Petani</option>
+                                    <option value="Peternak">Peternak</option>
+                                    <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
+                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                    <option value="Pedagang Kecil">Pedagang Kecil</option>
+                                    <option value="Pedagang Besar">Pedagang Besar</option>
+                                    <option value="Wiraswasta">Wiraswasta</option>
+                                    <option value="Wirausaha">Wirausaha</option>
+                                    <option value="Buruh">Buruh</option>
+                                    <option value="Pensiunan">Pensiunan</option>
+                                    <option value="Tenaga Kerja Indonesia (TKI)">Tenaga Kerja Indonesia (TKI)</option>
+                                    <option value="Tidak dapat diterapkan">Tidak dapat diterapkan</option>
+                                    <option value="Meninggal Dunia">Meninggal Dunia</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select><br><br>
+                            <label for="ortu_penghasilan_ayah">Penghasilan Ayah</label>
+                                <select id="ortu_penghasilan_ayah" data-formulircpdb="ortu_penghasilan_ayah" class="w3-select w3-border">
+                                    <option value="Belum Memilih" selected="">Pilih kisaran penghasilan</option>
+                                    <option value="Kurang dari Rp. 1.000.000,-">Kurang dari Rp. 1.000.000,-</option>
+                                    <option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>
+                                    <option value="Lebih dari Rp. 2.000.000">Lebih dari Rp. 2.000.000</option>
+                                    <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                                    <option value="Rp. 500.000 - Rp. 999.999">Rp. 500.000 - Rp. 999.999</option>
+                                    <option value="Rp. 1.000.000 - Rp. 1.999.999">Rp. 1.000.000 - Rp. 1.999.999</option>
+                                    <option value="Rp. 2.000.000 - Rp. 4.999.999">Rp. 2.000.000 - Rp. 4.999.999</option>
+                                    <option value="Rp. 5.000.000 - Rp. 20.000.000">Rp. 5.000.000 - Rp. 20.000.000</option>
+                                    <option value="Lebih dari Rp.20.000.000">Lebih dari Rp.20.000.000</option>
+                                    <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select><br><br>
+                          <label for="ortu_abk_ayah">Ayah Berkebutuhan Khusus?</label> 
+                              <select id="ortu_abk_ayah" data-formulircpdb="ortu_abk_ayah" class="w3-select w3-border">
+                                <option value="BELUM PILIH" selected="">Silakan Pilih</option>
+                                <option value="TIDAK">Tidak</option> <option value="NETRA (A)">Netra (A)</option>
+                                <option value="RUNGU (B)">Rungu (B)</option>
+                                <option value="GRAHITA RINGAN (C)">Grahita Ringan (C)</option>
+                                <option value="GRAHITA SEDANG (C1)">Grahita Sedang (C1)</option>
+                                <option value="DAKSA RINGAN (D)">Daksa Ringan (D)</option>
+                                <option value="DAKSA SEDANG (D1)">Daksa Sedang (D1)</option>
+                                <option value="INDIGO (O)">Indigo (O)</option>
+                                <option value="DOWN SINDROME (P)">Down Sindrome (P)</option>
+                                <option value="AUTIS (Q)">Autis (Q)</option>
+                                <option value="LARAS (E)">Laras ( E)</option>
+                                <option value="WICARA (F)">Wicara (F)</option>
+                                <option value="TUNA GANDA (G)">Tuna Ganda (G)</option>
+                                <option value="HIPERAKTIF (H)">Hiperaktif (H)</option>
+                                <option value="CERDAS ISTIMEWA (I)">Cerdas Istimewa (i)</option>
+                                <option value="BAKAT ISTIMEWA (J)">Bakat Istimewa (J)</option>
+                                <option value="KESULITAN BELAJAR (K)">Kesulitan Belajar (K)</option>
+                              </select><br><br> 
+    
+                        <label for="ortu_hp_ayah">No. HP/WA Ayah</label>
+                            <input type="tel" id="ortu_hp_ayah" data-formulircpdb="ortu_hp_ayah" class="w3-input w3-border"></div><div class="w3-card-4 w3-padding w3-margin-top"><h5 class="w3-pale-green"> Data Ibu Kandung</h5>
+                      <label for="ortu_nama_ibu">Nama Ibu</label>
+                      <input type="text" id="ortu_nama_ibu" data-formulircpdb="ortu_nama_ibu" class="w3-input w3-border" oninput="ketik_kapital(this)"><br>
+                      <label for="ortu_nik_ibu">NIK Ibu</label>
+                      <input type="text" id="ortu_nik_ibu" data-formulircpdb="ortu_nik_ibu" class="w3-input w3-border"><br><br> 
+                      <label for="ortu_ttl_ibu">Tanggal Lahir Ibu</label>
+                      <input type="date" data-formulircpdb="ortu_ttl_ibu" value="1987-07-01" id="ortu_ttl_ibu" class="w3-input w3-border" onchange="konversi_tanggal(this,'sub_arti_tanggal_Ibu')" style="width:150px"><br><sub class="w3-text-red sub_sub sub_arti_tanggal_Ibu"></sub> 
+                      <label for="ortu_pendidikan_ibu">Pendidikan Ibu</label>
+                      <select id="ortu_pendidikan_ibu" data-formulircpdb="ortu_pendidikan_ibu" class="w3-select w3-border">
+                          <option value="Tidak Sekolah">Tidak Sekolah</option>
+                          <option value="Putus SD">Putus SD</option>
+                          <option value="SD Sederajat">SD Sederajat</option>
+                          <option value="SMP Sederajat">SMP Sederajat</option>
+                          <option value="SMA Sederajat">SMA Sederajat</option>
+                          <option value="D1">D1</option> 
+                          <option value="D2">D2</option>
+                          <option value="D3">D3</option>
+                          <option value="D4/S1">D4/S1</option>
+                          <option value="S2">S2</option>
+                          <option value="S2">S3</option>
+                      </select><br><br>
+                  <label for="ortu_pekerjaan_ibu">Pekerjaan Ibu</label>
+                  <select id="ortu_pekerjaan_ibu" data-formulircpdb="ortu_pekerjaan_ibu" class="w3-select w3-border">
+                      <option value="Belum Memilih" selected="">Pilih Pekerjaan</option>
+                      <option value="Tidak Bekerja">Tidak bekerja</option>
+                      <option value="Nelayan">Nelayan</option>
+                      <option value="Petani">Petani</option>
+                      <option value="Peternak">Peternak</option>
+                      <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
+                      <option value="Karyawan Swasta">Karyawan Swasta</option>
+                      <option value="Pedagang Kecil">Pedagang Kecil</option>
+                      <option value="Pedagang Besar">Pedagang Besar</option>
+                      <option value="Wiraswasta">Wiraswasta</option>
+                      <option value="Wirausaha">Wirausaha</option>
+                      <option value="Buruh">Buruh</option>
+                      <option value="Pensiunan">Pensiunan</option>
+                      <option value="Tenaga Kerja Indonesia (TKI)">Tenaga Kerja Indonesia (TKI)</option>
+                      <option value="Tidak dapat diterapkan">Tidak dapat diterapkan</option>
+                      <option value="Meninggal Dunia">Meninggal Dunia</option>
+                      <option value="Lainnya">Lainnya</option>
+                  </select><br><br>
+                  
+                  <label for="ortu_penghasilan_ibu">Penghasilan Ibu</label>
+                  <select id="ortu_penghasilan_ibu" data-formulircpdb="ortu_penghasilan_ibu" class="w3-select w3-border">
+                      <option value="Belum Memilih" selected="">Pilih kisaran penghasilan</option>
+                      <option value="Kurang dari Rp. 1.000.000,-">Kurang dari Rp. 1.000.000,-</option>
+                      <option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>
+                      <option value="Lebih dari Rp. 2.000.000">Lebih dari Rp. 2.000.000</option>
+                      <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                      <option value="Rp. 500.000 - Rp. 999.999">Rp. 500.000 - Rp. 999.999</option>
+                      <option value="Rp. 1.000.000 - Rp. 1.999.999">Rp. 1.000.000 - Rp. 1.999.999</option>
+                      <option value="Rp. 2.000.000 - Rp. 4.999.999">Rp. 2.000.000 - Rp. 4.999.999</option>
+                      <option value="Rp. 5.000.000 - Rp. 20.000.000">Rp. 5.000.000 - Rp. 20.000.000</option>
+                      <option value="Lebih dari Rp.20.000.000">Lebih dari Rp.20.000.000</option>
+                      <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                      <option value="Lainnya">Lainnya</option>
+                  </select><br><br>
+                  
+                  <label for="ortu_abk_ibu">Ibu Berkebutuhan Khusus?</label>
+                  <select id="ortu_abk_ibu" data-formulircpdb="ortu_abk_ibu" class="w3-select w3-border">
+                      <option value="BELUM PILIH" selected="">Silakan Pilih</option>
+                      <option value="TIDAK">Tidak</option>
+                      <option value="NETRA (A)">Netra (A)</option>
+                      <option value="RUNGU (B)">Rungu (B)</option>
+                      <option value="GRAHITA RINGAN (C)">Grahita Ringan (C)</option>
+                      <option value="GRAHITA SEDANG (C1)">Grahita Sedang (C1)</option>
+                      <option value="DAKSA RINGAN (D)">Daksa Ringan (D)</option>
+                      <option value="DAKSA SEDANG (D1)">Daksa Sedang (D1)</option>
+                      <option value="INDIGO (O)">Indigo (O)</option>
+                      <option value="DOWN SINDROME (P)">Down Sindrome (P)</option>
+                      <option value="AUTIS (Q)">Autis (Q)</option>
+                      <option value="LARAS (E)">Laras ( E)</option>
+                      <option value="WICARA (F)">Wicara (F)</option>
+                      <option value="TUNA GANDA (G)">Tuna Ganda (G)</option>
+                      <option value="HIPERAKTIF (H)">Hiperaktif (H)</option>
+                      <option value="CERDAS ISTIMEWA (I)">Cerdas Istimewa (i)</option>
+                      <option value="BAKAT ISTIMEWA (J)">Bakat Istimewa (J)</option>
+                      <option value="KESULITAN BELAJAR (K)">Kesulitan Belajar (K)</option>
+                  </select><br><br>
+                  
+                  <label for="ortu_hp_ibu">No. HP/WA Ibu</label>
+                      <input type="tel" id="ortu_hp_ibu" data-formulircpdb="ortu_hp_ibu" class="w3-input w3-border"></div><div class="w3-card-4 w3-padding w3-margin-top"><h5 class="w3-pale-green">Data Wali</h5>
+                    <label for="ortu_nama_wali">Nama wali</label>
+                        <input type="text" id="ortu_nama_wali" data-formulircpdb="ortu_nama_wali" class="w3-input w3-border" oninput="ketik_kapital(this)">
+                    <label for="ortu_nik_wali">NIK Wali</label>
+                        <input type="text" id="ortu_nik_wali" data-formulircpdb="ortu_nik_wali" class="w3-input w3-border"><br>
+                    <label for="ortu_ttl_wali">Tanggal Lahir Wali</label>
+                        <input type="date" data-formulircpdb="ortu_ttl_wali" value="1987-07-01" id="ortu_ttl_wali" class="w3-select w3-border" onchange="konversi_tanggal(this,'sub_arti_tanggal_Wali')" style="width:150px"><br><sub class="w3-text-red sub_sub sub_arti_tanggal_Wali"></sub><br> 
+                    
+                    <label for="ortu_pendidikan_wali">Pendidikan Wali</label>
+                    <select id="ortu_pendidikan_wali" data-formulircpdb="ortu_pendidikan_wali" class="w3-select w3-border">
+                        <option value="Tidak Sekolah">Tidak Sekolah</option>
+                        <option value="Putus SD">Putus SD</option>
+                        <option value="SD Sederajat">SD Sederajat</option>
+                        <option value="SMP Sederajat">SMP Sederajat</option>
+                        <option value="SMA Sederajat">SMA Sederajat</option>
+                        <option value="D1">D1</option> <option value="D2">D2</option>
+                        <option value="D3">D3</option> <option value="D4/S1">D4/S1</option>
+                        <option value="S2">S2</option> <option value="S2">S3</option>
+                    </select><br><br>
+                    
+                    <label for="ortu_pekerjaan_wali">Pekerjaan Wali</label>
+                    <select id="ortu_pekerjaan_wali" data-formulircpdb="ortu_pekerjaan_wali" class="w3-select w3-border">
+                        <option value="Belum Memilih" selected="">Pilih Pekerjaan</option>
+                        <option value="Tidak Bekerja">Tidak bekerja</option>
+                        <option value="Nelayan">Nelayan</option>
+                        <option value="Petani">Petani</option>
+                        <option value="Peternak">Peternak</option>
+                        <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
+                        <option value="Karyawan Swasta">Karyawan Swasta</option>
+                        <option value="Pedagang Kecil">Pedagang Kecil</option>
+                        <option value="Pedagang Besar">Pedagang Besar</option>
+                        <option value="Wiraswasta">Wiraswasta</option>
+                        <option value="Wirausaha">Wirausaha</option>
+                        <option value="Buruh">Buruh</option>
+                        <option value="Pensiunan">Pensiunan</option>
+                        <option value="Tenaga Kerja Indonesia (TKI)">Tenaga Kerja Indonesia (TKI)</option>
+                        <option value="Tidak dapat diterapkan">Tidak dapat diterapkan</option>
+                        <option value="Meninggal Dunia">Meninggal Dunia</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select><br><br>
+                    
+                    <label for="ortu_penghasilan_wali">Penghasilan Wali</label>
+                    <select id="ortu_penghasilan_wali" data-formulircpdb="ortu_penghasilan_wali" class="w3-select w3-border">
+                        <option value="Belum Memilih" selected="">Pilih kisaran penghasilan</option>
+                        <option value="Kurang dari Rp. 1.000.000,-">Kurang dari Rp. 1.000.000,-</option>
+                        <option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>
+                        <option value="Lebih dari Rp. 2.000.000">Lebih dari Rp. 2.000.000</option>
+                        <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                        <option value="Rp. 500.000 - Rp. 999.999">Rp. 500.000 - Rp. 999.999</option>
+                        <option value="Rp. 1.000.000 - Rp. 1.999.999">Rp. 1.000.000 - Rp. 1.999.999</option>
+                        <option value="Rp. 2.000.000 - Rp. 4.999.999">Rp. 2.000.000 - Rp. 4.999.999</option>
+                        <option value="Rp. 5.000.000 - Rp. 20.000.000">Rp. 5.000.000 - Rp. 20.000.000</option>
+                        <option value="Lebih dari Rp.20.000.000">Lebih dari Rp.20.000.000</option>
+                        <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select><br><br>
+                    
+                    <label for="ortu_abk_wali">Wali Berkebutuhan Khusus?</label>
+                    <select id="ortu_abk_wali" data-formulircpdb="ortu_abk_wali" class="w3-select w3-border">
+                        <option value="BELUM PILIH" selected="">Silakan Pilih</option>
+                        <option value="TIDAK">Tidak</option>
+                        <option value="NETRA (A)">Netra (A)</option>
+                        <option value="RUNGU (B)">Rungu (B)</option>
+                        <option value="GRAHITA RINGAN (C)">Grahita Ringan (C)</option>
+                        <option value="GRAHITA SEDANG (C1)">Grahita Sedang (C1)</option>
+                        <option value="DAKSA RINGAN (D)">Daksa Ringan (D)</option>
+                        <option value="DAKSA SEDANG (D1)">Daksa Sedang (D1)</option>
+                        <option value="INDIGO (O)">Indigo (O)</option>
+                        <option value="DOWN SINDROME (P)">Down Sindrome (P)</option>
+                        <option value="AUTIS (Q)">Autis (Q)</option>
+                        <option value="LARAS (E)">Laras ( E)</option>
+                        <option value="WICARA (F)">Wicara (F)</option>
+                        <option value="TUNA GANDA (G)">Tuna Ganda (G)</option>
+                        <option value="HIPERAKTIF (H)">Hiperaktif (H)</option>
+                        <option value="CERDAS ISTIMEWA (I)">Cerdas Istimewa (i)</option>
+                        <option value="BAKAT ISTIMEWA (J)">Bakat Istimewa (J)</option>
+                        <option value="KESULITAN BELAJAR (K)">Kesulitan Belajar (K)</option>
+                    </select></div><div class="w3-card-4 w3-padding w3-margin-top"><h4 class="w3-center w3-card-2 w3-pale-red">FILE PENDUKUNG</h4><table class="w3-table-all w3-small"><tbody><tr>
+                            <td>STSB/IJASAH PAUD <label for="up_filependukung_0" class="w3-button w3-right w3-green w3-small">
+                            <i class="fa fa-upload"></i> Upload </label> 
+                            </td>
+                            </tr>
+    
+                            <tr>
+                                <td class="preview_filependukung_0"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="w3-input w3-border" id="cpdb_id_file_filependukung_0" data-formulircpdb="cpdb_id_file_filependukung_0" disabled>
+                            </td>
+                        </tr>
+                        <tr class="w3-dark-white w3-pale-green"><td></td>
+                        </tr><tr>
+                            <td>SPTJM <label for="up_filependukung_1" class="w3-button w3-right w3-green w3-small">
+                            <i class="fa fa-upload"></i> Upload </label> 
+                            </td>
+                            </tr>
+    
+                            <tr>
+                                <td class="preview_filependukung_1"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="w3-input w3-border" id="cpdb_id_file_filependukung_1" data-formulircpdb="cpdb_id_file_filependukung_1" disabled>
+                            </td>
+                        </tr>
+                        <tr class="w3-dark-white w3-pale-green"><td></td>
+                        </tr><tr>
+                            <td>KTP <label for="up_filependukung_2" class="w3-button w3-right w3-green w3-small">
+                            <i class="fa fa-upload"></i> Upload </label> 
+                            </td>
+                            </tr>
+    
+                            <tr>
+                                <td class="preview_filependukung_2"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="w3-input w3-border" id="cpdb_id_file_filependukung_2" data-formulircpdb="cpdb_id_file_filependukung_2" disabled>
+                            </td>
+                        </tr>
+                        <tr class="w3-dark-white w3-pale-green"><td></td>
+                        </tr><tr>
+                            <td>Poto Calon Peserta Didik Baru <label for="up_filependukung_3" class="w3-button w3-right w3-green w3-small">
+                            <i class="fa fa-upload"></i> Upload </label> 
+                            </td>
+                            </tr>
+    
+                            <tr>
+                                <td class="preview_filependukung_3"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="w3-input w3-border" id="cpdb_id_file_filependukung_3" data-formulircpdb="cpdb_id_file_filependukung_3" disabled>
+                            </td>
+                        </tr>
+                        <tr class="w3-dark-white w3-pale-green"><td></td>
+                        </tr> </tbody></table></div><div class="w3-hide">
+                <input type="file" id="up_akta" onchange="uploadfile(this)">
+                    <input type="file" id="up_kk" onchange="uploadfile(this)">
+                    <input type="file" id="up_domisili" onchange="uploadfile(this)">
+                    <input type="file" id="up_ijazah" onchange="uploadfile(this)"><input type="file" id="up_filependukung_0" onchange="uploadfile(this)"> kode 0<input type="file" id="up_filependukung_1" onchange="uploadfile(this)"> kode 1<input type="file" id="up_filependukung_2" onchange="uploadfile(this)"> kode 2<input type="file" id="up_filependukung_3" onchange="uploadfile(this)"> kode 3</div>
+                <br>
+                    <div class="w3-card-4 w3-container">
+                        <ul class="w3-ul">
+                    <li>
+                        <label for="setuju">
+                            <input type="checkbox" class="w3-check ceksetuju" id="setuju" value="Setuju" > Dengan ini menyatakan bahwa data yang saya isi dan unggah benar-benar data yang sebenarnya.</label>
+                    </li><li><label for="takluk">
+                    <input type="checkbox" id="takluk" class="w3-check ceksetuju" > Anda setuju dan tunduk pada peraturan PPDB SD di sekolah kami (SDN Cipayung 1) dan menerima sepenuhnya sistem seleksi yang telah ditetapkan melalui pendaftaran di web ini.
+                    </label>
+                    </li>
+                    <li>
+                    <label for="verifikasi">
+                    <input type="checkbox" id="verifikasi" class="w3-check ceksetuju" >
+                    Anda setuju bahwa Tim Verifikasi/Panitia PPDB berhak menolak/mengembalikan apabila data  identitas CPDB tidak sesuai dengan dokumen Akta Kelahiran, dan/atau alamat CPDB tidak sesuai dengan dokumen Kartu Keluarga (bukan Surat Keterangan Domisili)
+                    </label></li>    
+                    <li><label for="gugat">
+                    <input type="checkbox" id="gugat" class="w3-check ceksetuju" > Anda setuju bahwa keputusan hasil seleksi ini tidak dapat diganggu gugat
+                    </label>
+                        </li>
+                        </ul>
+                        <button disabled class="w3-green w3-input w3-button w3-round-xxlarge kirimformulir" onclick="kirimformulirdikembalikan(this,2,${row},'${idpendaftar}')" style="width:60%;margin:0 auto">DAFTAR</button><hr>
+                    </div>
+                    <hr class="w3-clear">`
+    divform.innerHTML = html;
+    let elemenjalur = document.querySelectorAll("[data-formulircpdb]");
+    for(let i = 0 ; i < elemenjalur.length ; i++){
+      let el = elemenjalur[i];
+      let key = el.getAttribute("data-formulircpdb");
+      let val = data[key];
+      if(el.type == "date"){
+        el.value = val ==""?"":StringTanggalnol(new Date(val));
+      }else{
+        el.value = val;
+      }
+      // let val = dataT[key]
+      //                       if(inputan.type == "date"){
+      //                           inputan.value = val ==""?"":StringTanggalnol(new Date(val));
+      //                       }else if(inputan.type =="select-one"){
+      //                           inputan.value = val;
+      //                       }else{
+      //                           inputan.value = val;
+      //                       }
+      //console.log(el, key, data[key],el.hasAttribute("disabled"))
+    }
+    let setuju = document.querySelectorAll(".ceksetuju");
+            let kirim = document.querySelector(".kirimformulir");
+            let count = 0
+            setuju.forEach(el => {
+                el.addEventListener("click", () => {
+                    if (el.checked) {
+                        count++;
+                    } else {
+                        count--;
+                    };
+                    if (count == 4) {
+                        kirim.removeAttribute("disabled");
+                    } else {
+                        kirim.setAttribute("disabled", "true");
+                    }
+                })
+            })
+    
+  }else{
+    let riwayat = JSON.parse(data.riwayat_pendaftaran);
+    let idsekolahtolak = riwayat.map(s => s.tujuan_mendaftar)
+    let html = ``;
+    //start
+    html += `<div class="w3-row-padding w3-card-4 w3-margin-top ">`;
+    html +=`<div class=" w3-col l12 s12 w3-center">Pilih Sekolah</div>`;
+  for (let i = 0 ; i <classCollection.length ; i++){
+    let id = classCollection[i].id;
+    let setting = db_settingppdbsekolah.filter(s=> s.id_sekolah == id);
+    console.log(id, setting,idsekolahtolak.indexOf(id))
+
+    
+    let namasekolah = setting[0].nama_sekolah;
+    let kuota = setting[0].total_cpdb;
+    let splitkelas = classCollection[i].img;
+    let alamat = setting[0].alamat_kelurahan + ",<br>RT " + setting[0].alamat_rt + ", RW " + setting[0].alamat_rw;
+    let tekstitle = `Alamat: ${alamat}`
+    if(idsekolahtolak.indexOf(id)>-1){
+          html +=`<div class="w3-col l3 s6 w3-border w3-round w3-red w3-btn w3-hover-green" title="${tekstitle}" style="margin:5px 0" onclick="alert('Maaf, Anda pernah ditolak di sekolah ini, silakan pilih sekolah lailn')">`;
+          html +=`<div class="w3-row w3-tiny w3-round-large">`;
+            html +=`<img src="/img/${splitkelas}" class="w3-col l4 s4  w3-hide-small w3-hide-medium" style="height:65px">`;
+            html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+            html +=`<div class="w3-col l8 s12">${namasekolah.toUpperCase()}</div>`;
+            html +=`<div class="w3-col l8 s12">Kuota Total: ${kuota}<span class="w3-tiny"><br>${tekstitle}</span>`;
+            html +=`</div>`;
+            html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+          html +=`</div>`;
+        html +=`</div>`;
+    }else{
+
+    
+      html +=`<div class="w3-col l3 s6 w3-border w3-round w3-btn w3-hover-green" title="${tekstitle}" style="margin:5px 0" onclick="cpdbmemilihsekolah_daripilihan(${id})">`;
+        html +=`<div class="w3-row w3-tiny w3-round-large">`;
+          html +=`<img src="/img/${splitkelas}" class="w3-col l4 s4  w3-hide-small w3-hide-medium" style="height:65px">`;
+          html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+          html +=`<div class="w3-col l8 s12">${namasekolah.toUpperCase()}</div>`;
+          html +=`<div class="w3-col l8 s12">Kuota Total: ${kuota}<span class="w3-tiny"><br>${tekstitle}</span>`;
+          html +=`</div>`;
+          html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+        html +=`</div>`;
+      html +=`</div>`;
+    }
+
+  }
+  html +=`</div>`;
+    //end
+    divform.innerHTML = html;
+
+  }
+      // html +=`Maaf, Ananda CPDB pernah mendaftar`
+
+      // html +=`Maaf, CPDB Sebelumnya pernah mendaftar di <b>${dbSetting[0].nama_sekolah}</b>, sayangnya status pendaftaran`;
+      // html +=`<b>${data.id_status}</b>.`;
+      // if(data.id_status == "Dikembalikan"){
+      //   html +=`Ananda masih berkesempatan mendaftarkan diri di <b>${dbSetting[0].nama_sekolah}</b> atau sekolah lainnya. Silakan lengkapi dan penuhi seluruh persyaratan yang dibutuhkan kemudian pilih sekolah tujuan. `
+      //   html +=` Berikut ini adalah riwayat pendaftaran sekolah Anda:`
+      // }else {
+      //   html +=` Anda masih berkesempatan mendaftarkan ke sekolah tujuan lain selain ${dbSetting[0].nama_sekolah}.<br>`;
+      //   html +=` Berikut ini adalah riwayat pendaftaran sekolah Anda:`
+
+      // }
+      // // html +=`<table class="w3-table-all w3-tiny">`;
+      //   html +=`<thead><tr class="w3-white">`;
+      //     html +=`<th></th><th>Nama Pendaftar</th><th colspan="2">: ${data.nama_cpdb}</th></tr><tr class="w3-white">`;
+      //     html +=`<th></th><th>NIK</th><th colspan="2">: ${data.cpdb_nik}</th>`;
+      //     html +=`</tr><tr><th colspan="4" class="w3-center w3-pale-green">Riwayat Pendaftaran</th></tr><tr>`;
+      //     html +=`<th class="w3-border">No</th><th class="w3-border">Sekolah Tujuan</th><th class="w3-border">Status</th><th class="w3-border">Keterangan</th>`;
+      //   html +=`</tr></thead>`;
+      //   html+=`<tbody>`;
+      // for(let i = 0 ; i <riwayat.length ; i++){
+      //   let idd = riwayat[i].tujuan_mendaftar;
+      //   let sekolahtujuan = db_settingppdbsekolah.filter(s=> s.id_sekolah == idd);
+      //   html +=`<tr>`;
+      //     html +=`<td class="w3-border">${(i+1)}</td>`;
+      //     html +=`<td class="w3-border">${sekolahtujuan[0].nama_sekolah}</td>`;
+      //     html +=`<td class="w3-border">${riwayat[i].id_status}</td>`;
+      //     html +=`<td class="w3-border">${riwayat[i].ket_status}</td>`;
+      //   html +=`</tr>`;
+      // }
+      // html +=`</tbody></table><br>`;
+      // html +=`</div`;
+
+     // divform.innerHTML = html;
+
+}
+
+const html_kesempatankeduamendaftar = (data) =>{
+  let divform = document.querySelector(".cekformulircpdbawal");
+  let html = "";
+    html += `<div class="w3-row-padding w3-card-4 w3-margin-top ">`;
+    html +=`<div class=" w3-col l12 s12 w3-center">Pilih Sekolah</div>`;
+  for (let i = 0 ; i <classCollection.length ; i++){
+    let id = classCollection[i].id;
+    let setting = db_settingppdbsekolah.filter(s=> s.id_sekolah == id);
+    let namasekolah = setting[0].nama_sekolah;
+    let kuota = setting[0].total_cpdb;
+    let splitkelas = classCollection[i].img;
+    let alamat = setting[0].alamat_kelurahan + ",<br>RT " + setting[0].alamat_rt + ", RW " + setting[0].alamat_rw;
+    let tekstitle = `Alamat: ${alamat}`
+
+    html +=`<div class="w3-col l3 s6 w3-border w3-round w3-btn w3-hover-green" title="${tekstitle}" style="margin:5px 0" onclick="cpdbmemilihsekolah_daripilihan(${id})">`;
+      html +=`<div class="w3-row w3-tiny w3-round-large">`;
+        html +=`<img src="/img/${splitkelas}" class="w3-col l4 s4  w3-hide-small w3-hide-medium" style="height:65px">`;
+        html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+        html +=`<div class="w3-col l8 s12">${namasekolah.toUpperCase()}</div>`;
+        html +=`<div class="w3-col l8 s12">Kuota Total: ${kuota}<span class="w3-tiny"><br>${tekstitle}</span>`;
+        html +=`</div>`;
+        html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+      html +=`</div>`;
+    html +=`</div>`;
+
+  }
+  html +=`</div>`;
+  divform.innerHTML = html;
+  let divform2 = document.querySelector(".tambahanformformulircpdbawal");
+      divform2.innerHTML ="";
+}
+
 const html_dilaranglanjutdaftar = (data) =>{
   let riwayat = JSON.parse(data.riwayat_pendaftaran);
       let id = data.tujuan_mendaftar;
       let dbSetting = db_settingppdbsekolah.filter(s=> s.id_sekolah == id);
       let divform = document.querySelector(".tambahanformformulircpdbawal");
       let html =`<div class="w3-card-4 w3-container w3-pale-red w3-margin-top">`;
-      html +="Maaf, CPDB dalam status "
+      
       html +=`<b>${data.id_status}</b> di sekolah tujuan <b>${dbSetting[0].nama_sekolah}</b>`
       html +=`, Anda bisa mendaftarkan ke sekolah tujuan lain setelah proses di sekolah tersebut selesai (Keterangan: Keluar Jurnal, Ditolak, atau Dikembalikan).`;
       html +=`<table class="w3-table-all w3-tiny">`;
         html +=`<thead><tr class="w3-white">`;
-          html +=`<th colspan="2"><th>Nama Pendaftar</the=><th>: ${data.nama_cpdb}</th></tr><tr class="w3-white">`;
-          html +=`<th colspan="2"><th>NIK</th><th>: ${data.cpdb_nik}</th>`;
+          html +=`<th></th><th>Nama Pendaftar</th><th colspan="2">: ${data.nama_cpdb}</th></tr><tr class="w3-white">`;
+          html +=`<th></th><th>NIK</th><th colspan="2">: ${data.cpdb_nik}</th>`;
           html +=`</tr><tr><th colspan="4" class="w3-center w3-pale-green">Riwayat Pendaftaran</th></tr><tr>`;
           html +=`<th class="w3-border">No</th><th class="w3-border">Sekolah Tujuan</th><th class="w3-border">Status</th><th class="w3-border">Keterangan</th>`;
         html +=`</tr></thead>`;
@@ -377,11 +1035,11 @@ const html_cpdbpilihsekolah = ()=>{
     let namasekolah = setting[0].nama_sekolah;
     let kuota = setting[0].total_cpdb;
     let splitkelas = classCollection[i].img;
-    let alamat = setting[0].alamat_kelurahan + " RT/RW " + setting[0].alamat_rt + setting[0].alamat_rw;
+    let alamat = setting[0].alamat_kelurahan + ",<br>RT " + setting[0].alamat_rt + ", RW " + setting[0].alamat_rw;
     let tekstitle = `Alamat: ${alamat}`
 
     html +=`<div class="w3-col l3 s6 w3-border w3-round w3-btn w3-hover-green" title="${tekstitle}" style="margin:5px 0" onclick="cpdbmemilihsekolah_daripilihan(${id})">`;
-      html +=`<div class="w3-row w3-tiny">`;
+      html +=`<div class="w3-row w3-tiny w3-round-large">`;
         html +=`<img src="/img/${splitkelas}" class="w3-col l4 s4  w3-hide-small w3-hide-medium" style="height:65px">`;
         html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
         html +=`<div class="w3-col l8 s12">${namasekolah.toUpperCase()}</div>`;
@@ -406,7 +1064,7 @@ const cpdbmemilihsekolah_daripilihan = (id) =>{
   let namasekolah = setting[0].nama_sekolah;
   let kuota = setting[0].total_cpdb;
   let splitkelas = classCollection.filter(s => s.id == id)[0].img;
-  let alamat = setting[0].alamat_kelurahan + " RT/RW " + setting[0].alamat_rt + setting[0].alamat_rw;
+  let alamat = setting[0].alamat_kelurahan + " RT/RW " + setting[0].alamat_rt +"/" +setting[0].alamat_rw;
   let tekstitle = `Alamat: ${alamat}`;
   
   let html ="";
@@ -415,12 +1073,12 @@ const cpdbmemilihsekolah_daripilihan = (id) =>{
     html +=`<div class="w3-col l4 s12 w3-border-right"><div class="w3-center">Anda Memilih Sekolah:</div>`;
     
         
-          html +=`<div class="w3-row w3-tiny w3-border w3-card-4 w3-margin">`;
+          html +=`<div class="w3-row w3-tiny w3-border w3-card-4 w3-margin w3-round-xlarge">`;
             html +=`<img src="/img/${splitkelas}" class="w3-col l4 s4" style="height:65px">`;
             html +=`<div class="w3-col s8 w3-hide-large w3-margin-top"></div>`;
             html +=`<div class="w3-col l8 s8 w3-center">${namasekolah.toUpperCase()}</div>`;
             html +=`<div class="w3-col l8 s8 w3-center">Kuota Total: ${kuota}<span class="w3-tiny"><br>${tekstitle}</span></div>`;
-            //html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
+            html +=`<div class="w3-col s12 w3-hide-large w3-margin-top"></div>`;
           html +=`</div>`;
           html +=`<div class="w3-center w3-tiny">Atau</div>`;
           html +=`<div class="w3-center"><div class="w3-tiny w3-border w3-card-4 w3-margin w3-btn w3-padding" onclick="html_cpdbpilihsekolah()">PILIH SEKOLAH LAIN</div></div>`;
@@ -475,8 +1133,26 @@ const cpdbmemilihsekolah_daripilihan = (id) =>{
 
 }
 const html_formulir = (jalur,id,namasekolah) => {
+  //tambahanformformulircpdbawal
   let divform = document.querySelector(".tambahanformformulircpdbawal");
-  divform.innerHTML = `<div class="w3-center"><img src="/img/barloading.gif"></div>`;
+  let cekkosonginner =divform.innerHTML;
+  if(cekkosonginner !== ""){
+    let conf = confirm("Laman pilihan jalur sebelumnya telah terbuka, Anda akan membuka pilihan jalur "+ jalur + " dan akan menghilangkan seluruh isian data Anda sebelumnya jika Anda melanjutkan memilih.");
+    if(!conf){
+      return
+    }
+  }
+  divform.innerHTML = `<div class="w3-center w3-margin-top"><img src="/img/barloading.gif"></div>`;
+  let input_umur = document.getElementById("frm_tanggallahircpdb");
+  //console.log(input_umur.value)
+  let tglL, umur_siswa;
+  if(input_umur.value !==""){
+      tglL = new Date(input_umur.value);
+      umur_siswa = skor_umur(umur(tglL).tahun, umur(tglL).bulan, umur(tglL).hari);
+  }else{
+      umur_siswa = 0;
+  }
+  
   let serversettingppdb_id = db_settingppdbsekolah.filter(s => s.id_sekolah == id)[0];
   let urlserver = serversettingppdb_id.url_settingppdb;
   urllogin = serversettingppdb_id.url_settingppdb;
@@ -490,7 +1166,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                     html+=`Jalur yang Dipilih:<input type="text" data-formulircpdb="jalur_cpdb" id="jalur_cpdb" class="w3-input w3-border w3-light-grey" value="${jalur.toUpperCase()}" disabled/><br>`;
               html += `</div><div class="w3-card-4 w3-padding w3-margin-top">`;
                     html+= `<h4 class="w3-center w3-card-2 w3-blue">Form Pendaftaran Jalur ${jalur}</h4>`;
-                    html +=`<label for="cpdb_umur">Skor Umur:<input type="text" data-formulircpdb="cpdb_umur" id="cpdb_umur" class="w3-border" style="width:80px" disabled></label><br><br>`;
+                    html +=`<label for="cpdb_umur">Skor Umur:<input type="text" data-formulircpdb="cpdb_umur" id="cpdb_umur" class="w3-border" style="width:80px" value="${umur_siswa}" disabled></label><br><br>`;
                     html +=`<label for="cpdb_jk">Jenis Kelamin: <select id="cpdb_jk" data-formulircpdb="cpdb_jk" class="w3-select w3-light-grey"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select></label><br><br>`;
                     html +=`<label for="cpdb_agama">Agama yang dianut CPDB:`;
                     html +=`<select id="cpdb_agama" data-formulircpdb="cpdb_agama" class="w3-border w3-select w3-light-gray">`
@@ -529,6 +1205,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                     </table>`
                     
                     html += `</div><div class="w3-card-4 w3-padding w3-margin-top">`;
+                    html +=`<h5 class="w3-center w3-card-2 w3-aqua">Alamat CPDB dan Dokumen Kartu Keluarga</h5>`;
                     html +=`<label for="cpdb_no_kk">No Kartu Keluarga CPDB</label>
                               <input type="text" data-formulircpdb="cpdb_no_kk" id="cpdb_no_kk" class="w3-input w3-border"/><br><br>
                       <label for="cpdb_kota">Kota(atau Kabupaten)</label>
@@ -568,7 +1245,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                       </table>`;
                       html += `</div><div class="w3-card-4 w3-padding w3-margin-top">`;
                       html +=`<h4 class="w3-center w3-card-2 w3-aqua">Data Orang Tua</h4>
-                      <h5>Data Ayah Kandung</h5> 
+                      <h5 class="w3-pale-green">Data Ayah Kandung</h5> 
                         <label for="ortu_nama_ayah">Nama Ayah</label>
                             <input type="text" id="ortu_nama_ayah" data-formulircpdb="ortu_nama_ayah" class="w3-input w3-border" oninput="ketik_kapital(this)">
                         <label for="ortu_nik_ayah">NIK Ayah</label>
@@ -649,7 +1326,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                     <label for="ortu_hp_ayah">No. HP/WA Ayah</label>
                         <input type="tel" id="ortu_hp_ayah" data-formulircpdb="ortu_hp_ayah" class="w3-input w3-border">`;
             html += `</div><div class="w3-card-4 w3-padding w3-margin-top">`;
-            html +=`<h5> Data Ibu Kandung</h5>
+            html +=`<h5 class="w3-pale-green"> Data Ibu Kandung</h5>
                   <label for="ortu_nama_ibu">Nama Ibu</label>
                   <input type="text" id="ortu_nama_ibu" data-formulircpdb="ortu_nama_ibu" class="w3-input w3-border" oninput="ketik_kapital(this)"><br>
                   <label for="ortu_nik_ibu">NIK Ibu</label>
@@ -732,7 +1409,7 @@ const html_formulir = (jalur,id,namasekolah) => {
               <label for="ortu_hp_ibu">No. HP/WA Ibu</label>
                   <input type="tel" id="ortu_hp_ibu" data-formulircpdb="ortu_hp_ibu" class="w3-input w3-border">`;
         html += `</div><div class="w3-card-4 w3-padding w3-margin-top">`;
-        html +=`<h5>Data Wali</h5>
+        html +=`<h5 class="w3-pale-green">Data Wali</h5>
                 <label for="ortu_nama_wali">Nama wali</label>
                     <input type="text" id="ortu_nama_wali" data-formulircpdb="ortu_nama_wali" class="w3-input w3-border" oninput="ketik_kapital(this)">
                 <label for="ortu_nik_wali">NIK Wali</label>
@@ -877,7 +1554,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                 </label>
                     </li>
                     </ul>
-                    <button disabled class="w3-green w3-input w3-button w3-round-xxlarge kirimformulir" onclick="kirimformulir(this)" style="width:60%;margin:0 auto">DAFTAR</button><hr/>
+                    <button disabled class="w3-green w3-input w3-button w3-round-xxlarge kirimformulir" onclick="kirimformulir(this,${id})" style="width:60%;margin:0 auto">DAFTAR</button><hr/>
                 </div>
                 <hr class="w3-clear">`;
 
@@ -908,105 +1585,436 @@ const html_formulir = (jalur,id,namasekolah) => {
 
 const ketik_kapital = (el) => el.value = el.value.toUpperCase();
 
-const kirimformulir = (el) => {
+const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar....
+  let datasetting = db_settingppdbsekolah.filter(s => s.id_sekolah == id)[0];
+  let urlppdb = datasetting.url_pendaftar;
+  val_namasekolah = datasetting.nama_sekolah;
+
+
+  
   el.setAttribute("onclick","alert('sedang proses kirim')");
   el.innerHTML = `<img src="/img/barloading.gif">`;
   
   let elemensinput = document.querySelectorAll("[data-formulircpdb]")
-  // let objek = elemen_form();
   
   let divform = document.querySelector(".tambahanformformulircpdbawal");
-  // let divsebelumnya = document.querySelector(".tombol_form_jalur");
-  // divsebelumnya.className = divsebelumnya.className.replace("w3-hide"," ");
-  // divsebelumnya.innerHTML=""
-  divform.innerHTML = `<img src="/img/barloading.gif" alt="proses loading"> ...`;
-  //let key = Object.keys(objek);
-
+  let formulircpdbawal = document.querySelector(".formulircpdbawal");
+  let cekformulircpdbawal = document.querySelector(".cekformulircpdbawal");
+  
+  if(formulircpdbawal.className.indexOf("w3-hide")==-1){
+    formulircpdbawal.classList.add("w3-hide")
+  }
   let data = new FormData();
-  //data.append("action", "mendaftar");
+  //data.append("action", "cpdbdaftarawal");
   for (let i = 0; i < elemensinput.length; i++) {
     let ein = elemensinput[i];
     let keys = ein.getAttribute("data-formulircpdb");
     let val = ein.value;
-    console.log(keys, val);
-      //data.append(key, objek[key[i]])
+    // console.log(keys, val);
+      data.append(keys, val)
   };
+  // karena ini awal, maka riwayat_pendaftaran dibuat awal-awal:
+  // key = "riwayat_pendaftaran"
+  let vel = [{"tujuan_mendaftar":id,"id_status":"Perlu Verifikasi","ket_status":"Perlu Verifikasi"}];
+      data.append("riwayat_pendaftaran",JSON.stringify(vel));
+  let acuan_Zonasi = lacak_zonasi(id);
+
+      data.append("patokan_zonasi",acuan_Zonasi);
 
 
-  // fetch(urlppdb, { method: "post", body: data })
-  //     .then(m => m.json())
-  //     .then(r => {
-  //         console.log(r);
-  //         cariUpdate = r.objek;
-  //         let tgldaftar = new Date(r.objek[0].waktu_daftar);
-  //         divform.innerHTML = `
-  //         Terimakasih telah mendaftar di ${val_namasekolah}. Data Anda telah berhasil terkirim. Berikut data pokok yang wajib Anda ketahui:
-  //         <div id="statusformulir" style="overflow-x:auto">
-  //         <table class="w3-table-all garis">
-  //         <tr class="w3-aqua w3-centered">
-  //             <td colspan="2">Status Pendaftaran</td>
-  //         </tr>
-  //         <tr>
-  //             <td>PILIHAN JALUR</td>
-  //             <td>${r.objek[0].jalur_cpdb}</td>
-  //         </tr>
-  //          <tr>
-  //             <td>ID PENDAFTAR</td>
-  //             <td>${r.objek[0].id_pendaftar}</td>
-  //         </tr>
-  //         <tr>
-  //             <td>Status Pendaftaran</td>
-  //             <td class="w3-large">${r.objek[0].id_status}</td>
-  //         </tr>
-  //         <tr>
-  //             <td>Waktu Pendaftaran</td>
-  //             <td>${tanggalfulllengkap(tgldaftar)}</td>
-  //         </tr>
-  //         <tr class="w3-aqua w3-centered">
-  //             <td colspan="2">Data Pokok Pendaftar</td>
-  //         </tr>
-  //         <tr>
-  //             <td>NAMA CALON PDB</td>
-  //             <td>${r.objek[0].nama_cpdb}</td>
-  //         </tr>
-  //         <tr>
-  //             <td>Skor Umur</td>
-  //             <td>${r.objek[0].cpdb_umur}</td>
-  //         </tr>
-  //         <tr>
-  //             <td>Alamat:</td>
-  //             <td> Kota/Kab :${r.objek[0].cpdb_kota}<br/><br/>
-  //                 Kec. :${r.objek[0].cpdb_kec}<br/><br/>
-  //                 Kelurahan/Desa :${r.objek[0].cpdb_kel}<br/><br/>
-  //                 RW :${r.objek[0].cpdb_rw}<br/><br/>
-  //                 RT :${r.objek[0].cpdb_rt}<br/><br/>
-              
-  //             </td>
-  //         </tr>
+  divform.innerHTML = `<img src="/img/barloading.gif" alt="proses loading"> ...`;
+  for (let i = 0; i < elemensinput.length; i++) {
+    let ein = elemensinput[i];
+    ein.value = "";
+  };
+  fetch(urlppdb+"?action=cpdbdaftarawal", 
+      { method: "post", 
+      body: data 
+    }).then(m => m.json())
+      .then(r => {
           
-  //         <tr class="w3-aqua w3-centered">
-  //             <td colspan="2">Akun Fitur Pesan <br/><sub>Gunakan username dan password berikut untuk menggunakan fitur pesan</sub></td>
-  //         </tr>
-  //         <tr>
-  //             <td>Username: ${r.objek[0].id_pendaftar}</td>
-  //             <td>Password: ${r.objek[0].ortu_nama_ayah}</td>
-  //         </tr>
-  //         <tr class="w3-pale-green">
-  //         <td colspan="2">
-  //             Tahapan selanjutnya, Silakan Anda cek di Menu <b class="w3-red">Cari</b> untuk melihat/mengetahui data telah dikonfirmasi oleh Tim Verifikasi/Panitia PPDB.
-  //             Data yang telah diverifikasi akan masuk ke tahap Seleksi pada menu <b class="w3-red">SELEKSI</b>.
-  //         </td>
-  //         </tr>
-  //         </table></div>
-  //         <div class="w3-center">
-  //         <button onclick="print('statusformulir')" class="w3-button w3-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button>            
-  //         <button onclick="fn_close_daftar()" class="w3-button w3-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>
-  //         </div>`
-  //     }).catch(er => {
-  //         console.log(er);
-  //         divform.innerHTML = "Maaf, Trafik jaringan penuh. Silakan ulangi sesi Anda."
-  //     })
+          cekformulircpdbawal.innerHTML = "";
+          cariUpdate = r.objek;
+          let tgldaftar = new Date(r.objek[0].waktu_daftar);
+          let html = `<div id="statusformulir" style="overflow-x:auto">`;
+          html +=`<table style="width:98%;margin:0 auto;font-size:12px">`;
+            html +=`<tr>`;
+              html +=`<td style="padding:2px 5px;width:56px"><img src="/img/Lambang_Kota_Depok.png" style="width:50px"></td>`;
+              html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">PPDB SDN Kecamatan Cipayung`;
+                html +=`<br>Tanda Bukti Pendaftaran PPDB` ;
+                html +=`<br>Tahun Pelajaran 2022/2023` ;
+              html +=`</td>`;
+            html +=`</tr>`;
+          html +=`</table><br>`;
+          html +=`<table style="width:98%;margin:0 auto;border-collapse:collapse;font-size:12px">`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Data Calon Peserta Didik Baru</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:125px">ID Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:1px">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_pendaftar}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:98px">NIK Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:1px">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].cpdb_nik}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">Nama CPDB</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].nama_cpdb}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">Tempat, Tanggal Lahir</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">${r.objek[0].cpdb_tempat_lahir}, ${r.objek[0].cpdb_tanggal_lahir == ""?"":tanggalfull(r.objek[0].cpdb_tanggal_lahir)}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">Alamat</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">RT : ${r.objek[0].cpdb_rt}, <br>RW : ${r.objek[0].cpdb_rw}, <br>Kelurahan : ${r.objek[0].cpdb_kel}, <br>Kecamatan : ${r.objek[0].cpdb_kec} <br>Kota/Kab : ${r.objek[0].cpdb_kota}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Tujuan Sekolah</td>`;
+            html+=`</tr>`;
+            
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">Waktu Mendaftar</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${tanggalfulllengkap(tgldaftar)}</td>`;
+            html+=`</tr>`; 
+            html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">ID Pilihan Sekolah</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${id}</td>`;
+            html+=`</tr>`; 
+            html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">Nama Sekolah</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${val_namasekolah}</td>`;
+            html+=`</tr>`; 
+              html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">Status Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_status}</td>`;
+            html+=`</tr>`;
+            // html+=`<tr>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">Status Pendaftaran</td>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_status}</td>`;
+            // html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Tahapan selanjutnya, Silakan Anda cek di Menu <b class="w3-red">Cari</b> untuk melihat/mengetahui data telah dikonfirmasi oleh Tim Verifikasi/Panitia PPDB.<br>Data yang telah diverifikasi akan masuk ke tahap Seleksi pada menu <b class="w3-red">SELEKSI</b>.</td>`;
+            html+=`</tr>`;
+          html +=`</table><br></div><div class="w3-center">`;
+          html +=`<button onclick="printA5('statusformulir')" class="w3-button w3-pale-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button><button onclick="document.getElementById('modalFormulirPendaftaran').style.display='none';" class="w3-button w3-pale-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>`;
+          divform.innerHTML = html;
 
+
+          let divform2_innerHTML = `
+          Terimakasih telah mendaftar di ${val_namasekolah}. Data Anda telah berhasil terkirim. Berikut data pokok yang wajib Anda ketahui:
+          <div id="statusformulir" style="overflow-x:auto">
+          <table class="w3-table-all garis">
+          <tr class="w3-aqua w3-centered">
+              <td colspan="2" class="w3-center">Status Pendaftaran</td>
+          </tr>
+          <tr>
+              <td>PILIHAN JALUR</td>
+              <td>${r.objek[0].jalur_cpdb}</td>
+          </tr>
+           <tr>
+              <td>ID PENDAFTAR</td>
+              <td>${r.objek[0].id_pendaftar}</td>
+          </tr>
+          <tr>
+              <td>Status Pendaftaran</td>
+              <td class="w3-large">${r.objek[0].id_status}</td>
+          </tr>
+          <tr>
+              <td>Waktu Pendaftaran</td>
+              <td>${tanggalfulllengkap(tgldaftar)}</td>
+          </tr>
+          <tr class="w3-aqua w3-centered">
+              <td colspan="2">Data Pokok Pendaftar</td>
+          </tr>
+          <tr>
+              <td>NAMA CALON PDB</td>
+              <td>${r.objek[0].nama_cpdb}</td>
+          </tr>
+          <tr>
+              <td>Skor Umur</td>
+              <td>${r.objek[0].cpdb_umur}</td>
+          </tr>
+          <tr>
+              <td>Alamat:</td>
+              <td> Kota/Kab :${r.objek[0].cpdb_kota}<br/><br/>
+                  Kec. :${r.objek[0].cpdb_kec}<br/><br/>
+                  Kelurahan/Desa :${r.objek[0].cpdb_kel}<br/><br/>
+                  RW :${r.objek[0].cpdb_rw}<br/><br/>
+                  RT :${r.objek[0].cpdb_rt}<br/><br/>
+              
+              </td>
+          </tr>
+          
+          <tr class="w3-aqua w3-centered">
+              <td colspan="2">Akun Fitur Pesan <br/><sub>Gunakan username dan password berikut untuk menggunakan fitur pesan</sub></td>
+          </tr>
+          <tr>
+              <td>Username: ${r.objek[0].id_pendaftar}</td>
+              <td>Password: ${r.objek[0].ortu_nama_ayah}</td>
+          </tr>
+          <tr class="w3-pale-green">
+          <td colspan="2">
+              Tahapan selanjutnya, Silakan Anda cek di Menu <b class="w3-red">Cari</b> untuk melihat/mengetahui data telah dikonfirmasi oleh Tim Verifikasi/Panitia PPDB.
+              Data yang telah diverifikasi akan masuk ke tahap Seleksi pada menu <b class="w3-red">SELEKSI</b>.
+          </td>
+          </tr>
+          </table></div>
+          <div class="w3-center">
+          <button onclick="printA5('statusformulir')" class="w3-button w3-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button>            
+          <button onclick="fn_close_daftar()" class="w3-button w3-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>
+          </div>`
+      }).catch(er => {
+          console.log(er);
+          divform.innerHTML = "Maaf, Trafik jaringan penuh. Silakan ulangi sesi Anda."
+      })
+
+}
+const kirimformulirdikembalikan = (el,id,row,idd) => { // ini untuk orang yang pertama kali daftar....
+  let datasetting = db_settingppdbsekolah.filter(s => s.id_sekolah == id)[0];
+  let urlppdb = datasetting.url_pendaftar;
+  val_namasekolah = datasetting.nama_sekolah;
+  
+
+
+
+  
+  el.setAttribute("onclick","alert('sedang proses kirim')");
+  el.innerHTML = `<img src="/img/barloading.gif">`;
+  
+  let elemensinput = document.querySelectorAll("[data-formulircpdb]")
+  
+  let divform = document.querySelector(".tambahanformformulircpdbawal");
+  let formulircpdbawal = document.querySelector(".formulircpdbawal");
+  let cekformulircpdbawal = document.querySelector(".cekformulircpdbawal");
+  
+  if(formulircpdbawal.className.indexOf("w3-hide")==-1){
+    formulircpdbawal.classList.add("w3-hide")
+  }
+  let data = new FormData();
+  //data.append("action", "cpdbdaftarawal");
+  for (let i = 0; i < elemensinput.length; i++) {
+    let ein = elemensinput[i];
+    let keys = ein.getAttribute("data-formulircpdb");
+    let val = ein.value;
+    // console.log(keys, val);
+    if(keys == "riwayat_pendaftaran"){
+      //start
+          let riwayat = JSON.parse(val);
+        //   let dataverif = {};
+        // dataverif.id_status = "Perlu Verifikasi";
+        // dataverif.ket_status = "Perlu Verifikasi";
+
+
+        // // //console.log(riwayat);
+
+        let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
+        updateRiwayat.id_status = idstatus;
+        updateRiwayat.ket_status = ketstatus;
+        console.log(updateRiwayat);
+        
+        let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
+        console.log(newState);
+        //dt.riwayat_pendaftaran = JSON.stringify(newState)
+        //console.log(dt);
+        // dataverif.riwayat_pendaftaran = JSON.stringify(newState)
+          //end
+          data.append(keys, JSON.stringify(newState))
+    }else if(keys == "id_status"){
+      data.append(keys, "Perlu Verifikasi")
+
+    }else if(keys == "ket_status"){
+      data.append(keys, "Perlu Verifikasi")
+
+    }else{
+      data.append(keys, val)
+
+    }
+  };
+  // karena ini awal, maka riwayat_pendaftaran dibuat awal-awal:
+  // key = "riwayat_pendaftaran"
+  let vel = [{"tujuan_mendaftar":id,"id_status":"Perlu Verifikasi","ket_status":"Perlu Verifikasi"}];
+      data.append("riwayat_pendaftaran",JSON.stringify(vel));
+  let acuan_Zonasi = lacak_zonasi(id);
+
+      data.append("patokan_zonasi",acuan_Zonasi);
+
+
+  divform.innerHTML = `<img src="/img/barloading.gif" alt="proses loading"> ...`;
+  for (let i = 0; i < elemensinput.length; i++) {
+    let ein = elemensinput[i];
+    ein.value = "";
+  };
+  data.append("baris_terminal",row);
+  data.append("id_pendaftar",idd);
+  fetch(urlppdb+"?action=cpdbdaftarlagi", 
+      { method: "post", 
+      body: data 
+    }).then(m => m.json())
+      .then(r => {
+          
+          cekformulircpdbawal.innerHTML = "";
+          console.log(r)
+          cariUpdate = r.objek;
+          let tgldaftar = new Date(r.objek[0].waktu_daftar);
+          let html = `<div id="statusformulir" style="overflow-x:auto">`;
+          html +=`<table style="width:98%;margin:0 auto;font-size:12px">`;
+            html +=`<tr>`;
+              html +=`<td style="padding:2px 5px;width:56px"><img src="/img/Lambang_Kota_Depok.png" style="width:50px"></td>`;
+              html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">PPDB SDN Kecamatan Cipayung`;
+                html +=`<br>Tanda Bukti Pendaftaran PPDB` ;
+                html +=`<br>Tahun Pelajaran 2022/2023` ;
+              html +=`</td>`;
+            html +=`</tr>`;
+          html +=`</table><br>`;
+          html +=`<table style="width:98%;margin:0 auto;border-collapse:collapse;font-size:12px">`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Data Calon Peserta Didik Baru</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:125px">ID Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:1px">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_pendaftar}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:98px">NIK Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;width:1px">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].cpdb_nik}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">Nama CPDB</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].nama_cpdb}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">Tempat, Tanggal Lahir</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">${r.objek[0].cpdb_tempat_lahir}, ${r.objek[0].cpdb_tanggal_lahir == ""?"":tanggalfull(r.objek[0].cpdb_tanggal_lahir)}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">Alamat</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;vertical-align:top">RT : ${r.objek[0].cpdb_rt}, <br>RW : ${r.objek[0].cpdb_rw}, <br>Kelurahan : ${r.objek[0].cpdb_kel}, <br>Kecamatan : ${r.objek[0].cpdb_kec} <br>Kota/Kab : ${r.objek[0].cpdb_kota}</td>`;
+            html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Tujuan Sekolah</td>`;
+            html+=`</tr>`;
+            
+            html+=`<tr>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">Waktu Mendaftar</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${tanggalfulllengkap(tgldaftar)}</td>`;
+            html+=`</tr>`; 
+            html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">ID Pilihan Sekolah</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${id}</td>`;
+            html+=`</tr>`; 
+            html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">Nama Sekolah</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${val_namasekolah}</td>`;
+            html+=`</tr>`; 
+              html+=`<tr>`;   
+              html+=`<td style="border-bottom:.5pt solid #000;">Status Pendaftaran</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+              html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_status}</td>`;
+            html+=`</tr>`;
+            // html+=`<tr>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">Status Pendaftaran</td>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">:</td>`;
+            //   html+=`<td style="border-bottom:.5pt solid #000;">${r.objek[0].id_status}</td>`;
+            // html+=`</tr>`;
+            html+=`<tr>`;
+              html+=`<td colspan="3" style="border:.5pt solid #000;padding:2px 5px;text-align:center;">Tahapan selanjutnya, Silakan Anda cek di Menu <b class="w3-red">Cari</b> untuk melihat/mengetahui data telah dikonfirmasi oleh Tim Verifikasi/Panitia PPDB.<br>Data yang telah diverifikasi akan masuk ke tahap Seleksi pada menu <b class="w3-red">SELEKSI</b>.</td>`;
+            html+=`</tr>`;
+          html +=`</table><br></div><div class="w3-center">`;
+          html +=`<button onclick="printA5('statusformulir')" class="w3-button w3-pale-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button><button onclick="document.getElementById('modalFormulirPendaftaran').style.display='none';" class="w3-button w3-pale-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>`;
+          divform.innerHTML = html;
+
+      }).catch(er => {
+          console.log(er);
+          divform.innerHTML = "Maaf, Trafik jaringan penuh. Silakan ulangi sesi Anda. "+er
+      })
+
+}
+
+const printA5 = (iddiv) => {
+    let div = document.getElementById(iddiv);
+    let pracetak = document.getElementById("pracetak");
+    //
+    let doc = pracetak.contentDocument;
+    // head, body
+    let head = doc.head;
+    let body = doc.body;
+    //isikan HEAD dengan title, style, link, dll.
+    head.innerHTML = `<title>PPDB SDN KECAMATAN CIPAYUNG</title>`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link href="https://fonts.googleapis.com/css?family=Raleway">`;
+    head.innerHTML += `<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>`;
+    head.innerHTML += `<style type="text/css">
+    .versii-table{width:950px;max-width:100%;border-collapse:collapse}.versi-table{width:auto;max-width:100%;border-collapse:collapse}.versi-table td,.versi-table th,.versi-table tr,.versii-table td,.versii-table th,.versii-table tr{border:1px solid #000;color:#000;padding:5px 10px 5px 10px}.versi-table th,.versii-table th{background-color:#eee;color:#00f;vertical-align:middle;text-align:center}.versi-table tr:nth-of-type(even) td,.versii-table tr:nth-of-type(even) td{border:0;background-color:#fff;border:1px solid #000}.versi-table tr:nth-of-type(odd) td,.versii-table tr:nth-of-type(odd) td{border:0;background-color:#eef;border:1px solid #000}
+    </style>`;
+
+    head.innerHTML += `<style type="text/css" media="print">
+    @media print {html,body{margin:0;padding:0}
+    @page {size: A5 portrait;max-height:100%;max-width:100%;}}</style>`;
+
+    body.innerHTML = div.innerHTML
+
+
+    window.frames["pracetak"].focus();
+    window.frames["pracetak"].print();
+
+
+
+}
+const lacak_zonasi = (id) =>{
+  let acuansekolah = db_settingppdbsekolah.filter(s => s.id_sekolah == id)[0];
+  let rt_sekolah = acuansekolah.alamat_rt;
+  let rw_sekolah = acuansekolah.alamat_rw;
+  let kelurahan_sekolah = acuansekolah.alamat_kelurahan;
+  let kecamatan_sekolah = acuansekolah.alamat_kecamatan;
+  let kota_sekolah = acuansekolah.alamat_kota;
+
+  let rt_cpdb = document.querySelector("[data-formulircpdb='cpdb_rt']")
+  let rw_cpdb = document.querySelector("[data-formulircpdb='cpdb_rw']")
+  let kelurahan_cpdb = document.querySelector("[data-formulircpdb='cpdb_kel']")
+  let kecamatan_cpdb = document.querySelector("[data-formulircpdb='cpdb_kec']")
+  let kota_cpdb = document.querySelector("[data-formulircpdb='cpdb_kota']")
+  let ket = "";
+  if(rt_cpdb == null ||  rw_cpdb == null || kelurahan_cpdb == null || kecamatan_cpdb == null || kota_cpdb == null){
+    ket = "Alamat tidak lengkap";
+    console.log(rt_cpdb, rw_cpdb, kelurahan_cpdb, kecamatan_cpdb, kota_cpdb)
+  }else{
+
+    if(rt_sekolah == rt_cpdb.value && rw_sekolah == rw_cpdb.value  && kelurahan_sekolah == kelurahan_cpdb.value && kecamatan_sekolah == kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
+        ket ="se_rt"
+    }else if(rt_sekolah != rt_cpdb.value && rw_sekolah == rw_cpdb.value  && kelurahan_sekolah == kelurahan_cpdb.value && kecamatan_sekolah == kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
+        ket ="se_rw"
+    }else if(rt_sekolah != rt_cpdb.value && rw_sekolah != rw_cpdb.value  && kelurahan_sekolah == kelurahan_cpdb.value && kecamatan_sekolah == kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
+        ket ="se_kelurahan"
+    }else if(rt_sekolah != rt_cpdb.value && rw_sekolah != rw_cpdb.value  && kelurahan_sekolah != kelurahan_cpdb.value && kecamatan_sekolah == kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
+        ket ="se_kecamatan"
+    }else if(rt_sekolah != rt_cpdb.value && rw_sekolah != rw_cpdb.value  && kelurahan_sekolah != kelurahan_cpdb.value && kecamatan_sekolah != kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
+        ket ="se_kota"
+    }else{
+        ket ="luar_kota"
+      }
+  }
+  return ket
 }
 const konversi_tanggal = (el, kelas) => {
   let d = new Date(el.value);
@@ -1109,9 +2117,9 @@ const pilih_kota = (el, kelas) => {
       <label for="cpdb_kel">Kelurahan:</label>
       <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel" id="cpdb_kel" oninput="ketik_kapital(this)"/>
       <label for="cpdb_rw">RW</label>
-      <input type="number" class="w3-input w3-border"  min="1" style="width:50px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
+      <input type="number" class="w3-input w3-border"  min="1" style="width:123px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
       <label for="cpdb_rt">RT</label>
-      <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
+      <input type="number" class="w3-input w3-border"  min="1"  style="width:123px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
       <label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
       <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"x  oninput="ketik_kapital(this)"/>
       
@@ -1240,9 +2248,10 @@ function formatBytes(a, b = 2) {
   return parseFloat((a / Math.pow(1024, d)).toFixed(c)) + " " + ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
 };
 const upload_file = (kelas, param, tipe) => {
-  //console.log(kelas);
+
+  console.log(kelas);
   // console.log(kelas + "\n" + param);https://script.google.com/macros/s/AKfycbzvqVQtlBTMRUgkFN-ESC9RDaHhGHeou3i0LIjg-48jXWkjAO6S8jl8i2SwsN69QscB/exec
-  let div = document.querySelector("input[name=cpdb_id_file_" + kelas + "]"); //cpdb_id_file_
+  let div = document.querySelector("input[data-formulircpdb='cpdb_id_file_" + kelas + "']"); //cpdb_id_file_
   let divstatus = document.querySelector(".preview_" + kelas);
   let namapendaftar = document.querySelector("input[id=nama_cpdb]").value;
   let data = new FormData();
@@ -1281,6 +2290,18 @@ function deleteZero(i) {
   return i;
 };
 
+const StringTanggalnol = (tgl) => { //parameter tgl bentuk tgl
+  let m = tgl.getMonth() + 1;
+  let d = tgl.getDate();
+  let y = tgl.getFullYear();
+
+
+  let string = y + "-" + addZero(m) + "-" + addZero(d);
+
+
+  //console.log(string)
+  return string
+}
 function tanggalfulllengkap(tgl) {
   var d = new Date(tgl);
   var tgl = d.getDate();
@@ -1312,7 +2333,7 @@ const caridatapendaftar = () => {
       return;
   };
   mod.style.display = "block";
-  mod_teks.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
+  mod_teks.innerHTML = `<img src="/img/barloading.gif" alt="proses loading">`;
   let param = "?action=getdatasheet&tab=respon";
   fetch(urlppdb + param).then(m => m.json())
       .then(r => {
