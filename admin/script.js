@@ -3451,9 +3451,9 @@ const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
     // //console.log(riwayat);
 
     let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
+    console.log(updateRiwayat);
     updateRiwayat.id_status = idstatus;
     updateRiwayat.ket_status = ketstatus;
-    console.log(updateRiwayat);
     
     let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
     console.log(newState);
@@ -7281,18 +7281,18 @@ const publikasikannomorwa = (el)=>{
     
     let dataa = new FormData();
 
-    dataa.append("action", "simpanTabel");
-    dataa.append("idss", "14P1-pKe0T_1XOHODe4IdH_95YQz9FDSIYpzOrgaDCnI");
-    dataa.append("tab", "id_sekolah");
-    dataa.append("tabel", tabels);
-    dataa.append("kolom", 27);
-    fetch(urllogin, {
+    dataa.append("action", "simpannoWa");
+    dataa.append("row", id_sekolah);
+    dataa.append("nowa", nowa.value);
+    dataa.append("nogrup", grupwa.value);
+    
+    fetch(terminal, {
         method: 'post',
         body: dataa
     }).then(m => m.json())
     .then(r => {
         console.log(r);
-        //el.innerHTML = `Publikasikan`;
+        
     })
     .catch(er => console.log (er));
 

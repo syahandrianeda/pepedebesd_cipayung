@@ -23,8 +23,34 @@
   <!-- Top Bar-->
   <div class="w3-bar w3-top w3-white w3-card-2 w3-container w3-padding" style="height:60px">
     <div class="w3-bar-item w3-large w3-lobster font-effect-shadow-multiple">PPDB SDN Online</div>
-    <div class="w3-bar-item w3-right w3-button w3-blue"><i class="fa fa-bars w3-large"></i></div>
+    <div class="w3-right w3-bar-item w3-green w3-button barcari"><i class="fa fa-search"></i></div>
     <div class="w3-bar-item"></div>
+  </div>
+  <div class="w3-white w3-padding w3-animate-top sidebarcari"
+        style="display:none;z-index: 3;top:0;position: fixed;width:100%;">
+        <div class="w3-left">
+            Anda dapat mencari data pendaftar berdasarkan:
+            <div class="w3-row">
+                <label>
+                    <input type="radio" name="pilihpencarian" value="nama_cpdb" class="kriteria_cari">
+                    Nama CPDB
+                </label>
+                <label>
+                    <input type="radio" name="pilihpencarian" value="id_pendaftar" class="kriteria_cari">
+                    ID Pendaftar
+
+                </label>
+                <input class="w3-bar-item w3-border w3-col s8 w3-input w3-border-black w3-round w3-left"
+                    placeholder="Masukan kode pendaftaran" name="inputcari" oninput="ketik_kapital(this)">
+                <button class="w3-button w3-left w3-green w3-left" onclick="caridatapendaftar()"><i
+                        class="fa fa-search"></i>Cari</button>
+            </div>
+        </div>
+
+        <div class="w3-clear"></div>
+    </div>
+  <!--overlay untuk "sidebar" dan "bar searching"-->
+  <div class="w3-overlay w3-animate-opacity overlaycari" style="z-index: 2;" title="Keluar">
   </div>
   <div class="w3-main">
     <div class="w3-row-padding w3-margin" style="height: 700px;">
@@ -136,7 +162,7 @@
     <h2>Pilihan SD Negeri di Kecamatan Cipayung</h2>
     Informasi Sekolah Dasar Negeri di Kecamatan Cipayung
     <div class="w3-row-padding bgimg2  w3-pale-blue" style="margin:10px auto;">
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncipayung1')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('2')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_cipayung1">SDN CIPAYUNG 1</h6>
@@ -147,7 +173,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncipayung2')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('3')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_cipayung2">SDN CIPAYUNG 2</h6>
@@ -158,7 +184,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncipayung3')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('4')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_cipayung3">SDN CIPAYUNG 3</h6>
@@ -169,7 +195,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncipayung4')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('5')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_cipayung4">SDN CIPAYUNG 4</h6>
@@ -181,7 +207,7 @@
       </div>
 
       <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button"
-        onclick="goToLink('sdnpondokterong1')">
+        onclick="goToLink('8')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ponter1">SDN PONDOK TERONG 1</h6>
@@ -191,7 +217,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnpondokterong3')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('9')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ponter3">SDN PONDOK TERONG 3</h6>
@@ -203,7 +229,7 @@
       </div>
 
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnpondokterong4')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('10')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ponter4">SDN PONDOK TERONG 4</h6>
@@ -214,7 +240,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnutanjaya')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('14')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_utanjaya">SDN UTAN JAYA</h6>
@@ -224,7 +250,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnratujaya1')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('11')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ratujaya1">SDN RATUJAYA 1</h6>
@@ -235,7 +261,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnratujaya2')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('12')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ratujaya2">SDN RATUJAYA 2</h6>
@@ -246,7 +272,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdnratujaya3')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('13')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_ratujaya3">SDN RATUJAYA 3</h6>
@@ -257,7 +283,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncitayam1')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('6')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_citayam1">SDN CITAYAM 1</h6>
@@ -267,7 +293,7 @@
         </div>
       </div>
 
-      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('sdncitayam4')">
+      <div style="background-color:#AAFAD4" class="w3-col l3 s11 w3-card-4 w3-round-large w3-margin w3-button" onclick="goToLink('7')">
         <div class="w3-container w3-padding-16">
           <div class="w3-center">
             <h6 class="h_citayam4">SDN CITAYAM 4</h6>
@@ -287,19 +313,19 @@
       <header class="w3-pale-green w3-card4">
         <div class="w3-bar w3-padding">
           <!-- <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge" title="Jadwal Pendaftaran"><i class="fa fa-calendar-check-o"></i> <span class="w3-hide-small">Jadwal</span></button> -->
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Informasi Tentang Sekolah"><i class="fa fa-home"></i> <span class="w3-hide-small">Info Sekolah</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Persyaratan"><i class="fa fa-book"></i> <span class="w3-hide-small">Persyaratan</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Daya Tampung"><i class="fa fa-group"></i> <span class="w3-hide-small">Kuota/Pagu</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Alur"><i class="fa fa-random"></i> <span class="w3-hide-small">Alur</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Statistik Pendaftar"><i class="fa fa-bar-chart"></i> <span class="w3-hide-small">Statistik</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Proses seleksi"><i class="fa fa-sort-numeric-asc"></i> <span class="w3-hide-small">Seleksi</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Cari"><i class="fa fa-search"></i> <span class="w3-hide-small">Cari</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Tutorial"><i class="fa fa-youtube"></i> <span class="w3-hide-small">Tutorial</span></button>
-          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Pesan"><i class="fa fa-comment"></i> <span class="w3-hide-small">Pesan</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_info" title="Informasi Tentang Sekolah"><i class="fa fa-home"></i> <span class="w3-hide-small">Info Sekolah</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_syrt" title="Persyaratan"><i class="fa fa-book"></i> <span class="w3-hide-small">Persyaratan</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_pagu" title="Daya Tampung"><i class="fa fa-group"></i> <span class="w3-hide-small">Kuota/Pagu</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_alur" title="Alur"><i class="fa fa-random"></i> <span class="w3-hide-small">Alur</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_stsk" title="Statistik Pendaftar"><i class="fa fa-bar-chart"></i> <span class="w3-hide-small">Statistik</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_selek" title="Proses seleksi"><i class="fa fa-sort-numeric-asc"></i> <span class="w3-hide-small">Seleksi</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_yt" title="Tutorial"><i class="fa fa-youtube"></i> <span class="w3-hide-small">Tutorial</span></button>
+          <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny btn_wa" title="Pesan"><i class="fa fa-comment"></i> <span class="w3-hide-small">Pesan</span></button>
+          <!-- <button class="w3-bar-item w3-blue w3-border w3-button w3-round-xlarge w3-tiny" title="Cari"><i class="fa fa-search"></i> <span class="w3-hide-small">Cari</span></button> -->
         </div>
       </header>
       <div id="main_modalinfosekolah">
-        <h4 class="w3-center">INFO</h4>
+        <h4 class="w3-center">INFORMASI PPDB <span class="mdsnamaskeolah"></span> 2022/2023</h4>
         <div class="areainfo_modalinfosekolah w3-container w3-margin-bottom"></div>
       </div>
       <footer class="w3-pale-green w3-card-4 w3-center w3-margin-top">
@@ -336,6 +362,19 @@
       <footer class="w3-red w3-small w3-center w3-padding w3-margin-top">PPDB SDN Kecamatan Cipayung Tahun Pelajaran 2022/2023</footer>
     </div>
   </div>
+  
+  <div class="w3-modal w3-white" id="resultcari">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-center w3-container w3-teal">
+            <span class="w3-button w3-display-topright w3-red w3-hover-blue"
+                onclick="fn_close_cari()">&times;</span>
+            <h3 class="w3-center">Hasil Pencarian</h3>
+        </header>
+        <div class="w3-container teksresultcari">
+        </div>
+
+    </div>
+</div>
   <iframe id="pracetak" name="pracetak" class="w3-hide"></iframe>
   <script src="/app/js.js"></script>
 
