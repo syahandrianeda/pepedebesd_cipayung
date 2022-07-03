@@ -2912,10 +2912,12 @@ const caridatapendaftar = () => {
           // console.log(r);
           let datarest = r.records;
           cariUpdate = r.records;
-          let html = `<table class="w3-table-all garis jsondatacari"><thead>
+          let html = `<table class="w3-table-all garis jsondatacari w3-small"><thead>
           <tr>
               <th>Nama</th>
+              <th>Tujuan Sekolah</th>
               <th>Status Pendaftaran</th>
+              <th>Keterangan</th>
               <th>Detail</th>
           </tr>
           </thead><tbody>`
@@ -2926,9 +2928,11 @@ const caridatapendaftar = () => {
               for (let i = 0; i < filter.length; i++) {
                   html += `<tr>
                   <td>${filter[i].nama_cpdb}</td>
+                  <td>${db_settingppdbsekolah.filter(s => s.id_sekolah == filter[i].tujuan_mendaftar)[0].nama_sekolah}</td>
                   <td>${filter[i].id_status}</td>
+                  <td>${filter[i].ket_status}</td>
                   <td>
-                      <button class="w3-button w3-teal" onclick="cekdataT('${filter[i].id_pendaftar}')">
+                      <button class="w3-button w3-teal" onclick="cekdataT('${filter[i].baris_terminal}')">
                           <i class="fa fa-eye"></i>
                       </button>
                   </td>
@@ -3606,3 +3610,108 @@ barcari.onclick = function (){
   div_overlaycari.style.display = "block";
     div_sidebarcari.style.display = "block";
 }
+
+const w3_close = () => {
+  div_overlaycari.style.display = "none";
+  div_sidebarcari.style.display = "none";
+  // nav_sidebar.style.display = "none";
+};
+const w3_open = () => {
+  div_overlaycari.style.display = "block";
+  div_sidebarcari.style.display = "none";
+
+ 
+
+};
+div_overlaycari.addEventListener("click", () => {
+  // div_overlaycari.style.display = "none";
+  // div_sidebarcari.style.display = "none";
+  w3_close();
+});
+
+const cekdataT = async (id) => {
+  //let mod = document.getElementById("resultcari");
+  console.log(id)
+  let konversinamsekolah = db_settingppdbsekolah;
+  let mod_teks = document.querySelector(".teksresultcari");
+  mod_teks.innerHTML = `<div class="w3-center w3-margin"><img src="/img/barloading.gif"></div>`;
+  let param = "?action=getAllDataTerminal";
+  fetch(terminal+"?action=panggildatasatuanak&id_cpdb="+id)
+  .then(m => m.json()).then(r => {
+    console.log(r)
+    let lengh = r.records.length;
+    let dataanak = r.records[lengh-1];
+    console.log(dataanak)
+    let sekolahtujuan = dataanak.tujuan_mendaftar;
+    let namasekolah = db_settingppdbsekolah.filter(s => s.id_sekolah == sekolahtujuan)[0].nama_sekolah;//
+    console.log(namasekolah);//[0].nama_sekolah;
+    let datariwayat = JSON.parse(dataanak.riwayat_pendaftaran);
+    let html ="";
+        html +=`<div class="w3-card-4 w3-padding w3-small">`;
+        html +=`<h5 class="w3-center">Data Pribadi Siswa</h5>`;
+        html += `<table class="w3-table-all" style="width:300px;margin:0 auto">`;
+          html +=`<tr>`;
+            html +=`<td>Nama CPDB</td>`;
+            html +=`<td style="width:1px">:</td>`;
+            html +=`<td>${dataanak.nama_cpdb}</td>`;
+          html +=`</tr>`;
+          html +=`<tr>`;
+            html +=`<td>Skor Umur</td>`;
+            html +=`<td style="width:1px">:</td>`;
+            html +=`<td>${dataanak.cpdb_umur}</td>`;
+          html +=`</tr>`;
+          html +=`<tr>`;
+            html +=`<td>Alamat</td>`;
+            html +=`<td style="width:1px">:</td>`;
+            html +=`<td>Kel. ${dataanak.cpdb_kel}, RT.${dataanak.cpdb_rt}, RW. ${dataanak.cpdb_rw} </td>`;
+          html +=`</tr>`;
+          html += `</table>`;
+
+          html +=`<h5 class="w3-center">Detail Pendaftaran Terkini</h5>`;
+          html += `<table class="w3-table-all" style="width:80%;margin:0 auto">`;
+            html +=`<tr>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Tujuan Sekolah Terakhir</td>`;
+              html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${namasekolah}</td>`;
+            html +=`</tr>`;
+            
+            html +=`<tr>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Status Pendaftaran</td>`;
+              html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${dataanak.id_status}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Keterangan Pendaftaran</td>`;
+              html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+              html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${dataanak.ket_status}</td>`;
+            html +=`</tr>`;
+          html +=`</table><hr class="w3-bottombar w3-border-pale-red">`;
+          html +=`<div class="w3-card-4 w3-padding">`;
+          html +=`<h6 class="w3-center">Riwayat Pendaftaran</h6>`
+            html +=`<table class="w3-table w3-tiny">`;
+              html +=`<thead>`;
+                html +=`<tr class="w3-light-gray">`;
+                  html +=`<th class="w3-border">No.</th>`
+                  html +=`<th class="w3-border">Sekolah Tujuan</th>`
+                  html +=`<th class="w3-border">Status Pendaftaran</th>`
+                  html +=`<th class="w3-border">Keterangan Pendaftaran</th>`
+                html +=`</tr>`;
+              html +=`</thead>`;
+              html +=`<tbody>`;
+              for(let i = 0 ; i < datariwayat.length ; i++){
+                let sk = datariwayat[i].tujuan_mendaftar;
+                console.log(sk)
+                  html +=`<tr>`;
+                    html +=`<td class="w3-border">${i+1}</td>`
+                    html +=`<td class="w3-border">${db_settingppdbsekolah.filter(s => s.id_sekolah == datariwayat[i].tujuan_mendaftar)[0].nama_sekolah}</td>`;
+                    html +=`<td class="w3-border">${datariwayat[i].id_status}</td>`
+                    html +=`<td class="w3-border">${datariwayat[i].ket_status}</td>`
+                  html +=`</tr>`;
+              }
+                  html +=`</tbody>`;
+            html +=`</table>`;
+          html +=`</div>`;
+        html +=`</div>`;
+        mod_teks.innerHTML = html;
+  })
+};
