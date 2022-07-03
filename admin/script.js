@@ -826,6 +826,16 @@ const ubahaksesform = (bol) => {
             console.log(er);
             alert("Maaf, Terjadi kesalahan. Silakan ulangi sesi Anda sesaat lagi.")
         })
+        let dataa = new FormData();
+        dataa.append("action", "inputdataKolomSeBaris");
+        //dataa.append("idss", "14P1-pKe0T_1XOHODe4IdH_95YQz9FDSIYpzOrgaDCnI");
+        dataa.append("tab", "id_sekolah");
+        dataa.append("idsekolah",id_sekolah);
+        dataa.append("tabel", tabels);
+        dataa.append("kolom", 20);
+    fetch(terminal,{method:"post",body:dataa}).then(m => m.json()).then(r =>{
+        console.log(r);
+    }).catch(er => {console.log(er)})
 }
 const save_t_jadwal = (brs) => {
     let tabel = document.querySelector(".s_t_jadwal");
@@ -1328,15 +1338,15 @@ const html_setpagu = (s) => {
             <tr class="w3-pale-blue">
                 <th>
                     <i class="fa fa-edit w3-right w3-blue w3-button tb_btn_editkuota_zonasi" onclick="sel_editable(this,'tb_result_kuotazonasi')" title="Edit kuota zonasi"></i>
-                    Zonasi (70%)
+                    Zonasi
                 </th>
                 <th>
                     <i class="fa fa-edit w3-blue w3-right w3-button tb_btn_editkuota_afirmasi" onclick="sel_editable(this,'tb_result_kuotaafirmasi')" title="Edit kuota Afirmasi"></i>
-                    Afirmasi (15%)
+                    Afirmasi
                 </th>
                 <th>
                     <i class="fa fa-edit w3-blue w3-right w3-button tb_btn_editkuota_perpindahanptk" onclick="sel_editable(this,'tb_result_kuotaperpindahanptk')"title="Edit kuota Perpindahan Tugas/PTK"></i>
-                    Perpindahan Tugas (5%)
+                    Perpindahan Tugas
                 </th>
             </tr>
             <tr>
@@ -3437,11 +3447,13 @@ const masukkankeTahapSeleksiDariTerminal = (id) =>{
 }
 
 const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
+    console.log(baristerminal, idstatus, ketstatus,el)
     el.setAttribute("onclick","alert('Sedang proses kirim')");
     let data = db_pendaftar.filter(s => s.baris_terminal == baristerminal);
     let dt = data[0]
-    
+    console.log(data);
     let riwayat = JSON.parse(dt.riwayat_pendaftaran);
+    console.log(riwayat)
     //id_status	ket_status	riwayat_pendaftaran
     let dataverif = {};
     dataverif.id_status = idstatus;
@@ -3449,7 +3461,7 @@ const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
 
 
     // //console.log(riwayat);
-
+    // let updateRiwayat ={}
     let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
     console.log(updateRiwayat);
     updateRiwayat.id_status = idstatus;
@@ -4463,7 +4475,7 @@ const kembalikankependaftar = (id) => {
             </div>
         <hr/>
         <button class="w3-blue w3-button tmbl_kirimbalikin_api"><i class="fa fa-paper-plane-o"></i> Kirim</button>
-        <button class="w3-green w3-button " onclick="verifikasikan_berkasini('${id}');divid.style.display='none'"><i class="fa fa-times-circle-o"></i> Kembali</button>
+        <button class="w3-green w3-button " onclick="document.getElementById('id_modal_info').style.display='none'"><i class="fa fa-times-circle-o"></i> Kembali</button>
     <hr/></div>        <hr/></div><hr/>
     <div class="w3-card-4 w3-pale-blue w3-round w3-container">
         Petunjuk:
@@ -4509,8 +4521,12 @@ const kembalikankependaftar = (id) => {
             alert("Isian status dan/atau alasannya tidak boleh kosong.");
             // return;
         } else {
-
-            req_verifikasiDariTerminal(lr, status, ket_status, tm);
+            Rd.forEach(el => {
+                if (el.checked) {
+                    let status = el.value;
+                    req_verifikasiDariTerminal(lr, status, ket_status, tm);
+                }
+            })
         }
     });
 
