@@ -371,10 +371,12 @@ const html_maucobalagidaftar = (data, idstts) =>{
   console.log(data);
   if(idstts == "Dikembalikan"){
     let id = data.tujuan_mendaftar;
+
   let row = data.baris_terminal;
   let idpendaftar = data.id_pendaftar;
   let jalurppdb = data.jalur_cpdb;
       let dbSetting = db_settingppdbsekolah.filter(s=> s.id_sekolah == id);
+      let namasekolah = dbSetting[0].nama_sekolah;
       let alamat = dbSetting[0].alamat_kelurahan + ",<br>RT " + dbSetting[0].alamat_rt + ", RW " + dbSetting[0].alamat_rw;
     let tekstitle = `Alamat: ${alamat}`;
     html += `<div class="w3-card-4 w3-container w3-pale-red w3-margin-top">`;
@@ -805,7 +807,8 @@ const html_maucobalagidaftar = (data, idstts) =>{
                         <label for="setuju">
                             <input type="checkbox" class="w3-check ceksetuju" id="setuju" value="Setuju" > Dengan ini menyatakan bahwa data yang saya isi dan unggah benar-benar data yang sebenarnya.</label>
                     </li><li><label for="takluk">
-                    <input type="checkbox" id="takluk" class="w3-check ceksetuju" > Anda setuju dan tunduk pada peraturan PPDB SD di sekolah kami (${namasekolah}) dan menerima sepenuhnya sistem seleksi yang telah ditetapkan melalui pendaftaran di web ini.
+                    <input type="checkbox" id="takluk" class="w3-check ceksetuju" > Anda setuju dan tunduk pada peraturan PPDB SD di sekolah kami 
+                    (${namasekolah}) dan menerima sepenuhnya sistem seleksi yang telah ditetapkan melalui pendaftaran di web ini.
                     </label>
                     </li>
                     <li>
@@ -2272,6 +2275,8 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
     let ein = elemensinput[i];
     ein.value = "";
   };
+  let dst = document.querySelector(".cekformulircpdbawal");
+  dst.innerHTML = "";
   fetch(urlppdb+"?action=cpdbdaftarawal", 
       { method: "post", 
       body: data 
@@ -2280,7 +2285,8 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
           
           cekformulircpdbawal.innerHTML = "";
           cariUpdate = r.objek;
-          let tgldaftar = new Date(r.objek[0].waktu_daftar);
+          console.log(cariUpdate);
+          let tgldaftar = new Date();
           let html = `<div id="statusformulir" style="overflow-x:auto">`;
           html +=`<table style="width:98%;margin:0 auto;font-size:12px">`;
             html +=`<tr>`;

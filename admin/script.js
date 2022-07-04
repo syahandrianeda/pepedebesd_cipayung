@@ -624,12 +624,19 @@ const konversi_tanggal = (el, kelas) => {
     let d = new Date(el.value);
     let div = document.querySelector("." + kelas);
     let divumur = document.querySelector(".sub_skor_umur");
-    div.innerHTML = `${umur(d).tahun} Tahun ${umur(d).bulan} Bulan ${umur(d).hari} Hari (per 1 Juli 2021)`;
+    div.innerHTML = `${umur(d).tahun} Tahun ${umur(d).bulan} Bulan ${umur(d).hari} Hari (per 1 Juli 2022)`;
     divumur.innerHTML = skor_umur(umur(d).tahun, umur(d).bulan, umur(d).hari);
+};
+const konversi_tanggal2 = (el, kelas) => {
+    let d = new Date(el.value);
+    let div = document.querySelector("." + kelas);
+    let divumur = document.querySelector("[data-revisiverifulang='cpdb_umur']");
+    div.innerHTML = `${umur(d).tahun} Tahun ${umur(d).bulan} Bulan ${umur(d).hari} Hari (per 1 Juli 2022)`;
+    divumur.value = skor_umur(umur(d).tahun, umur(d).bulan, umur(d).hari);
 };
 
 function umur(tgllahir) {
-    let patokan = new Date("2021-07-01");
+    let patokan = new Date("2022-07-01");
     var curday = patokan.getDate();
     var curmon = patokan.getMonth();
     var curyear = patokan.getFullYear();
@@ -3067,13 +3074,13 @@ const verif_menu = () => {
     let html = `
     <div class="tab">
     <button class="w3-button tabverif active" onclick="pindahTab(this,'terminal')">dB Terminal</button>
-    <button class="w3-button tabverif active" onclick="pindahTab(this,'all')">Daftar Peserta</button>
-    <button class="w3-button tabverif " onclick="pindahTab(this,'dobel')">Indikasi Pendaftar Ganda</button>
-    <button class="w3-button tabverif " onclick="pindahTab(this,'yet')">Pendaftar Belum Verifikasi</button>
-    <button class="w3-button tabverif " onclick="pindahTab(this,'gagal')">Tidak Lolos Verifikasi</button>
-    <button class="w3-button tabverif " onclick="pindahTab(this,'verifulang')">Verifikasi Ulang</button>
-    <button class="w3-button tabverif " onclick="pindahTab(this,'ceklebihsatusekolah')">Mendaftar 2 Sekolah</button>
-    </div>
+    <button class="w3-button tabverif" onclick="pindahTab(this,'all')">Daftar Peserta</button>`
+    html +=`
+    <button class="w3-button tabverif w3-hide" onclick="pindahTab(this,'dobel')">Indikasi Pendaftar Ganda</button>
+    <button class="w3-button tabverif w3-hide" onclick="pindahTab(this,'yet')">Pendaftar Belum Verifikasi</button>
+    <button class="w3-button tabverif w3-hide" onclick="pindahTab(this,'gagal')">Tidak Lolos Verifikasi</button>`
+    html +=`<button class="w3-button tabverif " onclick="pindahTab(this,'verifulang')">Verifikasi Ulang</button>`
+    html +=`<button class="w3-button tabverif w3-hide" onclick="pindahTab(this,'ceklebihsatusekolah')">Mendaftar 2 Sekolah</button></div>
     <div class="verif_verivikator w3-border w3-container" style="overflow-x:auto">
    
     </div>
@@ -3191,6 +3198,7 @@ const detailpendaftarTerminal = async (row) =>{
                 html +=`<tr><th colspan="4" class="w3-center">Riwayat Pendaftaran CPDB ini</th></tr>`
                 html +=`<tr>`;
                     html+=`<th class="w3-border w3-center">No.</th>`;
+                    
                     html+=`<th class="w3-border w3-center">Sekolah Tujuan</th>`;
                     html+=`<th class="w3-border w3-center">Status Pendaftaran</th>`;
                     html+=`<th class="w3-border w3-center">Keterangan</th>`;
@@ -3201,6 +3209,7 @@ const detailpendaftarTerminal = async (row) =>{
                 let namasekolah = datasekolahkecamatan.filter(s => s.id_sekolah == ids)[0]
                 html +=`<tr>`;
                     html +=`<td class="w3-border">${i+1}</td>`;
+                    
                     html +=`<td class="w3-border">${namasekolah.nama_sekolah.toUpperCase()}</td>`;
                     html +=`<td class="w3-border">${riwayat[i].id_status}</td>`;
                     html +=`<td class="w3-border">${riwayat[i].ket_status}</td>`;
@@ -3212,10 +3221,10 @@ const detailpendaftarTerminal = async (row) =>{
             Keterangan Status : <br/><br/><span class="w3-pale-green w3-padding">${d.ket_status}</span><hr/>`;
 
             if (d.editable === true && d.id_status == "Dikembalikan") {
-                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
+              //  html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
             } else {
 
-                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
+              //  html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
             }
 
 
@@ -3402,6 +3411,323 @@ const detailpendaftarTerminal = async (row) =>{
         dividinfo.innerHTML = er;
     });
 }
+const detailpendaftarTerminal2 = async (row) =>{
+    let divid = document.getElementById("id_modal_info");
+    divid.style.display = "block"
+    let dividinfo = document.querySelector(".teks_info_modal");
+    dividinfo.innerHTML = `<div class="w3-center w3-margin-top"><img src="/app/barloading.gif" alt="proses loading"></div>`;
+    //ga perlu pagu dulu nih, langsung deteksi dB terminal untuk memindahkan dB CPDB ke dB Pendaftar sekolah;
+    let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
+    await fetch(linkpagu).then(m => m.json()).then(r => {
+        console.log("getpagu", r)
+        objek_settingpagu = r.records;
+    }).catch(er => console.log(er));
+
+    fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+row)
+    .then(m => m.json()).then(r =>{
+        console.log(r)
+   
+    db_pendaftar = r.records;
+            let data = r.records;
+            let d = data[0];//.filter(k => k.id_pendaftar == id)[0];
+            let html = `<h3 class="w3-center">Verifikasi Identitas CPDB</h3>
+            Form ini untuk mencocokkan data utama dalam proses penseleksian (sistem jurnal prioritas). Adapun apabila ada ketidakcocokan data-data selain dalam form ini, dapat dilakukan dalam proses daftar ulang
+            <div class="w3-card w3-container w3-center w3-margin-top">
+            ID PENDAFTAR : ${d.id_pendaftar}<hr/>`
+            html +=`<table class="w3-table-all w3-striped w3-tiny"><thead>`;
+                html +=`<tr><th colspan="4" class="w3-center">Riwayat Pendaftaran CPDB ini</th></tr>`
+                html +=`<tr>`;
+                    html+=`<th class="w3-border w3-center">No.</th>`;
+                    
+                    html+=`<th class="w3-border w3-center">Sekolah Tujuan</th>`;
+                    html+=`<th class="w3-border w3-center">Status Pendaftaran</th>`;
+                    html+=`<th class="w3-border w3-center">Keterangan</th>`;
+                html +=`</tr></thead><tbody>`;
+            let riwayat = JSON.parse(d.riwayat_pendaftaran);
+            for(let i = 0 ; i < riwayat.length ; i++){
+                let ids = riwayat[i].tujuan_mendaftar;
+                let namasekolah = datasekolahkecamatan.filter(s => s.id_sekolah == ids)[0]
+                html +=`<tr>`;
+                    html +=`<td class="w3-border">${i+1}</td>`;
+                    
+                    html +=`<td class="w3-border">${namasekolah.nama_sekolah.toUpperCase()}</td>`;
+                    html +=`<td class="w3-border">${riwayat[i].id_status}</td>`;
+                    html +=`<td class="w3-border">${riwayat[i].ket_status}</td>`;
+                html +=`</tr>`;
+            }
+            html +=`</tbody></table><br>`
+            html +=`WAKTU MENDAFTAR : <br/><br/>${tanggalfulllengkap(d.waktu_daftar)}<hr/>
+            Status Pendaftaran : <br/><br/><span class="w3-red w3-padding">${d.id_status}</span><hr/>
+            Keterangan Status : <br/><br/><span class="w3-pale-green w3-padding">${d.ket_status}</span><hr/>`;
+
+            if (d.editable === true && d.id_status == "Dikembalikan") {
+               // html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
+            } else {
+
+                //html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
+            }
+
+
+            html += `</div><h4 class="w3-green">Dokumen Akta Kelahiran/Surat Kenal Lahir</h4>
+            <div class="containerbaru">
+                <iframe class="responsive-iframebaru" 
+                src="https://drive.google.com/file/d/${(d.cpdb_id_file_akta == "") ? "18Zvo5idM92xYEIzqKDDFnc0iqI6JvUnS" : d.cpdb_id_file_akta}/preview"
+                 title="akte"></iframe>
+            </div>
+            <table class="w3-table-all garis w3-small">
+                <tr class="w3-aqua">
+                    <th>Keterangan</th>
+                    <th>Isian Pendaftar</th>
+                    <th>Kolom Edit Admin</th>
+                    <th>Sesuai/ Tidak Sesuai</td>   
+                </tr>
+                <tr><td>Nama CPDB</td>
+                    <td>${d.nama_cpdb}</td>
+                    <td><textarea data-revisiverifulang="nama_cpdb" type="text" oninput="ketik_kapital(this)" class="w3-input w3-pale-red">${d.nama_cpdb}</textarea></td>
+                    <td>
+                        <label for="y_cocok_nama">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_nama" name="cocok_nama">Sesuai</label><br/>
+                        <label for="t_cocok_nama">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_nama" name="cocok_nama">Tidak</label>
+                    </td>
+                </tr>
+                <tr><td>Tempat Lahir</td>
+                    <td>${d.cpdb_tempat_lahir}</td>
+                    <td><input type="text" data-revisiverifulang="cpdb_tempat_lahir" class="w3-input w3-pale-red" oninput="ketik_kapital(this)"  value="${d.cpdb_tempat_lahir}"></td>
+                    <td>
+                        <label for="y_cocok_tempatlahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_tempatlahir" name="cocok_tml">Sesuai</label><br/>
+                        <label for="t_cocok_tempat">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_tempatlahir" name="cocok_tml">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>${tanggalfull(d.cpdb_tanggal_lahir)}</td>`
+                    let dodol = formattanggalinput(new Date(d.cpdb_tanggal_lahir))
+                    html+=`
+                    <td><input type="date" data-revisiverifulang="cpdb_tanggal_lahir" class="w3-input w3-pale-red"  onchange="konversi_tanggal2(this,'sub_arti_yy')" value="${dodol}" ><span class="sub_arti_yy"></span></td>
+                    <td>
+                        <label for="y_cocok_tgllahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_tgllahir" name="cocok_ttl">Sesuai</label><br/>
+                        <label for="t_cocok_tgllahir">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_tgllahir" name="cocok_ttl">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Skor Umur</td>
+                    <td>${d.cpdb_umur}</td>
+                    <td><input type="text" value="${d.cpdb_umur}" data-revisiverifulang="cpdb_umur" class="w3-input w3-pale-red" disabled></td>
+                    <td>
+                    <label for="y_cocok_umur">
+                    <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_umur" name="cocok_umur">Sesuai</label><br/>
+                    <label for="t_cocok_umur">
+                    <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_umur" name="cocok_umur">Tidak</label>
+                
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>${(d.cpdb_jk == "L") ? "Laki-laki" : "Perempuan"}</td>
+                    <td><input type="text" data-revisiverifulang="cpdb_jk" value="${d.cpdb_jk}" oninput="ketik_kapital(this)" class="w3-input w3-pale-red" ><br>
+                    Ketik: L atau P
+                    </td>
+                    <td>
+                        <label for="y_cocok_jk">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_jk" name="cocok_jk">Sesuai</label><br/>
+                        <label for="t_cocok_jk">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_jk" name="cocok_jk">Tidak</label>
+                    </td>
+                </tr>
+            </table><hr/><div class="w3-card-4 w3-container">
+            Simulasi Umur <br/><input type="date" onchange="konversi_tanggal(this,'sub_arti_tanggal')"><hr/>
+            Detail umur: <span class="sub_arti_tanggal"></span><br/>
+            Skor Umur: <span class="sub_skor_umur"></span></div>
+            <hr/>
+            <h4 class="w3-green">Dokumen Tempat Tinggal</h4>
+            Berikut ini dokumen Kartu Keluarga (KK) yang menjadi rujukan pengisian alamat Calon Peserta Didik Baru.
+            <div class="containerbaru">
+                <iframe class="responsive-iframebaru" 
+                src="https://drive.google.com/file/d/${(d.cpdb_id_file_kk == "") ? "18Zvo5idM92xYEIzqKDDFnc0iqI6JvUnS" : d.cpdb_id_file_kk}/preview"
+                 title="akte"></iframe>
+            </div>
+            <table class="w3-table-all garis w3-small">
+                <tr class="w3-aqua">
+                    <th>Keterangan</th>
+                    <th>Isian Pendaftar</th>
+                    <th>Kolom Edit Admin</th>
+                    <th>Sesuai/Tidak Sesuai</td>
+                </tr>
+                <tr>
+                    <td>Kota/Kab</td>
+                    <td>${d.cpdb_kota}</td>
+                    <td><input type="text" data-revisiverifulang="cpdb_kota" type="text" oninput="ketik_kapital(this)"  value="${d.cpdb_kota}" class="w3-input w3-pale-red">Ketik:KOTA DEPOK untuk depok,</td>
+                    <td>
+                        <label for="y_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kota" name="cocok_kota">Sesuai</label><br/>
+                        <label for="t_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kota" name="cocok_kota">Tidak</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kecamatan</td>
+                    <td>${d.cpdb_kec}</td>
+                    <td><input type="text" data-revisiverifulang="cpdb_kec" type="text" oninput="ketik_kapital(this)"  class="w3-input w3-pale-red" value="${d.cpdb_kec}" placeholder="CIPAYUNG"></td>
+                    <td>
+                        <label for="y_cocok_kec">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kec" name="cocok_kec">Sesuai</label><br/>
+                        <label for="t_cocok_kota">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kec" name="cocok_kec">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Kelurahan</td>
+                    <td>${d.cpdb_kel}</td>
+                    <td><input type="text" data-revisiverifulang="cpdb_kel" type="text" oninput="ketik_kapital(this)"  class="w3-input w3-pale-red" value="${d.cpdb_kel}"></td>
+                    <td>
+                        <label for="y_cocok_kel">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_kel" name="cocok_kel">Sesuai</label><br/>
+                        <label for="t_cocok_kel">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_kel" name="cocok_kel">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>RW</td>
+                    <td>${d.cpdb_rw}</td>
+                    <td><input type="number" data-revisiverifulang="cpdb_rw" type="text"  class="w3-input w3-pale-red" value="${d.cpdb_rw}"></td>
+                    <td>
+                        <label for="y_cocok_rw">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_rw" name="cocok_rw">Sesuai</label><br/>
+                        <label for="t_cocok_rw">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_rw" name="cocok_rw">Tidak</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>RT</td>
+                    <td>${d.cpdb_rt}</td>
+                    <td><input type="number" data-revisiverifulang="cpdb_rt" type="text"  class="w3-input w3-pale-red" value="${d.cpdb_rt}"></td>
+                    <td>
+                        <label for="y_cocok_rt">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_rt" name="cocok_rt">Sesuai</label><br/>
+                        <label for="t_cocok_rt">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_rt" name="cocok_rt">Tidak</label>
+                    </td>
+                </tr>
+            </table>
+            <div class="w3-card-4 w3-center w3-margin-top w3-margin-bottom">Ubah Jalur
+            <br>
+            <input type="text" value="${d.jalur_cpdb}" oninput="ketik_kapital(this)" class="w3-input w3-pale-red w3-center w3-border">
+            ketik: ZONASI, AFIRMASI, PTK
+            </div><hrr>
+            <h4 class="w3-green">Dokumen Pendukung Sistem Zalur ${d.jalur_cpdb}</h4>
+            <div class="w3-card-4 w3-light-gray w3-container w3-small w3-round-xlarge">
+            `;
+            let key = "ket_doc_" + (d.jalur_cpdb).toLowerCase();
+            //console.log(key);
+            let docsyarat = objek_settingpagu.filter(k => k[key] !== "");
+            //console.log(docsyarat)
+            for (let j = 0; j < docsyarat.length; j++) {
+                let kz = "cpdb_id_file_filependukung_" + j;
+                let show = "";
+                if (d[kz] !== "") {
+                    show = ` <div class="containerbaru">
+                    <iframe class="responsive-iframebaru" 
+                 src="https://drive.google.com/file/d/${d[kz]}/preview"
+                  title="akte"></iframe>
+             </div>`
+                } else {
+                    show = "Tidak Diunggah"
+                }
+
+                html += `<table class="w3-table-all garis w3-centered"><tbody>
+                <tr class="w3-aqua">
+                    <td>${docsyarat[j][key]}</td>
+                    </tr><tr>
+                    <td>${show}</td>
+                    </tr><tr>
+                    <td>
+                        <label for="y_cocok_dok${j}">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="Y" id="y_cocok_dok${j}" name="cocok_dok${j}">Sesuai</label>
+                        <label for="t_cocok_dok${j}">
+                        <input type="radio" class="w3-radio radio_cek"  onchange="cekradioverifikasi()"  value ="T" id="t_cocok_dok${j}" name="cocok_dok${j}">Tidak</label>
+                    </td>
+                </tr></tbody></table><hr/>
+                `;
+            };
+            html += `</div>
+            <hr/>
+            <div class="w3-card-4 w3-pale-green kesimpulan_verifikasi w3-padding w3-center">
+            Kesimpulan:
+            </div>
+            <div class="w3-card-4 w3-pale-red  w3-padding w3-center">
+            <button class="w3-button w3-green w3-round-xlarge" onclick="kirim_verifikasiulangkeTerminal('${d.baris_terminal}')" title="Masukkan ke Proses Jurnal">Proses Jurnal</button>
+            <button class="w3-button w3-yellow w3-round-xlarge" onclick="kembalikankependaftar('${d.baris_terminal}')" title=" Kembalikan ke pendaftar (Minta pendaftar mengisi Ulang)">Kembalikan ?????</button>
+            
+            </div><hr/>
+            `;
+            // <button class="w3-button w3-red w3-round-xlarge" onclick="EditOlehAdmin('${d.id_pendaftar}')">Edit by Tim</button>
+            dividinfo.innerHTML = html; 
+    }).catch(er =>{
+        console.log(er);
+        dividinfo.innerHTML = er;
+    });
+}
+const kirim_verifikasiulangkeTerminal = (brsterm) =>{
+    let id = parseInt(brsterm);
+    //data yagn diupdate admin
+    let dataUpdateByAdmi = {};
+    let inputEl = document.querySelectorAll("[data-revisiverifulang");
+    for(let i = 0 ; i < inputEl.length ; i++){
+        let nn = inputEl[i];
+        let key = nn.getAttribute("data-revisiverifulang");
+        let val = nn.value;
+        dataUpdateByAdmi[key] = val
+    }
+    console.log(dataUpdateByAdmi);
+    dataUpdateByAdmi.id_status ="Proses Jurnal";
+    dataUpdateByAdmi.ket_status ="Proses Jurnal";
+    
+    //kita panggil dulu databaseterminalnya:
+    let dividinfo = document.querySelector(".teks_info_modal");
+    
+    dividinfo.innerHTML =`<div class="w3-center w3-card-4"><img src="/img/barloading.gif"> Memanggil database Terminal </div>`
+    fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+id)
+    .then(m => m.json()).then(r =>{
+        let dataanak = r.records[0];
+        // console.log(dataanak);
+        dividinfo.innerHTML =`<div class="w3-center w3-card-4"><img src="/img/barloading.gif"> Berhasil memanggil database Terminal dan mulai update data pendaftar </div>`
+                let riwayat = JSON.parse(dataanak.riwayat_pendaftaran);
+                let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
+                    console.log(updateRiwayat);
+                    updateRiwayat.id_status = "Proses Jurnal";
+                    updateRiwayat.ket_status = "Proses Jurnal";
+                    
+                let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
+            //console.log(newState);
+        dataUpdateByAdmi.riwayat_pendaftaran = JSON.stringify(newState);
+        let objekkirimserver = Object.assign(dataanak, dataUpdateByAdmi);
+        //console.log(objekkirimserver);
+        // console.log(objekkirimserver.baris_terminal)
+        let dBverif = new FormData();
+        // console.log(urlppdb)
+        dBverif.append("action","verifikasiUlangkeTerminal");
+        let ky = Object.keys(objekkirimserver)
+        for(let i = 0 ; i < ky.length ; i++){
+            console.log(ky[i], objekkirimserver[ky[i]])
+            dBverif.append(ky[i], objekkirimserver[ky[i]])
+        }
+        fetch(urlppdb,{method:"post",body:dBverif}).then(m=>m.json())
+        .then(r => {
+            dividinfo.innerHTML = ""
+            console.log(r);
+        }).catch(er => {
+            console.log(er);
+            dividinfo.innerHTML = er;
+        })
+
+    }).catch(er => console.log)
+}
+
 const masukkankeTahapSeleksiDariTerminal = (id) =>{
     
     let lr = id;//parseInt(id.split("_")[0]);
@@ -4150,9 +4476,7 @@ const verifikasikan_berkasini = async (id) => {
         await fetch(link)
             .then(m => m.json())
             .then(r => {
-                //console.log("await bekerja")
                 objek_settingpagu = r.records;
-                // html_setseleksi(r.records);
             })
     };
 
@@ -4172,10 +4496,10 @@ const verifikasikan_berkasini = async (id) => {
             Keterangan Status : <br/><br/><span class="w3-pale-green w3-padding">${d.ket_status}</span><hr/>`;
 
             if (d.editable === true && d.id_status == "Dikembalikan") {
-                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
+            //    html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-green w3-padding">DIIJINKAN</span><hr/>`;
             } else {
 
-                html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
+           //     html += `Pendaftarkan diijinkan memperbaiki pendaftaran data ini: <br/><br/><span class="w3-red w3-padding"> TIDAK DIIJINKAN</span><hr/>`;
             }
 
             html += `</div><h4 class="w3-green">Dokumen Akta Kelahiran/Surat Kenal Lahir</h4>
@@ -6867,7 +7191,7 @@ const cekverifulang = () => {
                 <td>${data[i].nama_cpdb}</td>
                 <td>${data[i].id_status}</td>
                 <td>
-                <button onclick="verifikasikan_berkasini('${data[i].id_pendaftar}')"><i class="fa fa-edit w3-large"></i> Verifikasi Ulang</button>
+                <button onclick="detailpendaftarTerminal2('${data[i].baris_terminal}')"><i class="fa fa-edit w3-large"></i> Verifikasi Ulang</button>
                 </td>
                
         </tr>`;
@@ -8112,3 +8436,12 @@ const excelrombel = (kelas) => {
     });
     div.innerHTML = "";
 }
+
+function formattanggalinput(tgl) {
+    var d = new Date(tgl);
+    var tgl = d.getDate();
+    var bln = d.getMonth() + 1;
+    var thn = d.getFullYear();
+    return thn + "-" + addZero(bln) + "-" + addZero(tgl)
+  };
+  
