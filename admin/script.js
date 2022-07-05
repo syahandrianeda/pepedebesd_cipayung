@@ -1,4 +1,8 @@
-const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+//dB Asli
+//const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+//dB Trial
+const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
+
 let datasekolahkecamatan = [];
     fetch(terminal + "?action=settingPerSekolah")
         .then(m => m.json())
@@ -3616,7 +3620,7 @@ const detailpendaftarTerminal2 = async (row) =>{
             </table>
             <div class="w3-card-4 w3-center w3-margin-top w3-margin-bottom">Ubah Jalur
             <br>
-            <input type="text" value="${d.jalur_cpdb}" oninput="ketik_kapital(this)" class="w3-input w3-pale-red w3-center w3-border">
+            <input type="text" data-revisiverifulang="jalur_cpdb" value="${d.jalur_cpdb}" oninput="ketik_kapital(this)" class="w3-input w3-pale-red w3-center w3-border">
             ketik: ZONASI, AFIRMASI, PTK
             </div><hrr>
             <h4 class="w3-green">Dokumen Pendukung Sistem Zalur ${d.jalur_cpdb}</h4>
@@ -3680,6 +3684,7 @@ const kirim_verifikasiulangkeTerminal = (brsterm) =>{
     for(let i = 0 ; i < inputEl.length ; i++){
         let nn = inputEl[i];
         let key = nn.getAttribute("data-revisiverifulang");
+        
         let val = nn.value;
         dataUpdateByAdmi[key] = val
     }
@@ -3718,7 +3723,7 @@ const kirim_verifikasiulangkeTerminal = (brsterm) =>{
         }
         fetch(urlppdb,{method:"post",body:dBverif}).then(m=>m.json())
         .then(r => {
-            dividinfo.innerHTML = ""
+            dividinfo.innerHTML = r.result;
             console.log(r);
         }).catch(er => {
             console.log(er);
@@ -5256,9 +5261,29 @@ const cek_real_prioritas = (zonasi) => {
     //     return;
     // }
     let kuota = objek_settingpagu[0][zonasi];
-    let aa = zonasi.replace("kuota_", "");
+    let aa = zonasi.replace("kuota_", "").toUpperCase();
     let div = document.querySelector(".verif_resultseleksi");
-    let html = `<h3  class="w3-container">Proses Jurnal ${zonasi.replace("kuota_", "")} </h3>
+    let html =`<div class="w3-center w3-margin-top"><img src="/img/barloading.gif"></div>`;
+    div.innerHTML = html;
+    console.log(zonasi,aa)
+    
+    // `<h3  class="w3-container">Proses Jurnal ${zonasi.replace("kuota_", "")} </h3>
+    
+    // Data Pendaftar yang memilih jalur ${zonasi.replace("kuota_", "")} dengan Daya Tampung / kuota Jalur tersebut sebanyak ${kuota} Calon PDB (Berdasarkan pengaturan Pagu sebelumnya.)
+    // <div class="w3-border w3-center w3-margin w3-padding"><button class="w3-button w3-round-large w3-green" onclick="printSeleksi('tuS_${zonasi}','${aa}')" title="Print Tabel Ini"><i class="fa fa-print"></i> Print </button>
+    // <button class="w3-button w3-round-large w3-blue" onclick="excelSeleksi('tuS_${zonasi}','${aa}')" title="Export Tabel Ini"><i class="fa fa-file-excel-o"></i> Excel </button>
+    // </div>
+    // <table class="w3-table-all garis w3-tiny tuS_${zonasi}"> 
+    // <thead>
+    //     <tr class="w3-centered">
+    //      <th rowspan="2">Prioritas</th> <th rowspan="2">No. Urut</th> <th rowspan="2">ID Pendaftar</th> <th rowspan="2">Nama CPDB</th> <th rowspan="2">Umur</th> <th colspan="5">Alamat</th> <th rowspan="2">Detail</th> </tr> <tr> <th>RT</th> <th>RW</th> <th>Kelurahan</th> <th>Kecamata</th> <th>Kota</th> </tr></thead><tbody>`;
+    // div.innerHTML = `<i class="fa fa-spin fa-spinner"></i>`;
+    let prioritas = objek_settingseleksi;
+    let param = "?action=getdatasheet&tab=respon";
+    fetch(urlppdb + param).then(m => m.json()).then(r => {
+        db_pendaftar = r.records;
+    //start
+     html = `<h3  class="w3-container">Proses Jurnal ${zonasi.replace("kuota_", "")} </h3>
     
     Data Pendaftar yang memilih jalur ${zonasi.replace("kuota_", "")} dengan Daya Tampung / kuota Jalur tersebut sebanyak ${kuota} Calon PDB (Berdasarkan pengaturan Pagu sebelumnya.)
     <div class="w3-border w3-center w3-margin w3-padding"><button class="w3-button w3-round-large w3-green" onclick="printSeleksi('tuS_${zonasi}','${aa}')" title="Print Tabel Ini"><i class="fa fa-print"></i> Print </button>
@@ -5268,9 +5293,10 @@ const cek_real_prioritas = (zonasi) => {
     <thead>
         <tr class="w3-centered">
          <th rowspan="2">Prioritas</th> <th rowspan="2">No. Urut</th> <th rowspan="2">ID Pendaftar</th> <th rowspan="2">Nama CPDB</th> <th rowspan="2">Umur</th> <th colspan="5">Alamat</th> <th rowspan="2">Detail</th> </tr> <tr> <th>RT</th> <th>RW</th> <th>Kelurahan</th> <th>Kecamata</th> <th>Kota</th> </tr></thead><tbody>`;
-    // div.innerHTML = `<i class="fa fa-spin fa-spinner"></i>`;
-    let prioritas = objek_settingseleksi;
-    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
+    
+    //end
+    let db = db_pendaftar.filter(k => k.jalur_cpdb == aa.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
+    console.log(db)
     let count = 0;
     let urut = 1;
     for (let a = 0; a < prioritas.length; a++) {
@@ -5373,6 +5399,8 @@ const cek_real_prioritas = (zonasi) => {
     `;
     // console.log(db);
     div.innerHTML = html;
+    }).catch(er => console.log(er));
+    
     //console.log(count);
 };
 const fn_prioritas_real = (arrObj, objfilter) => {

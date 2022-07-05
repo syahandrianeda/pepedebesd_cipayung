@@ -1,5 +1,9 @@
   var myIndex = 0;
-  const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+//db asli
+  // const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+
+  //dB Trial  
+  const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec";
   //"https://script.google.com/macros/s/AKfycbwoRP0VaqvyQk6maCfku5zOfgxUZVIqOaFO_c8DYDsbjPbgodki1-F90uAdLFntYcSjRQ/exec";
 
   carousel();
@@ -2258,13 +2262,14 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
     let ein = elemensinput[i];
     let keys = ein.getAttribute("data-formulircpdb");
     let val = ein.value;
-    // console.log(keys, val);
+    console.log(keys, val);
       data.append(keys, val)
   };
   // karena ini awal, maka riwayat_pendaftaran dibuat awal-awal:
   // key = "riwayat_pendaftaran"
   let vel = [{"tujuan_mendaftar":id,"id_status":"Perlu Verifikasi","ket_status":"Perlu Verifikasi"}];
       data.append("riwayat_pendaftaran",JSON.stringify(vel));
+      console.log(JSON.stringify(vel))
   let acuan_Zonasi = lacak_zonasi(id);
 
       data.append("patokan_zonasi",acuan_Zonasi);
@@ -2761,8 +2766,8 @@ const pilih_kota = (el, kelas) => {
       
       `;
   } else {
-      html = `<br><label for="cpdb_kota_lainnya">Kota/Kabupaten:</label>
-      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kota_lainnya" id="cpdb_kota_lainnya" oninput="ketik_kapital(this)"/>
+      html = `<br><label for="cpdb_kota">Kota/Kabupaten:</label>
+      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kota" id="cpdb_kota" oninput="ketik_kapital(this)"/>
       <label for="cpdb_kec">Kecamatan:</label>
       <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kec" id="cpdb_kec" oninput="ketik_kapital(this)"/>
       <label for="cpdb_kel">Kelurahan:</label>
@@ -2772,7 +2777,7 @@ const pilih_kota = (el, kelas) => {
       <label for="cpdb_rt">RT</label>
       <input type="number" class="w3-input w3-border"  min="1"  style="width:123px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
       <label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
-      <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"x  oninput="ketik_kapital(this)"/>
+      <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"  oninput="ketik_kapital(this)"/>
       
       File Pendukung:
       
