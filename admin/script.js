@@ -1,7 +1,12 @@
 //dB Asli
 //const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+
 //dB Trial
-const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
+//const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
+//const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
+
+//Db tRIAL edasyahandrian@gmail.comn
+const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec";
 
 let datasekolahkecamatan = [];
     fetch(terminal + "?action=settingPerSekolah")
@@ -3144,6 +3149,7 @@ const cekdataterminal = ()=>{
     
     fetch(urlppdb,{method:"post",body:datakirim})
     .then(m => m.json()).then(r => {
+        console.log(r)
         db_pendaftar = r.records;
             let data = r.records;
             let html = `

@@ -1,11 +1,13 @@
   var myIndex = 0;
 //db asli
-  // const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+//   const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
 
   //dB Trial  
-  const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec";
+//  const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec";
   //"https://script.google.com/macros/s/AKfycbwoRP0VaqvyQk6maCfku5zOfgxUZVIqOaFO_c8DYDsbjPbgodki1-F90uAdLFntYcSjRQ/exec";
 
+// dB Trial akun edasyahandrian@gmail.com
+const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec"
   carousel();
 
   let div_view = document.querySelector(".bataskontendaftar")
@@ -63,83 +65,83 @@
  * idss = spreadsheet
  * 
  */
-  let link = [{
-    "sekolah": "ratujaya1",
-    "kelas": "kuota_ratujaya1",
-    "url": "https://script.google.com/macros/s/AKfycbzpl-CIjAjTVOwlpf7ZKQ34hELzrPupKNF1v94yz9nU4AKY5RfUaMg3pP70lYd3iYkk/exec",
-    "idss": "1U65gnNh7bRfZlD0B3JxZ6B5j6RFgyD77ro67jvrQ1Hg",
-    "urlpddb":"https://script.google.com/macros/s/AKfycbw_CxeurtA5idnQukkl7-xtnFWITXc-tgrqQ7F6OKiKUepV0gWUA5Jl4lR4sBDFC8j6/exec"
-  }, {
-    "sekolah": "ratujaya2",
-    "kelas": "kuota_ratujaya2",
-    "url": "https://script.google.com/macros/s/AKfycbyomW88hiqeaM6EKAr3nul28QoXcukop3E61r9Byf10NJtE3xkybat0v9kqSh3-ySahVA/exec",
-    "idss": "1avLVXKt-LVXs3XB_Q452L0a4-bjmZDEjEr1npKzdigY",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbwBzMzpHXe4tt-t0ZkINwF65cPcPAfonUMAHb3FO7BfXZVSO0drotC_S2HzYnBpJfeGBw/exec"
-  }, {
-    "sekolah": "ponter1",
-    "kelas": "kuota_ponter1",
-    "idss": "10ikKaNupSl6Ssww0KEWw9o8sQJQ1RpA1c3U8po4LYuQ",
-    "url": "https://script.google.com/macros/s/AKfycbyZOmnGVRMZfoopwLIoQ2LeDmayjdP7_wTU53HOBwGfiM_ylU0wKuzJyzGjcJs_9ySmgA/exec",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbyfogeCk3qiRblZA0cnwujJqdHoNKwkHveEfw7WyeFdfDOFL6FuOe0Wf1P-oPVlsBoe/exec"
-  }, {
-    "sekolah": "ponter3",
-    "kelas": "kuota_ponter3",
-    "url": "https://script.google.com/macros/s/AKfycbx4UVsESvnS-HFQOLZ1HPHtuYWI9K1aApAc_yxmDZQpEImXUKNH9ZWL-ex_lmyNppzj/exec",
-    "idss": "1zKMNI-AhN4ziGhZ20p_bMZAOjE50HMBJ6-NG_QqobDc",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbzYMPW4a9VJUVLC5OKjUwYiJYjyaq8HLaih1IWOxTqa04nOyVByLJQIdpLeukZx5py3/exec"
-  }, {
-    "sekolah": "ponter4",
-    "kelas": "kuota_ponter4",
-    "url": "https://script.google.com/macros/s/AKfycbzgtCkGubK9ANlTswcRHzaP-xqQd8lqxZLjT3DkAb1KZ-CJ_b80dNcTMqdcyHUOdACv0A/exec",
-    "idss": "1bKxTClpqJ34IkAo_gVuCl__u6CprEGBMWPJFh5c8KN4",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbyLkRUvG9_gtuBh3UNhICNjifkhOnSj9ObX-EYYX51R3OW81PREN857jHyRTU5WDQm7/exec"
-  }, {
-    "sekolah": "ratujaya3",
-    "kelas": "kuota_ratujaya3",
-    "url": "https://script.google.com/macros/s/AKfycbyZEMq50GvQBFlPTeO06vwI9fpxgGL4wedkYqw8kodK8TFvIejHE5AbPfoS7XPaRvs4jg/exec",
-    "idss": "1AkJ2PYsAGLE6PQu9DMJP48R5NXOxu-ipdueyJC4Akrs",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbwUy4hxy6xB3toKOJp1cvHtS99zJrQ8pfvg1foA9KFUtjdti08rGk-uuyZIX9Fdp87O/exec"
-  }, {
-    "sekolah": "utanjaya",
-    "kelas": "kuota_utanjaya",
-    "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
-    "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
-    "urlppdb":"https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
-  }, {
-    "sekolah": "cipayung1",
-    "kelas": "kuota_cipayung1",
-    "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
-    "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
-    "urlppdb":"https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
-  }, {
-    "sekolah": "cipayung2",
-    "kelas": "kuota_cipayung2",
-    "idss": "10OOIxTrPAakmnYpgKsyQjTf41B-u9T-f6BrPqxTimPY",
-    "url": "https://script.google.com/macros/s/AKfycbw2kv0h79eThXl_20XVSWyZYKeTpCUqBs-Bvlz-q9R6y1FOB-vziybrq-BiaZvhxZ11/exec",
-    "urlppdb":"https://script.google.com/macros/s/AKfycbzyN2wqEuyYfryuBqQg8s2HHNy4ES2aWkuqAtJPO2Gr1Pxn4154o-pNEmgRnQJHOU80/exec"
+  // let link = [{
+  //   "sekolah": "ratujaya1",
+  //   "kelas": "kuota_ratujaya1",
+  //   "url": "https://script.google.com/macros/s/AKfycbzpl-CIjAjTVOwlpf7ZKQ34hELzrPupKNF1v94yz9nU4AKY5RfUaMg3pP70lYd3iYkk/exec",
+  //   "idss": "1U65gnNh7bRfZlD0B3JxZ6B5j6RFgyD77ro67jvrQ1Hg",
+  //   "urlpddb":"https://script.google.com/macros/s/AKfycbw_CxeurtA5idnQukkl7-xtnFWITXc-tgrqQ7F6OKiKUepV0gWUA5Jl4lR4sBDFC8j6/exec"
+  // }, {
+  //   "sekolah": "ratujaya2",
+  //   "kelas": "kuota_ratujaya2",
+  //   "url": "https://script.google.com/macros/s/AKfycbyomW88hiqeaM6EKAr3nul28QoXcukop3E61r9Byf10NJtE3xkybat0v9kqSh3-ySahVA/exec",
+  //   "idss": "1avLVXKt-LVXs3XB_Q452L0a4-bjmZDEjEr1npKzdigY",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbwBzMzpHXe4tt-t0ZkINwF65cPcPAfonUMAHb3FO7BfXZVSO0drotC_S2HzYnBpJfeGBw/exec"
+  // }, {
+  //   "sekolah": "ponter1",
+  //   "kelas": "kuota_ponter1",
+  //   "idss": "10ikKaNupSl6Ssww0KEWw9o8sQJQ1RpA1c3U8po4LYuQ",
+  //   "url": "https://script.google.com/macros/s/AKfycbyZOmnGVRMZfoopwLIoQ2LeDmayjdP7_wTU53HOBwGfiM_ylU0wKuzJyzGjcJs_9ySmgA/exec",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbyfogeCk3qiRblZA0cnwujJqdHoNKwkHveEfw7WyeFdfDOFL6FuOe0Wf1P-oPVlsBoe/exec"
+  // }, {
+  //   "sekolah": "ponter3",
+  //   "kelas": "kuota_ponter3",
+  //   "url": "https://script.google.com/macros/s/AKfycbx4UVsESvnS-HFQOLZ1HPHtuYWI9K1aApAc_yxmDZQpEImXUKNH9ZWL-ex_lmyNppzj/exec",
+  //   "idss": "1zKMNI-AhN4ziGhZ20p_bMZAOjE50HMBJ6-NG_QqobDc",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbzYMPW4a9VJUVLC5OKjUwYiJYjyaq8HLaih1IWOxTqa04nOyVByLJQIdpLeukZx5py3/exec"
+  // }, {
+  //   "sekolah": "ponter4",
+  //   "kelas": "kuota_ponter4",
+  //   "url": "https://script.google.com/macros/s/AKfycbzgtCkGubK9ANlTswcRHzaP-xqQd8lqxZLjT3DkAb1KZ-CJ_b80dNcTMqdcyHUOdACv0A/exec",
+  //   "idss": "1bKxTClpqJ34IkAo_gVuCl__u6CprEGBMWPJFh5c8KN4",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbyLkRUvG9_gtuBh3UNhICNjifkhOnSj9ObX-EYYX51R3OW81PREN857jHyRTU5WDQm7/exec"
+  // }, {
+  //   "sekolah": "ratujaya3",
+  //   "kelas": "kuota_ratujaya3",
+  //   "url": "https://script.google.com/macros/s/AKfycbyZEMq50GvQBFlPTeO06vwI9fpxgGL4wedkYqw8kodK8TFvIejHE5AbPfoS7XPaRvs4jg/exec",
+  //   "idss": "1AkJ2PYsAGLE6PQu9DMJP48R5NXOxu-ipdueyJC4Akrs",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbwUy4hxy6xB3toKOJp1cvHtS99zJrQ8pfvg1foA9KFUtjdti08rGk-uuyZIX9Fdp87O/exec"
+  // }, {
+  //   "sekolah": "utanjaya",
+  //   "kelas": "kuota_utanjaya",
+  //   "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
+  //   "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
+  // }, {
+  //   "sekolah": "cipayung1",
+  //   "kelas": "kuota_cipayung1",
+  //   "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
+  //   "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
+  // }, {
+  //   "sekolah": "cipayung2",
+  //   "kelas": "kuota_cipayung2",
+  //   "idss": "10OOIxTrPAakmnYpgKsyQjTf41B-u9T-f6BrPqxTimPY",
+  //   "url": "https://script.google.com/macros/s/AKfycbw2kv0h79eThXl_20XVSWyZYKeTpCUqBs-Bvlz-q9R6y1FOB-vziybrq-BiaZvhxZ11/exec",
+  //   "urlppdb":"https://script.google.com/macros/s/AKfycbzyN2wqEuyYfryuBqQg8s2HHNy4ES2aWkuqAtJPO2Gr1Pxn4154o-pNEmgRnQJHOU80/exec"
 
 
-  }, {
-    "sekolah": "cipayung3",
-    "kelas": "kuota_cipayung3",
-    "idss": "1G3fff9ybmPwGVFaR_oqunI0BMTZ1b-75HMAsk8QbA6c",
-    "url": "https://script.google.com/macros/s/AKfycbzWHfR_CcExF9FWANc5nakR1-4iHEpleW6zPdU0qjHt9_tiBqt_tYH9yCXTUG7C0uLKmQ/exec"
-  }, {
-    "sekolah": "cipayung4",
-    "kelas": "kuota_cipayung4",
-    "idss": "1YTBSa8rurPsJQKb-qRLIRw3b7H8RXmxfcBQLtrqosyk",
-    "url": "https://script.google.com/macros/s/AKfycbzgk2nUK447BUNrZ729BH9vCU1DYnE4U1pT0_myBxz6n_LUVZiRgFp4v6wtXMvN9pN3/exec"
-  }, {
-    "sekolah": "citayam1",
-    "kelas": "kuota_citayam1",
-    "idss": "1Zs7AU-lWKvXUrwjgqTHlTe0EE6jCkafiG2yDCJFRQDI",
-    "url": "https://script.google.com/macros/s/AKfycbx_QKugHrnQHwFZAVrpcvI7FPCEpnMUfM_nJyLIPvREySE7j05J5T37n2yJu7ZRjytn/exec"
-    }, {
-    "sekolah": "citayam4",
-    "kelas": "kuota_citayam4",
-    "idss": "1e2KCLdvmD7js72Yrb6h3PMjos4bfnpGFMdiqXq0lKeE",
-    "url": "https://script.google.com/macros/s/AKfycby5m9iXQt_fYT61eezYS9I2knGFC3aLtJyX3OdL39IciXV1XyVHU9N1i1cBYPVaiFRi/exec"
-  }]
+  // }, {
+  //   "sekolah": "cipayung3",
+  //   "kelas": "kuota_cipayung3",
+  //   "idss": "1G3fff9ybmPwGVFaR_oqunI0BMTZ1b-75HMAsk8QbA6c",
+  //   "url": "https://script.google.com/macros/s/AKfycbzWHfR_CcExF9FWANc5nakR1-4iHEpleW6zPdU0qjHt9_tiBqt_tYH9yCXTUG7C0uLKmQ/exec"
+  // }, {
+  //   "sekolah": "cipayung4",
+  //   "kelas": "kuota_cipayung4",
+  //   "idss": "1YTBSa8rurPsJQKb-qRLIRw3b7H8RXmxfcBQLtrqosyk",
+  //   "url": "https://script.google.com/macros/s/AKfycbzgk2nUK447BUNrZ729BH9vCU1DYnE4U1pT0_myBxz6n_LUVZiRgFp4v6wtXMvN9pN3/exec"
+  // }, {
+  //   "sekolah": "citayam1",
+  //   "kelas": "kuota_citayam1",
+  //   "idss": "1Zs7AU-lWKvXUrwjgqTHlTe0EE6jCkafiG2yDCJFRQDI",
+  //   "url": "https://script.google.com/macros/s/AKfycbx_QKugHrnQHwFZAVrpcvI7FPCEpnMUfM_nJyLIPvREySE7j05J5T37n2yJu7ZRjytn/exec"
+  //   }, {
+  //   "sekolah": "citayam4",
+  //   "kelas": "kuota_citayam4",
+  //   "idss": "1e2KCLdvmD7js72Yrb6h3PMjos4bfnpGFMdiqXq0lKeE",
+  //   "url": "https://script.google.com/macros/s/AKfycby5m9iXQt_fYT61eezYS9I2knGFC3aLtJyX3OdL39IciXV1XyVHU9N1i1cBYPVaiFRi/exec"
+  // }]
   const arraybulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
 
 let classCollection =[
@@ -1861,7 +1863,7 @@ const html_formulir = (jalur,id,namasekolah) => {
                     html +=`<label for="cpdb_no_kk">No Kartu Keluarga CPDB</label>
                               <input type="text" data-formulircpdb="cpdb_no_kk" id="cpdb_no_kk" class="w3-input w3-border"/><br><br>
                       <label for="cpdb_kota">Kota(atau Kabupaten)</label>
-                          <select data-formulircpdb="cpdb_kota" id="cpdb_kota" class="w3-select w3-border" onchange="pilih_kota(this,'kondisi_alamat')">
+                          <select id="cpdb_kota" class="w3-select w3-border" onchange="pilih_kota(this,'kondisi_alamat')">
                             <option value="">Pilih Kota Tinggal</option>
                             <option value="KOTA DEPOK">KOTA DEPOK</option>
                             <option value="Lainnya">LAINNYA</option>
@@ -2257,6 +2259,7 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
     formulircpdbawal.classList.add("w3-hide")
   }
   let data = new FormData();
+  let objektes = {}
   //data.append("action", "cpdbdaftarawal");
   for (let i = 0; i < elemensinput.length; i++) {
     let ein = elemensinput[i];
@@ -2264,30 +2267,41 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
     let val = ein.value;
     console.log(keys, val);
       data.append(keys, val)
+      objektes[keys] = val;//
   };
   // karena ini awal, maka riwayat_pendaftaran dibuat awal-awal:
   // key = "riwayat_pendaftaran"
   let vel = [{"tujuan_mendaftar":id,"id_status":"Perlu Verifikasi","ket_status":"Perlu Verifikasi"}];
       data.append("riwayat_pendaftaran",JSON.stringify(vel));
-      console.log(JSON.stringify(vel))
-  let acuan_Zonasi = lacak_zonasi(id);
+      //console.log(JSON.stringify(vel))
+      objektes['riwayat_pendaftaran'] = JSON.stringify(vel);
 
-      data.append("patokan_zonasi",acuan_Zonasi);
+  //let acuan_Zonasi = //lacak_zonasi(id);
+
+      //data.append("patokan_zonasi",acuan_Zonasi);
+      
+      //objektes["patokan_zonasi"]= acuan_Zonasi;
 
 
   divform.innerHTML = `<img src="/img/barloading.gif" alt="proses loading"> ...`;
   for (let i = 0; i < elemensinput.length; i++) {
     let ein = elemensinput[i];
-    ein.value = "";
+    //awa ini dihapus 
+   // ein.value = "";
   };
   let dst = document.querySelector(".cekformulircpdbawal");
   dst.innerHTML = "";
+  console.log("objektes:")
+  console.log(objektes)
+  console.log("lacakzonasi", lacak_zonasi(id));//
+  console.log(id, urlppdb);
+  
   fetch(urlppdb+"?action=cpdbdaftarawal", 
       { method: "post", 
       body: data 
     }).then(m => m.json())
       .then(r => {
-          
+          console.log(r)
           cekformulircpdbawal.innerHTML = "";
           cariUpdate = r.objek;
           console.log(cariUpdate);
@@ -2366,75 +2380,11 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
           html +=`</table><br></div><div class="w3-center">`;
           html +=`<button onclick="printA5('statusformulir')" class="w3-button w3-pale-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button><button onclick="document.getElementById('modalFormulirPendaftaran').style.display='none';" class="w3-button w3-pale-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>`;
           divform.innerHTML = html;
-
-
-          // let divform2_innerHTML = `
-          // Terimakasih telah mendaftar di ${val_namasekolah}. Data Anda telah berhasil terkirim. Berikut data pokok yang wajib Anda ketahui:
-          // <div id="statusformulir" style="overflow-x:auto">
-          // <table class="w3-table-all garis">
-          // <tr class="w3-aqua w3-centered">
-          //     <td colspan="2" class="w3-center">Status Pendaftaran</td>
-          // </tr>
-          // <tr>
-          //     <td>PILIHAN JALUR</td>
-          //     <td>${r.objek[0].jalur_cpdb}</td>
-          // </tr>
-          //  <tr>
-          //     <td>ID PENDAFTAR</td>
-          //     <td>${r.objek[0].id_pendaftar}</td>
-          // </tr>
-          // <tr>
-          //     <td>Status Pendaftaran</td>
-          //     <td class="w3-large">${r.objek[0].id_status}</td>
-          // </tr>
-          // <tr>
-          //     <td>Waktu Pendaftaran</td>
-          //     <td>${tanggalfulllengkap(tgldaftar)}</td>
-          // </tr>
-          // <tr class="w3-aqua w3-centered">
-          //     <td colspan="2">Data Pokok Pendaftar</td>
-          // </tr>
-          // <tr>
-          //     <td>NAMA CALON PDB</td>
-          //     <td>${r.objek[0].nama_cpdb}</td>
-          // </tr>
-          // <tr>
-          //     <td>Skor Umur</td>
-          //     <td>${r.objek[0].cpdb_umur}</td>
-          // </tr>
-          // <tr>
-          //     <td>Alamat:</td>
-          //     <td> Kota/Kab :${r.objek[0].cpdb_kota}<br/><br/>
-          //         Kec. :${r.objek[0].cpdb_kec}<br/><br/>
-          //         Kelurahan/Desa :${r.objek[0].cpdb_kel}<br/><br/>
-          //         RW :${r.objek[0].cpdb_rw}<br/><br/>
-          //         RT :${r.objek[0].cpdb_rt}<br/><br/>
-              
-          //     </td>
-          // </tr>
-          
-          // <tr class="w3-aqua w3-centered">
-          //     <td colspan="2">Akun Fitur Pesan <br/><sub>Gunakan username dan password berikut untuk menggunakan fitur pesan</sub></td>
-          // </tr>
-          // <tr>
-          //     <td>Username: ${r.objek[0].id_pendaftar}</td>
-          //     <td>Password: ${r.objek[0].ortu_nama_ayah}</td>
-          // </tr>
-          // <tr class="w3-pale-green">
-          // <td colspan="2">
-          //     Tahapan selanjutnya, Silakan Anda cek di Menu <b class="w3-red">Cari</b> untuk melihat/mengetahui data telah dikonfirmasi oleh Tim Verifikasi/Panitia PPDB.
-          //     Data yang telah diverifikasi akan masuk ke tahap Seleksi pada menu <b class="w3-red">SELEKSI</b>.
-          // </td>
-          // </tr>
-          // </table></div>
-          // <div class="w3-center">
-          // <button onclick="printA5('statusformulir')" class="w3-button w3-blue w3-round-large"><i class="fa fa-print"></i> Cetak</button>            
-          // <button onclick="fn_close_daftar()" class="w3-button w3-red w3-round-large"><i class="fa fa-times-rectangle-o"></i> Tutup</button>
-          // </div>`
       }).catch(er => {
-          console.log(er);
-          divform.innerHTML = "Maaf, Trafik jaringan penuh. Silakan ulangi sesi Anda."
+        console.log(er);
+        divform.innerHTML = "Maaf, terjadi trafik " + er;
       })
+
 
 }
 const kirimformulirdikembalikan = (el,id,row,idd) => { // ini untuk orang yang pertama kali daftar....
@@ -2645,11 +2595,11 @@ const lacak_zonasi = (id) =>{
   let kecamatan_sekolah = acuansekolah.alamat_kecamatan;
   let kota_sekolah = acuansekolah.alamat_kota;
 
-  let rt_cpdb = document.querySelector("[data-formulircpdb='cpdb_rt']")
-  let rw_cpdb = document.querySelector("[data-formulircpdb='cpdb_rw']")
-  let kelurahan_cpdb = document.querySelector("[data-formulircpdb='cpdb_kel']")
-  let kecamatan_cpdb = document.querySelector("[data-formulircpdb='cpdb_kec']")
-  let kota_cpdb = document.querySelector("[data-formulircpdb='cpdb_kota']")
+  let rt_cpdb = document.querySelector("[data-formulircpdb=cpdb_rt]");//data-formulircpdb
+  let rw_cpdb = document.querySelector("[data-formulircpdb=cpdb_rw]")
+  let kelurahan_cpdb = document.querySelector("[data-formulircpdb=cpdb_kel]")
+  let kecamatan_cpdb = document.querySelector("[data-formulircpdb=cpdb_kec]")
+  let kota_cpdb = document.querySelector("[data-formulircpdb=cpdb_kota]")
   let ket = "";
   if(rt_cpdb == null ||  rw_cpdb == null || kelurahan_cpdb == null || kecamatan_cpdb == null || kota_cpdb == null){
     ket = "Alamat tidak lengkap";
@@ -2748,7 +2698,10 @@ const pilih_kota = (el, kelas) => {
   let html = "";
   let indek = el.selectedIndex;
   if (options[indek].value == "KOTA DEPOK") {
-      html = `<br><label for="cpdb_kec">Kecamatan:</label>
+      html +=`<label for="cpdb_kota" class="w3-tiny">Kota/Kabupaten yang dipilih:</label>
+      <input type="text" class="w3-input w3-border w3-tiny" data-formulircpdb="cpdb_kota" value="KOTA DEPOK" disabled/>`
+
+      html += `<br><label for="cpdb_kec">Kecamatan:</label>
       <select class="w3-border w3-select" id="cpdb_kec" data-formulircpdb="cpdb_kec" onchange="pilih_kec(this,'kondisi_kel')">
       <option value="" selected>Pilih Kecamatan</option>
       <option value="CIPAYUNG" >CIPAYUNG</option>
@@ -2773,9 +2726,9 @@ const pilih_kota = (el, kelas) => {
       <label for="cpdb_kel">Kelurahan:</label>
       <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel" id="cpdb_kel" oninput="ketik_kapital(this)"/>
       <label for="cpdb_rw">RW</label>
-      <input type="number" class="w3-input w3-border"  min="1" style="width:123px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
+      <input type="number" class="w3-input w3-border" data-formulircpdb="cpdb_rw"  min="1" style="width:123px" id="cpdb_rw" >
       <label for="cpdb_rt">RT</label>
-      <input type="number" class="w3-input w3-border"  min="1"  style="width:123px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
+      <input type="number" class="w3-input w3-border" data-formulircpdb="cpdb_rt"   min="1"  style="width:123px" id="cpdb_rt" >
       <label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
       <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"  oninput="ketik_kapital(this)"/>
       
@@ -2789,7 +2742,7 @@ const pilih_kota = (el, kelas) => {
                   <td class="preview_kk">Preview Akta</td>
                   </tr>
                   <tr>
-                  <td><input type="text" class="cpdb_id_file_kk w3-input" id="cpdb_id_file_kk" data-formulircpdb="cpdb_id_file_kk" disabled></input>
+                  <td><input type="text"  class="cpdb_id_file_kk w3-input" id="cpdb_id_file_kk" data-formulircpdb="cpdb_id_file_kk" disabled></input>
                   </td>
               </tr>
               <tr>
@@ -2798,10 +2751,8 @@ const pilih_kota = (el, kelas) => {
                   <td><input type="text" class="cpdb_id_file_domisili w3-input" id="cpdb_id_file_domisili" data-formulircpdb="cpdb_id_file_domisili" disabled></input>
                   </td>
               </tr>
-              </table>
-
-      `;
-
+              </table>`;
+    document.querySelector(".kondisi_kel").innerHTML = "";
 
   }
   div.innerHTML = html;
@@ -2813,7 +2764,7 @@ const pilih_kec = (el, kelas) => {
   let indek = el.selectedIndex;
   if (options[indek].value == "CIPAYUNG") {
       html = `<br><label for="cpdb_kel">Kelurahan:</label>
-      <select class="w3-border w3-select" id="cpdb_kel" data-formulircpdb="cpdb_kel" >
+      <select class="w3-border w3-select" data-formulircpdb="cpdb_kel" id="cpdb_kel" >
       <option value="" >Pilih Kelurahan</option>
       <option value="CIPAYUNG" >CIPAYUNG</option>
       <option value="RATUJAYA" >RATUJAYA</option>
@@ -2822,11 +2773,11 @@ const pilih_kec = (el, kelas) => {
       <option value="CIPAYUNG JAYA">CIPAYUNG JAYA</option>
       </select><br>
       <label for="cpdb_rw">RW</label>
-      <input type="number" class="w3-input w3-border"  min="1" style="width:50px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
+      <input type="number" class="w3-input w3-border"  min="1" style="width:50px" data-formulircpdb="cpdb_rw" id="cpdb_rw">
       <br><label for="cpdb_rt">RT</label>
-      <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
+      <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" data-formulircpdb="cpdb_rt" id="cpdb_rt">
       <br><label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
-      <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"x  oninput="ketik_kapital(this)"/>
+      <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border"   oninput="ketik_kapital(this)"/>
       <br>File Pendukung:
               <ul class="w3-ul"><li>1. Kartu Keluarga <label for="up_kk" class="w3-button w3-round w3-green w3-small"><i class="fa fa-upload"></i> Upload </label> </li></ul>
               <table class="w3-table-all w3-tiny">
@@ -2840,11 +2791,11 @@ const pilih_kec = (el, kelas) => {
       `;
   } else {
       html = `<br><label for="cpdb_kel">Kelurahan:</label>
-      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel" id="cpdb_kel" oninput="ketik_kapital(this)"/>
+      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel"  id="cpdb_kel" oninput="ketik_kapital(this)"/>
       <label for="cpdb_rw">RW</label>
-      <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" id="cpdb_rw" data-formulircpdb="cpdb_rw">
+      <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" data-formulircpdb="cpdb_rw" id="cpdb_rw" >
       <label for="cpdb_rt">RT</label>
-      <input type="number" class="w3-input w3-border"  min="1" style="width:50px" id="cpdb_rt" data-formulircpdb="cpdb_rt">
+      <input type="number" class="w3-input w3-border"  min="1" style="width:50px" data-formulircpdb="cpdb_rt" id="cpdb_rt" >
       <label for="cpdb_alamat_jalan">Alamat Jalan/Komplek</label>
       <input type="text" id="cpdb_alamat_jalan" data-formulircpdb="cpdb_alamat_jalan" class="w3-input w3-border" oninput="ketik_kapital(this)"/>
       File Pendukung:
@@ -2996,6 +2947,8 @@ const caridatapendaftar = () => {
           // console.log(r);
           let datarest = r.records;
           cariUpdate = r.records;
+          
+          
           let html = `<table class="w3-table-all garis jsondatacari w3-small"><thead>
           <tr>
               <th>Nama</th>
@@ -3004,7 +2957,8 @@ const caridatapendaftar = () => {
               <th>Keterangan</th>
               <th>Detail</th>
           </tr>
-          </thead><tbody>`
+          </thead><tbody>`;
+          
           let filter = datarest.filter(k => k[kriteria1].indexOf(v_input) > -1);
           if (filter.length == 0) {
               html += `<tr><td colspan="3" class="w3-centered">Data Yang Anda cari tidak ditemukan</td></tr>`;
@@ -3463,11 +3417,13 @@ const get_Seleksi = async (urllogin, urlppdb, idss, el) => {
   html += `</tbody></table></div>`;
   //html+=`<p class="w3-tiny">Prioritas adalah penjurnalan berdasarkan kriteria rentang umur tertentu dan zonasi pendaftar. Penentuan kriteria prioritas disesuaikan dengan Perwal Kota Depok No. 17 Tahun 2021 dan Rapat dengan Dewan Komite</p>`;
   let bol = jalur_api[0]["publikasi_seleksi_" + teks];
+  console.log(teks);
   //console.log(bol);
   if (bol) {
       divin.innerHTML = html;
   } else {
-      divin.innerHTML = `<strong>Mohon maaf, Sistem seleksi tidak dipublikasikan</strong>`;
+      let tambahanhtml = jalur_api[0]["pesan_publikasi_"+teks]
+      divin.innerHTML = `<strong>Mohon maaf, Sistem seleksi tidak dipublikasikan. ${tambahanhtml}</strong>`;
 
   }
 
@@ -3721,24 +3677,33 @@ const cekdataT = async (id) => {
   mod_teks.innerHTML = `<div class="w3-center w3-margin"><img src="/img/barloading.gif"></div>`;
   let param = "?action=getAllDataTerminal";
   fetch(terminal+"?action=panggildatasatuanak&id_cpdb="+id)
+  // fetch(terminal+param)
   .then(m => m.json()).then(r => {
-    console.log(r)
+    //console.log(r)
+
     let lengh = r.records.length;
     let dataanak = r.records[lengh-1];
-    console.log(dataanak)
+    
+    
     let sekolahtujuan = dataanak.tujuan_mendaftar;
     let namasekolah = db_settingppdbsekolah.filter(s => s.id_sekolah == sekolahtujuan)[0].nama_sekolah;//
     console.log(namasekolah);//[0].nama_sekolah;
     let datariwayat = JSON.parse(dataanak.riwayat_pendaftaran);
     let html ="";
-        html +=`<div class="w3-card-4 w3-padding w3-small">`;
+        html +=`<div class="w3-card-4 w3-padding w3-small" styhle="overflow-x:auto">`;
         html +=`<h5 class="w3-center">Data Pribadi Siswa</h5>`;
-        html += `<table class="w3-table-all" style="width:300px;margin:0 auto">`;
+        html += `<table class="w3-table-all" style="width:500px;margin:0 auto">`;
           html +=`<tr>`;
-            html +=`<td>Nama CPDB</td>`;
+            html +=`<td>NIK CPDB</td>`;
             html +=`<td style="width:1px">:</td>`;
-            html +=`<td>${dataanak.nama_cpdb}</td>`;
+            html +=`<td>${dataanak.cpdb_nik}</td>`;
           html +=`</tr>`;
+          
+          html +=`<tr>`;
+            html +=`<td>Skor Umur</td>`;
+            html +=`<td style="width:1px">:</td>`;
+            html +=`<td>${dataanak.cpdb_umur}</td>`;
+          html +=`</tr>`; 
           html +=`<tr>`;
             html +=`<td>Skor Umur</td>`;
             html +=`<td style="width:1px">:</td>`;
