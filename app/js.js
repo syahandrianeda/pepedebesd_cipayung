@@ -1,13 +1,13 @@
   var myIndex = 0;
 //db asli
-//   const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+  const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
 
   //dB Trial  
 //  const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec";
   //"https://script.google.com/macros/s/AKfycbwoRP0VaqvyQk6maCfku5zOfgxUZVIqOaFO_c8DYDsbjPbgodki1-F90uAdLFntYcSjRQ/exec";
 
 // dB Trial akun edasyahandrian@gmail.com
-const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec"
+// const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec"
   carousel();
 
   let div_view = document.querySelector(".bataskontendaftar")
@@ -246,7 +246,7 @@ const getDataPagu = (id, hh, kelas) => {
         let result = r.setting;
         let data = result.filter(s => s.id_sekolah == id);
         
-        div.innerHTML = data[0].total_cpdb + " Murid";
+        div.innerHTML = "";//data[0].total_cpdb + " Murid";
         h.innerHTML = data[0].nama_sekolah.toUpperCase();
 
       })
@@ -261,6 +261,10 @@ for (let a = 0; a < classCollection.length; a++) {
 }
 
 const formPendaftaranCPDB = ()=>{
+  if(new Date().getTime()>new Date("2022-07-07")){
+    alert("Maaf, pendaftaran sudah ditutup");
+    return
+  }
   let modal = document.getElementById("modalFormulirPendaftaran");
   let tambahanformformulircpdbawal = document.querySelector(".tambahanformformulircpdbawal");
   let cekformulircpdbawal = document.querySelector(".cekformulircpdbawal");
@@ -335,7 +339,7 @@ const periksaNIKCPDB = (el)=>{
   fetch(terminal,{method:"post",body:ceknik})
   .then(m => m.json())
   .then(r =>{ 
-    console.log(r);
+    //console.log(r);
     // let bolehlanjut = r.bolehlanjut;
     let bolehlanjut = r.result;
     if(bolehlanjut == "tidak ditemukan"){
@@ -350,7 +354,7 @@ const periksaNIKCPDB = (el)=>{
         html_dilaranglanjutdaftar(data);
       }else{
         html_maucobalagidaftar(data, cekid_status)
-        console.log(cekid_status)
+        //console.log(cekid_status)
       }
 
     }
@@ -374,7 +378,7 @@ const html_maucobalagidaftar = (data, idstts) =>{
   
   let divform = document.querySelector(".tambahanformformulircpdbawal");
   let html ="";//[//] =`<div class="w3-card-4 w3-container w3-pale-red w3-margin-top">`;
-  console.log(data);
+  //console.log(data);
   if(idstts == "Dikembalikan"){
     let id = data.tujuan_mendaftar;
 
@@ -1184,7 +1188,7 @@ const cpdbmemilihsekolah_daripilihanPernahdaftar = (id, id_cpdb) =>{
 }
 const html_formulirPernahdaftar = (id_cpdb,teksjalur,id,namasekolah) =>{
   let fo = document.querySelectorAll(".classhtml_formulirPernahdaftar");
-  console.log(fo.length);
+  //console.log(fo.length);
   for(let i = 0 ; i < fo.length ; i++){
     let fos = fo[i];
     fos.setAttribute("onclick","alert('Anda sudah memiih jalur CPDB')");
@@ -1705,7 +1709,7 @@ const kirimformulirPernahdaftar = (th,id, id_cpdb)=>{
 
   fetch(link, {method:"post",body:datakirim})
   .then(m => m.json()).then(r => {
-    console.log(r);
+    //console.log(r);
     divcek.innerHTML = "";
           cariUpdate = r.objek;
           let tgldaftar = new Date(r.objek[0].waktu_daftar);
@@ -2258,29 +2262,41 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
   if(formulircpdbawal.className.indexOf("w3-hide")==-1){
     formulircpdbawal.classList.add("w3-hide")
   }
-  let data = new FormData();
   let objektes = {}
   //data.append("action", "cpdbdaftarawal");
   for (let i = 0; i < elemensinput.length; i++) {
     let ein = elemensinput[i];
     let keys = ein.getAttribute("data-formulircpdb");
     let val = ein.value;
-    console.log(keys, val);
-      data.append(keys, val)
-      objektes[keys] = val;//
+    //console.log(keys, val);
+    //data.append(keys, val)
+    objektes[keys] = val;//
   };
   // karena ini awal, maka riwayat_pendaftaran dibuat awal-awal:
   // key = "riwayat_pendaftaran"
   let vel = [{"tujuan_mendaftar":id,"id_status":"Perlu Verifikasi","ket_status":"Perlu Verifikasi"}];
-      data.append("riwayat_pendaftaran",JSON.stringify(vel));
-      //console.log(JSON.stringify(vel))
-      objektes['riwayat_pendaftaran'] = JSON.stringify(vel);
-
+  // data.append("riwayat_pendaftaran",JSON.stringify(vel));
+  //console.log(JSON.stringify(vel))
+  objektes['riwayat_pendaftaran'] = JSON.stringify(vel);
+  
   //let acuan_Zonasi = //lacak_zonasi(id);
+  
+  //data.append("patokan_zonasi",acuan_Zonasi);
+  
+  //objektes["patokan_zonasi"]= acuan_Zonasi;
+  
+  let data = new FormData();
+  let kOb = Object.keys(objektes);
+  for(let j = 0 ; j < kOb.length ; j++){
+    let k = kOb[j];
+    let v = objektes[k]
+    if(k == "tujuan_mendaftar"){
 
-      //data.append("patokan_zonasi",acuan_Zonasi);
-      
-      //objektes["patokan_zonasi"]= acuan_Zonasi;
+    }
+    data.append(k, v)
+  }
+  //data.append("id_status","Perlu Verifikasi")
+  //data.append("ket_status","Perlu Verifikasi")
 
 
   divform.innerHTML = `<img src="/img/barloading.gif" alt="proses loading"> ...`;
@@ -2291,20 +2307,20 @@ const kirimformulir = (el,id) => { // ini untuk orang yang pertama kali daftar..
   };
   let dst = document.querySelector(".cekformulircpdbawal");
   dst.innerHTML = "";
-  console.log("objektes:")
-  console.log(objektes)
-  console.log("lacakzonasi", lacak_zonasi(id));//
-  console.log(id, urlppdb);
-  
-  fetch(urlppdb+"?action=cpdbdaftarawal", 
+  // console.log("objektes:")
+  // console.log(objektes)
+  // //console.log("lacakzonasi", lacak_zonasi(id));//
+  // console.log(id, urlppdb);
+  data.append("action","cpdbdaftarawal")
+  fetch(urlppdb, 
       { method: "post", 
       body: data 
     }).then(m => m.json())
       .then(r => {
-          console.log(r)
+          //console.log(r)
           cekformulircpdbawal.innerHTML = "";
           cariUpdate = r.objek;
-          console.log(cariUpdate);
+          //console.log(cariUpdate);
           let tgldaftar = new Date();
           let html = `<div id="statusformulir" style="overflow-x:auto">`;
           html +=`<table style="width:98%;margin:0 auto;font-size:12px">`;
@@ -2428,10 +2444,10 @@ const kirimformulirdikembalikan = (el,id,row,idd) => { // ini untuk orang yang p
         let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id)[0];
         updateRiwayat.id_status = "Perlu Verifikasi";
         updateRiwayat.ket_status = "Perlu Verifikasi";
-        console.log(updateRiwayat);
+        // console.log(updateRiwayat);
         
         let newState = riwayat.map(obj => obj.tujuan_mendaftar == id ?  Object.assign({},obj, updateRiwayat): obj);
-        console.log(newState);
+        // console.log(newState);
         //dt.riwayat_pendaftaran = JSON.stringify(newState)
         //console.log(dt);
         // dataverif.riwayat_pendaftaran = JSON.stringify(newState)
@@ -2471,7 +2487,7 @@ const kirimformulirdikembalikan = (el,id,row,idd) => { // ini untuk orang yang p
       .then(r => {
           
           cekformulircpdbawal.innerHTML = "";
-          console.log(r)
+          // console.log(r)
           cariUpdate = r.objek;
           let tgldaftar = new Date(r.objek[0].waktu_daftar);
           let html = `<div id="statusformulir" style="overflow-x:auto">`;
@@ -2603,7 +2619,7 @@ const lacak_zonasi = (id) =>{
   let ket = "";
   if(rt_cpdb == null ||  rw_cpdb == null || kelurahan_cpdb == null || kecamatan_cpdb == null || kota_cpdb == null){
     ket = "Alamat tidak lengkap";
-    console.log(rt_cpdb, rw_cpdb, kelurahan_cpdb, kecamatan_cpdb, kota_cpdb)
+    // console.log(rt_cpdb, rw_cpdb, kelurahan_cpdb, kecamatan_cpdb, kota_cpdb)
   }else{
 
     if(rt_sekolah == rt_cpdb.value && rw_sekolah == rw_cpdb.value  && kelurahan_sekolah == kelurahan_cpdb.value && kecamatan_sekolah == kecamatan_cpdb.value && kota_sekolah == kota_cpdb.value){
@@ -2702,7 +2718,7 @@ const pilih_kota = (el, kelas) => {
       <input type="text" class="w3-input w3-border w3-tiny" data-formulircpdb="cpdb_kota" value="KOTA DEPOK" disabled/>`
 
       html += `<br><label for="cpdb_kec">Kecamatan:</label>
-      <select class="w3-border w3-select" id="cpdb_kec" data-formulircpdb="cpdb_kec" onchange="pilih_kec(this,'kondisi_kel')">
+      <select class="w3-border w3-select"  data-formulircpdb="cpdb_kec" onchange="pilih_kec(this,'kondisi_kel')">
       <option value="" selected>Pilih Kecamatan</option>
       <option value="CIPAYUNG" >CIPAYUNG</option>
       <option value="CILODONG" >CILODONG</option>
@@ -2720,9 +2736,9 @@ const pilih_kota = (el, kelas) => {
       `;
   } else {
       html = `<br><label for="cpdb_kota">Kota/Kabupaten:</label>
-      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kota" id="cpdb_kota" oninput="ketik_kapital(this)"/>
+      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kota" oninput="ketik_kapital(this)"/>
       <label for="cpdb_kec">Kecamatan:</label>
-      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kec" id="cpdb_kec" oninput="ketik_kapital(this)"/>
+      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kec"  oninput="ketik_kapital(this)"/>
       <label for="cpdb_kel">Kelurahan:</label>
       <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel" id="cpdb_kel" oninput="ketik_kapital(this)"/>
       <label for="cpdb_rw">RW</label>
@@ -2764,7 +2780,7 @@ const pilih_kec = (el, kelas) => {
   let indek = el.selectedIndex;
   if (options[indek].value == "CIPAYUNG") {
       html = `<br><label for="cpdb_kel">Kelurahan:</label>
-      <select class="w3-border w3-select" data-formulircpdb="cpdb_kel" id="cpdb_kel" >
+      <select class="w3-border w3-select" data-formulircpdb="cpdb_kel" >
       <option value="" >Pilih Kelurahan</option>
       <option value="CIPAYUNG" >CIPAYUNG</option>
       <option value="RATUJAYA" >RATUJAYA</option>
@@ -2791,7 +2807,7 @@ const pilih_kec = (el, kelas) => {
       `;
   } else {
       html = `<br><label for="cpdb_kel">Kelurahan:</label>
-      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel"  id="cpdb_kel" oninput="ketik_kapital(this)"/>
+      <input type="text" class="w3-input w3-border" data-formulircpdb="cpdb_kel"  oninput="ketik_kapital(this)"/>
       <label for="cpdb_rw">RW</label>
       <input type="number" class="w3-input w3-border"  min="1"  style="width:50px" data-formulircpdb="cpdb_rw" id="cpdb_rw" >
       <label for="cpdb_rt">RT</label>
@@ -2856,7 +2872,7 @@ function formatBytes(a, b = 2) {
 };
 const upload_file = (kelas, param, tipe) => {
 
-  console.log(kelas);
+  // console.log(kelas);
   // console.log(kelas + "\n" + param);https://script.google.com/macros/s/AKfycbzvqVQtlBTMRUgkFN-ESC9RDaHhGHeou3i0LIjg-48jXWkjAO6S8jl8i2SwsN69QscB/exec
   let div = document.querySelector("input[data-formulircpdb='cpdb_id_file_" + kelas + "']"); //cpdb_id_file_
   let divstatus = document.querySelector(".preview_" + kelas);
@@ -2958,8 +2974,14 @@ const caridatapendaftar = () => {
               <th>Detail</th>
           </tr>
           </thead><tbody>`;
-          
-          let filter = datarest.filter(k => k[kriteria1].indexOf(v_input) > -1);
+          // console.log(datarest.filter(s => s[kriteria1] ==v_input));
+          let filter;// = datarest.filter(k => k[kriteria1].indexOf(v_input) > -1);
+          if(kriteria1 == "cpdb_nik"){
+            filter = datarest.filter(k => k[kriteria1] == v_input);
+          }else{
+            filter =  datarest.filter(k => k[kriteria1].indexOf(v_input) > -1);
+          }
+          // let filter = datarest.filter(k => k[kriteria1] == v_input);
           if (filter.length == 0) {
               html += `<tr><td colspan="3" class="w3-centered">Data Yang Anda cari tidak ditemukan</td></tr>`;
           } else {
@@ -3181,7 +3203,7 @@ const menu_jadwal = (urllogin, namasekolah, idss) => {
   fetch(urllogin + "?idss=" + idss + "&action=getjadwal")
   .then(m => m.json()).then(r => {
             let ob = r.result;
-            console.log(r);
+            // console.log(r);
             // html_jadwal(ob);
             let html = `<div class="w3-card-4 w3-container w3-margin w3-round-large">
             <h3> Jadwal PPDB ${namasekolah}</h3></div><div class="w3-card-4 w3-container w3-round-large w3-padding"  style="overflow-x:auto">
@@ -3219,7 +3241,7 @@ const menu_alur = (urllogin, namasekolah,idss) => {
   let param = "?action=getsistemseleksi&idss=" + idss;
   fetch(urllogin + param).then(m => m.json())
       .then(k => {
-          console.log(k);
+          // console.log(k);
           let r = k.records[0];
           let html = `<div class="w3-card-4 w3-container w3-margin w3-round-large"><h3> Alur dan Seleksi</h3></div><div class="w3-card-4 w3-container w3-round-large w3-center w3-padding">`;
           html +=`<img class="w3-image pointerkan" src="/app/alur.png" onclick="klikpoto(this)"/>`
@@ -3333,7 +3355,7 @@ const menu_statistika = (urlppdb ) => {
               </tr>
               <tr>
                   <td>Tahap Seleksi</td>
-                  <td>${r.records.filter(k => k.id_status == "Proses Jurnal").length}</td>
+                  <td>${r.records.filter(k => k.id_status == "Proses Jurnal"||k.id_status == "Diterima").length}</td>
                   
               </tr>
               <tr>
@@ -3393,7 +3415,7 @@ const get_Seleksi = async (urllogin, urlppdb, idss, el) => {
   divin.innerHTML = `<img src="app/barloading.gif" alt="proses loading">`;
   let teks = (el.value == "PERPINDAHAN TUGAS/ANAK PTK") ? "ptk" : el.value.toLowerCase();
   let dataseleksi = await fungsi_objek_jurnal(urllogin, urlppdb, idss, teks);
-  console.log(dataseleksi)
+  // console.log(dataseleksi)
   let html = `<h3 class="w3-center">TAHAP JURNAL PPDB JALUR ${el.value}<br/>PER ${tanggalfulllengkap(new Date())}</h3>
   <div style="overflow-x:auto;"><table class="w3-table-all w3-tiny w3-centered" style="margin:0 auto">
   <thead> 
@@ -3403,6 +3425,7 @@ const get_Seleksi = async (urllogin, urlppdb, idss, el) => {
       <th rowspan="2" style="text-align:center;vertical-align:middle;border:.5pt solid #000">No. Urut</th> 
       <th rowspan="2" style="text-align:center;vertical-align:middle;border:.5pt solid #000">ID Pendaftar</th> 
       <th rowspan="2"  style="text-align:center;vertical-align:middle;border:.5pt solid #000">Nama CPDB</th> 
+      <th rowspan="2" style="text-align:center;vertical-align:middle;border:.5pt solid #000">Status</th> 
       <th rowspan="2" style="text-align:center;vertical-align:middle;border:.5pt solid #000">Umur</th> 
       <th colspan="5" style="text-align:center;vertical-align:middle;border: .5pt solid #000000">Alamat</th> 
   </tr> 
@@ -3417,12 +3440,12 @@ const get_Seleksi = async (urllogin, urlppdb, idss, el) => {
   html += `</tbody></table></div>`;
   //html+=`<p class="w3-tiny">Prioritas adalah penjurnalan berdasarkan kriteria rentang umur tertentu dan zonasi pendaftar. Penentuan kriteria prioritas disesuaikan dengan Perwal Kota Depok No. 17 Tahun 2021 dan Rapat dengan Dewan Komite</p>`;
   let bol = jalur_api[0]["publikasi_seleksi_" + teks];
-  console.log(teks);
+  // console.log(teks);
   //console.log(bol);
   if (bol) {
       divin.innerHTML = html;
   } else {
-      let tambahanhtml = jalur_api[0]["pesan_publikasi_"+teks]
+      let tambahanhtml = "";//jalur_api[0]["pesan_publikasi_"+teks]
       divin.innerHTML = `<strong>Mohon maaf, Sistem seleksi tidak dipublikasikan. ${tambahanhtml}</strong>`;
 
   }
@@ -3462,10 +3485,10 @@ const fungsi_objek_jurnal = async (urllogin, urlppdb, idss, zonasi) => {
           kuota = jalur_api[0]["kuota_" + zonasi];
       }).catch(er => console.log(er))
   
-  console.log(cariUpdate)
-  console.log(jalur_api)
-  console.log(db_pendaftar)
-  console.log(zonasi)
+  // console.log(cariUpdate)
+  // console.log(jalur_api)
+  // console.log(db_pendaftar)
+  // console.log(zonasi)
   
 
   let keyOb = zonasi;
@@ -3476,7 +3499,7 @@ const fungsi_objek_jurnal = async (urllogin, urlppdb, idss, zonasi) => {
   let html = ``;
   let htmlnonkuota = ``;
   let prioritas = objek_settingseleksi;
-  let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.toUpperCase() && k.id_status == "Proses Jurnal");
+  let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.toUpperCase() && (k.id_status == "Proses Jurnal"||k.id_status == "Diterima"));
   let count = 0;
   let urut = 1;
 
@@ -3501,6 +3524,7 @@ const fungsi_objek_jurnal = async (urllogin, urlppdb, idss, zonasi) => {
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].id_pendaftar}</td>
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].nama_cpdb}</td>
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_umur}</td>
+              <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].id_status}</td>
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_rt}</td>
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_rw}</td>
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_kel}</td>
@@ -3514,6 +3538,7 @@ const fungsi_objek_jurnal = async (urllogin, urlppdb, idss, zonasi) => {
               <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${nourut}</td>
                       <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].id_pendaftar}</td>
                       <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].nama_cpdb}</td>
+                      <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].id_status}</td>
                       <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_umur}</td>
                       <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_rt}</td>
                       <td style="text-align:left;vertical-align:top;border:.5pt solid #000">${data[i].cpdb_rw}</td>
@@ -3669,9 +3694,9 @@ div_overlaycari.addEventListener("click", () => {
   w3_close();
 });
 
-const cekdataT = async (id) => {
+const cekdataT2 = async (id) => {
   //let mod = document.getElementById("resultcari");
-  console.log(id)
+  //console.log(id)
   let konversinamsekolah = db_settingppdbsekolah;
   let mod_teks = document.querySelector(".teksresultcari");
   mod_teks.innerHTML = `<div class="w3-center w3-margin"><img src="/img/barloading.gif"></div>`;
@@ -3687,7 +3712,7 @@ const cekdataT = async (id) => {
     
     let sekolahtujuan = dataanak.tujuan_mendaftar;
     let namasekolah = db_settingppdbsekolah.filter(s => s.id_sekolah == sekolahtujuan)[0].nama_sekolah;//
-    console.log(namasekolah);//[0].nama_sekolah;
+    //console.log(namasekolah);//[0].nama_sekolah;
     let datariwayat = JSON.parse(dataanak.riwayat_pendaftaran);
     let html ="";
         html +=`<div class="w3-card-4 w3-padding w3-small" styhle="overflow-x:auto">`;
@@ -3749,7 +3774,7 @@ const cekdataT = async (id) => {
               html +=`<tbody>`;
               for(let i = 0 ; i < datariwayat.length ; i++){
                 let sk = datariwayat[i].tujuan_mendaftar;
-                console.log(sk)
+                //console.log(sk)
                   html +=`<tr>`;
                     html +=`<td class="w3-border">${i+1}</td>`
                     html +=`<td class="w3-border">${db_settingppdbsekolah.filter(s => s.id_sekolah == datariwayat[i].tujuan_mendaftar)[0].nama_sekolah}</td>`;
@@ -3764,3 +3789,157 @@ const cekdataT = async (id) => {
         mod_teks.innerHTML = html;
   })
 };
+
+const cekdataT = async (id) => {
+  //let mod = document.getElementById("resultcari");
+  //console.log(id)
+  let konversinamsekolah = db_settingppdbsekolah;
+  let mod_teks = document.querySelector(".teksresultcari");
+  mod_teks.innerHTML = `<div class="w3-center w3-margin"><img src="/img/barloading.gif"></div>`;
+  let param = "?action=getAllDataTerminal";
+  fetch(terminal+"?action=panggildatasatuanak&id_cpdb="+id)
+  // fetch(terminal+param)
+  .then(m => m.json()).then(r => {
+    //console.log(r)
+
+    let lengh = r.records.length;
+    let dataanak = r.records[lengh-1];
+    
+    
+    let sekolahtujuan = dataanak.tujuan_mendaftar;
+    let namasekolah = db_settingppdbsekolah.filter(s => s.id_sekolah == sekolahtujuan)[0].nama_sekolah;//
+    //console.log(namasekolah);//[0].nama_sekolah;
+    let datariwayat = JSON.parse(dataanak.riwayat_pendaftaran);
+    let html ="";
+      html +=`<div id="printareaditerima">`
+      html+=`<h3 style="color:blue;font-weight:bold;border-bottom:5px double #000;text-align:center">PENGUMUMAN PPDB SDN KECAMATAN CIPAYUNG</h3>`;
+      if(dataanak.id_status=="Diterima"){
+        html+=`<h4 style="text-align:center">Selamat, Ananda <b>${dataanak.id_status}</b> di <b>${namasekolah}</b> </h4><br><br>`;
+        html +=`<table style="width:98%;margin:0 auto; border-collapse:collapse;">`;
+          html +=`<tr>`;
+            html +=`<td rowspan="5" id="tempatbarcode" style="vertical-align:top;"></td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">ID Pendaftar</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top">:</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top">${dataanak.id_pendaftar}</td>`
+          html +=`</tr>`;
+          html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">Nama CPDB</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">:</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">${dataanak.nama_cpdb}</td>`;
+          html+=`</tr>`;
+          html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">Tempat, Tanggal Lahir</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">:</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">${dataanak.cpdb_tempat_lahir}, ${tanggalfull(dataanak.cpdb_tanggal_lahir)}</td>`;
+          html+=`</tr>`;
+          html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">Nama Orang Tua</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">:</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">${dataanak.ortu_nama_ayah}/${dataanak.ortu_nama_ibu}</td>`;
+          html+=`</tr>`;
+          html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">Alamat</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">:</td>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top">RT. ${dataanak.cpdb_rt},<br>RW. ${dataanak.cpdb_rw},<br>Kel. ${dataanak.cpdb_kel},<br>Kec. ${dataanak.cpdb_kec},<br>Kota. ${dataanak.cpdb_kota}</td>`;
+          html+=`</tr>`;
+        html +=`</table>`;
+        html+=`</div><br><br>`
+        html+=`<div class="w3-center w3-padding">`;
+          html +=`<button onclick="printA5('printareaditerima')" class="w3-button w3-tiny w3-green w3-bottombar w3-border w3-border-black w3-round-xlarge"> Cetak</button>`
+        html +=`</div>`
+        mod_teks.innerHTML = html;
+        let teksbarcode = `Selamat! Ananda ${dataanak.nama_cpdb} dinyatakan ${dataanak.id_status} di ${namasekolah}`;
+        barcodekan("tempatbarcode",teksbarcode)
+      }else{
+        html+=`<h4 style="text-align:center">Maaf, Ananda ${dataanak.id_status}</h4>`
+        html+=`Keterangan: ${dataanak.ket_status}`;
+        mod_teks.innerHTML = html;
+      }
+        // html +=`<div class="w3-card-4 w3-padding w3-small" style="overflow-x:auto">`;
+        // html +=`<h5 class="w3-center">Data Pribadi Siswa</h5>`;
+        // html += `<table class="w3-table-all" style="width:500px;margin:0 auto">`;
+        //   html +=`<tr>`;
+        //     html +=`<td>NIK CPDB</td>`;
+        //     html +=`<td style="width:1px">:</td>`;
+        //     html +=`<td>${dataanak.cpdb_nik}</td>`;
+        //   html +=`</tr>`;
+          
+        //   html +=`<tr>`;
+        //     html +=`<td>Skor Umur</td>`;
+        //     html +=`<td style="width:1px">:</td>`;
+        //     html +=`<td>${dataanak.cpdb_umur}</td>`;
+        //   html +=`</tr>`; 
+        //   html +=`<tr>`;
+        //     html +=`<td>Skor Umur</td>`;
+        //     html +=`<td style="width:1px">:</td>`;
+        //     html +=`<td>${dataanak.cpdb_umur}</td>`;
+        //   html +=`</tr>`;
+        //   html +=`<tr>`;
+        //     html +=`<td>Alamat</td>`;
+        //     html +=`<td style="width:1px">:</td>`;
+        //     html +=`<td>Kel. ${dataanak.cpdb_kel}, RT.${dataanak.cpdb_rt}, RW. ${dataanak.cpdb_rw} </td>`;
+        //   html +=`</tr>`;
+        //   html += `</table>`;
+
+        //   html +=`<h5 class="w3-center">Detail Pendaftaran Terkini</h5>`;
+        //   html += `<table class="w3-table-all" style="width:80%;margin:0 auto">`;
+        //     html +=`<tr>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Tujuan Sekolah Terakhir</td>`;
+        //       html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${namasekolah}</td>`;
+        //     html +=`</tr>`;
+            
+        //     html +=`<tr>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Status Pendaftaran</td>`;
+        //       html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${dataanak.id_status}</td>`;
+        //     html +=`</tr>`;
+        //     html +=`<tr>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">Keterangan Pendaftaran</td>`;
+        //       html +=`<td style="width:1px" class="w3-border-top w3-border-bottom w3-border-black">:</td>`;
+        //       html +=`<td class="w3-border-top w3-border-bottom w3-border-black">${dataanak.ket_status}</td>`;
+        //     html +=`</tr>`;
+        //   html +=`</table><hr class="w3-bottombar w3-border-pale-red">`;
+        //   html +=`<div class="w3-card-4 w3-padding">`;
+        //   html +=`<h6 class="w3-center">Riwayat Pendaftaran</h6>`
+        //     html +=`<table class="w3-table w3-tiny">`;
+        //       html +=`<thead>`;
+        //         html +=`<tr class="w3-light-gray">`;
+        //           html +=`<th class="w3-border">No.</th>`
+        //           html +=`<th class="w3-border">Sekolah Tujuan</th>`
+        //           html +=`<th class="w3-border">Status Pendaftaran</th>`
+        //           html +=`<th class="w3-border">Keterangan Pendaftaran</th>`
+        //         html +=`</tr>`;
+        //       html +=`</thead>`;
+        //       html +=`<tbody>`;
+        //       for(let i = 0 ; i < datariwayat.length ; i++){
+        //         let sk = datariwayat[i].tujuan_mendaftar;
+        //         //console.log(sk)
+        //           html +=`<tr>`;
+        //             html +=`<td class="w3-border">${i+1}</td>`
+        //             html +=`<td class="w3-border">${db_settingppdbsekolah.filter(s => s.id_sekolah == datariwayat[i].tujuan_mendaftar)[0].nama_sekolah}</td>`;
+        //             html +=`<td class="w3-border">${datariwayat[i].id_status}</td>`
+        //             html +=`<td class="w3-border">${datariwayat[i].ket_status}</td>`
+        //           html +=`</tr>`;
+        //       }
+        //           html +=`</tbody>`;
+        //     html +=`</table>`;
+        //   html +=`</div>`;
+        // html +=`</div>`;
+        // mod_teks.innerHTML = html;
+  })
+};
+
+const barcodekan = (el, teks) => {
+
+    var qrcode = new QRCode(document.getElementById(el), {
+        width: 100,
+        height: 100
+    });
+
+    qrcode.clear();
+    qrcode.makeCode(teks);
+
+
+
+}

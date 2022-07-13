@@ -1,18 +1,18 @@
 //dB Asli
-//const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
+const terminal = "https://script.google.com/macros/s/AKfycbx-AabThUSB1cVPIKmbfJqjzJQTIihdkTkN7bQ8ouhmXpGijbfUF-NjNxAaeeD76j34cQ/exec";
 
 //dB Trial
 //const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
 //const terminal = "https://script.google.com/macros/s/AKfycbxx57CiGHDz4WHC_qDARRsHmthfgBQjwRradXiM01FNGW4S0P70nNDkZWfWJUEz74tEBg/exec"
 
 //Db tRIAL edasyahandrian@gmail.comn
-const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec";
+// const terminal = "https://script.google.com/macros/s/AKfycbwV_60Sv_YikS2EWCQqEAz9ZoZWSGfR-0YQJd9vx94aDSPVkaWLGM02FKICTxMgqWn_/exec";
 
 let datasekolahkecamatan = [];
     fetch(terminal + "?action=settingPerSekolah")
         .then(m => m.json())
         .then(r => {
-            console.log(r)                
+            //console.log(r)                
             datasekolahkecamatan = r.setting;
         }).catch(er => console.log(er)) 
 const barcari = document.querySelector(".barcari");
@@ -824,7 +824,7 @@ const ubahaksesform = (bol) => {
             body: data
         }).then(m => m.json())
         .then(r => {
-            console.log(r);
+            //console.log(r);
             objek_settingpagu = r.records;
             let bolakses = objek_settingpagu[0].setingan_formdaftar;
 
@@ -850,7 +850,7 @@ const ubahaksesform = (bol) => {
         dataa.append("tabel", tabels);
         dataa.append("kolom", 20);
     fetch(terminal,{method:"post",body:dataa}).then(m => m.json()).then(r =>{
-        console.log(r);
+        //console.log(r);
     }).catch(er => {console.log(er)})
 }
 const save_t_jadwal = (brs) => {
@@ -1878,7 +1878,7 @@ const save_setpagu = (kelastabel) => {
                 body: data
             }).then(m => m.json())
             .then(r => {
-                console.log(r)
+                //console.log(r)
                 alert(r.result);
                 html_setpagu(r.records);
                 objek_settingpagu = r.records;
@@ -1894,7 +1894,7 @@ const save_setpagu = (kelastabel) => {
         paguterminal.append("objek",JSON.stringify(sT))
         fetch(terminal, {method:"post",body:paguterminal})
         .then(r=>{
-            console.log(r);
+           // console.log(r);
         }).catch(er => console.log(er));
             
     } else if (kelastabel == "tabel_dokumenkhusus_pagu") {
@@ -1930,7 +1930,6 @@ const save_setpagu = (kelastabel) => {
             }).then(m => m.json())
             .then(r => {
                 //console.log(r);
-                console.log(r);
                 document.querySelector(".res_simulasi_dokumen").innerHTML = "";
             })
             .catch(er => {
@@ -2414,7 +2413,7 @@ const tes_simulasiprioritas = () => {
     console.table(data);
     // let data = datas.filter(k => k.set_rt == rt && k.set_rw == rw && k.set_kel == kelurahan && k.set_kec == kecamatan && k.set_kota == kota);
 
-    console.log(data);
+    //console.log(data);
     // console.log(rt);
     // console.log(rw);
     // console.log(kelurahan);
@@ -3149,7 +3148,7 @@ const cekdataterminal = ()=>{
     
     fetch(urlppdb,{method:"post",body:datakirim})
     .then(m => m.json()).then(r => {
-        console.log(r)
+        //console.log(r)
         db_pendaftar = r.records;
             let data = r.records;
             let html = `
@@ -3189,13 +3188,13 @@ const detailpendaftarTerminal = async (row) =>{
     //ga perlu pagu dulu nih, langsung deteksi dB terminal untuk memindahkan dB CPDB ke dB Pendaftar sekolah;
     let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
     await fetch(linkpagu).then(m => m.json()).then(r => {
-        console.log("getpagu", r)
+        //console.log("getpagu", r)
         objek_settingpagu = r.records;
     }).catch(er => console.log(er));
 
     fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+row)
     .then(m => m.json()).then(r =>{
-        console.log(r)
+        //console.log(r)
    
     db_pendaftar = r.records;
             let data = r.records;
@@ -3429,13 +3428,13 @@ const detailpendaftarTerminal2 = async (row) =>{
     //ga perlu pagu dulu nih, langsung deteksi dB terminal untuk memindahkan dB CPDB ke dB Pendaftar sekolah;
     let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
     await fetch(linkpagu).then(m => m.json()).then(r => {
-        console.log("getpagu", r)
+        //console.log("getpagu", r)
         objek_settingpagu = r.records;
     }).catch(er => console.log(er));
 
     fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+row)
     .then(m => m.json()).then(r =>{
-        console.log(r)
+        //console.log(r)
    
     db_pendaftar = r.records;
             let data = r.records;
@@ -3709,12 +3708,12 @@ const kirim_verifikasiulangkeTerminal = (brsterm) =>{
         dividinfo.innerHTML =`<div class="w3-center w3-card-4"><img src="/img/barloading.gif"> Berhasil memanggil database Terminal dan mulai update data pendaftar </div>`
                 let riwayat = JSON.parse(dataanak.riwayat_pendaftaran);
                 let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
-                    console.log(updateRiwayat);
+                    //
                     updateRiwayat.id_status = "Proses Jurnal";
                     updateRiwayat.ket_status = "Proses Jurnal";
                     
                 let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
-            //console.log(newState);
+            ////
         dataUpdateByAdmi.riwayat_pendaftaran = JSON.stringify(newState);
         let objekkirimserver = Object.assign(dataanak, dataUpdateByAdmi);
         //console.log(objekkirimserver);
@@ -3730,7 +3729,7 @@ const kirim_verifikasiulangkeTerminal = (brsterm) =>{
         fetch(urlppdb,{method:"post",body:dBverif}).then(m=>m.json())
         .then(r => {
             dividinfo.innerHTML = r.result;
-            console.log(r);
+            //console.log(r);
         }).catch(er => {
             console.log(er);
             dividinfo.innerHTML = er;
@@ -3749,7 +3748,7 @@ const masukkankeTahapSeleksiDariTerminal = (id) =>{
     
     fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+id)
     .then(m => m.json()).then(r =>{
-        console.log(r)
+       // console.log(r)
    
     db_pendaftar = r.records;
             let data = r.records;
@@ -3783,29 +3782,29 @@ const masukkankeTahapSeleksiDariTerminal = (id) =>{
     })
 }
 
-const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
-    console.log(baristerminal, idstatus, ketstatus,el)
+const req_verifikasiDariTerminal2 = (baristerminal, idstatus, ketstatus,el) =>{
+    //console.log(baristerminal, idstatus, ketstatus,el)
     el.setAttribute("onclick","alert('Sedang proses kirim')");
     let data = db_pendaftar.filter(s => s.baris_terminal == baristerminal);
     let dt = data[0]
-    console.log(data);
+    
     let riwayat = JSON.parse(dt.riwayat_pendaftaran);
-    console.log(riwayat)
+    //console.log(riwayat)
     //id_status	ket_status	riwayat_pendaftaran
     let dataverif = {};
     dataverif.id_status = idstatus;
     dataverif.ket_status = ketstatus;
 
 
-    // //console.log(riwayat);
+    // ////console.log(riwayat);
     // let updateRiwayat ={}
     let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
-    console.log(updateRiwayat);
+    ////
     updateRiwayat.id_status = idstatus;
     updateRiwayat.ket_status = ketstatus;
     
     let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
-    console.log(newState);
+    ////
     //dt.riwayat_pendaftaran = JSON.stringify(newState)
     //console.log(dt);
     dataverif.riwayat_pendaftaran = JSON.stringify(newState)
@@ -3822,6 +3821,65 @@ const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
     fetch(urlppdb,{method:"post",body:datakirimTerminal})
     .then(m => m.json()).then(r =>{
         console.log(r)
+        alert(r.result)
+        let tabaktif = document.querySelector(".active")
+        tabaktif.click();
+        dividinfo.innerHTML = r.result;
+        setTimeout(()=>{
+            document.getElementById("id_modal_info").style.display='none'
+
+        },2000)
+
+    }).catch(er =>{
+        console.log(er)
+    })
+    //verifikasiKeTerminal,baris, dataverif
+
+    //untuk dbTerminal nantinya ini yang akan dipanggil
+
+    //untukdB Respon dan Jurnal
+
+}
+
+const req_verifikasiDariTerminal = (baristerminal, idstatus, ketstatus,el) =>{
+    //console.log(baristerminal, idstatus, ketstatus,el)
+    el.setAttribute("onclick","alert('Sedang proses kirim')");
+    let data = db_pendaftar.filter(s => s.baris_terminal == baristerminal);
+    let dt = data[0]
+    //console.log(data);
+    let riwayat = JSON.parse(dt.riwayat_pendaftaran);
+    //console.log(riwayat)
+    //id_status	ket_status	riwayat_pendaftaran
+    let dataverif = {};
+    dataverif.id_status = idstatus;
+    dataverif.ket_status = ketstatus;
+
+
+    // ////console.log(riwayat);
+    // let updateRiwayat ={}
+    let updateRiwayat = riwayat.filter(s => s.tujuan_mendaftar == id_sekolah)[0];
+    //
+    updateRiwayat.id_status = idstatus;
+    updateRiwayat.ket_status = ketstatus;
+    
+    let newState = riwayat.map(obj => obj.tujuan_mendaftar == id_sekolah ?  Object.assign({},obj, updateRiwayat): obj);
+    //
+    //dt.riwayat_pendaftaran = JSON.stringify(newState)
+    //console.log(dt);
+    dataverif.riwayat_pendaftaran = JSON.stringify(newState)
+
+
+    let datakirimTerminal = new FormData();
+    datakirimTerminal.append("action","verifikasiKeTerminal");
+    datakirimTerminal.append("baris",baristerminal);
+    datakirimTerminal.append('dataverif',JSON.stringify(dataverif));
+    
+    let dividinfo = document.querySelector(".teks_info_modal");
+    dividinfo.innerHTML = `<div class="w3-center w3-margin-top w3-margin-bottom"><img src="/img/barloading.gif"> ...</div>`;
+    
+    fetch(urlppdb,{method:"post",body:datakirimTerminal})
+    .then(m => m.json()).then(r =>{
+        //console.log(r)
         alert(r.result)
         cekdataterminal();
         dividinfo.innerHTML =r.result;
@@ -3886,7 +3944,7 @@ const cekditolakverif = () => {
         .then(r => {
             // console.log(r);
             db_pendaftar = r.records;
-            let data = r.records.filter(k => !(k.id_status == "Perlu Verifikasi" || k.id_status == "Proses Jurnal"));
+            let data = r.records.filter(k => !(k.id_status == "Perlu Verifikasi" || k.id_status == "Proses Jurnal"|| k.id_status == "Diterima"));
             let html = `Data Pendaftar yang tidak lolos seleksi dokumen (tidak masuk ke dalam Proses Jurnal dengan status DITOLAK, DIKEMBALIKAN, dan/atau GANDA PENDAFTARAN) (Diurutkan berdasarkan waktu pendaftaran terkini):
             <hr/>
             <button onclick="newPrint('nTB_tidaklolosseleksi')" class="w3-btn w3-blue"> <i class="fa fa-print"></i> Print</button>
@@ -4952,6 +5010,7 @@ const verif_seleksi = async () => {
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'all_tahap_seleksi')">Rekapitulasi Seleksi</button>
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'all_publikasi_seleksi')">Info Publikasi</button>
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'tahap_laporan_rekap')">Rekap Laporan</button>
+    <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'tidakpakaiaplikasi')">Cek Sekolah Lan</button>
 
     </div>
     <div class="verif_resultseleksi w3-border w3-container" style="overflow-x:auto">
@@ -4995,6 +5054,8 @@ const pindahTabSeleksi = (el, a) => {
         rekap_jalur();
     } else if( a=="tahap_laporan_rekap"){
         rekap_panggilsemuadata()
+    }else if( a=="tidakpakaiaplikasi"){
+        rekap_tidakpakeaplikasi()
     }else {
         html_publikasi_jurnal()
     }
@@ -5166,7 +5227,7 @@ const fungsi_html_jurnal = (zonasi) => {
     let html = ``;
     let htmlnonkuota = ``;
     let prioritas = objek_settingseleksi;
-    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
+    let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && (k.id_status == "Proses Jurnal" || k.id_status == "Diterima"));
     let count = 0;
     let urut = 1;
 
@@ -5271,7 +5332,7 @@ const cek_real_prioritas = (zonasi) => {
     let div = document.querySelector(".verif_resultseleksi");
     let html =`<div class="w3-center w3-margin-top"><img src="/img/barloading.gif"></div>`;
     div.innerHTML = html;
-    console.log(zonasi,aa)
+    //console.log(zonasi,aa)
     
     // `<h3  class="w3-container">Proses Jurnal ${zonasi.replace("kuota_", "")} </h3>
     
@@ -5298,11 +5359,21 @@ const cek_real_prioritas = (zonasi) => {
     <table class="w3-table-all garis w3-tiny tuS_${zonasi}"> 
     <thead>
         <tr class="w3-centered">
-         <th rowspan="2">Prioritas</th> <th rowspan="2">No. Urut</th> <th rowspan="2">ID Pendaftar</th> <th rowspan="2">Nama CPDB</th> <th rowspan="2">Umur</th> <th colspan="5">Alamat</th> <th rowspan="2">Detail</th> </tr> <tr> <th>RT</th> <th>RW</th> <th>Kelurahan</th> <th>Kecamata</th> <th>Kota</th> </tr></thead><tbody>`;
+        <th rowspan="2">Prioritas</th>
+        <th rowspan="2">No. Urut</th>
+        <th rowspan="2">ID Pendaftar</th>
+        <th rowspan="2">Nama CPDB</th>
+        <th rowspan="2">Umur</th>
+        <th colspan="5">Alamat</th>
+        <th rowspan="2">Status<br>di<br>Pendaftar</th>
+        <th rowspan="2">Status Publikasi</th>
+        </tr>
+    <tr>
+    <th>RT</th> <th>RW</th> <th>Kelurahan</th> <th>Kecamata</th> <th>Kota</th> </tr></thead><tbody>`;
     
     //end
-    let db = db_pendaftar.filter(k => k.jalur_cpdb == aa.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
-    console.log(db)
+    let db = db_pendaftar.filter(k => k.jalur_cpdb == aa.replace("kuota_", "").toUpperCase() && (k.id_status == "Proses Jurnal"||k.id_status == "Diterima"));
+    //console.log(db)
     let count = 0;
     let urut = 1;
     for (let a = 0; a < prioritas.length; a++) {
@@ -5338,7 +5409,8 @@ const cek_real_prioritas = (zonasi) => {
                 <td class="w3-deep-orange">${data[i].cpdb_kel}</td>
                 <td class="w3-deep-orange">${data[i].cpdb_kec}</td>
                 <td class="w3-deep-orange">${data[i].cpdb_kota}</td>
-                <td class="w3-deep-orange pointerkan w3-center w3-large" onclick="detailpendaftar('${data[i].id_pendaftar}')"><i class="fa fa-eye"></i></>
+                <td class="w3-deep-orange pointerkan w3-center" onclick="detailpendaftar('${data[i].id_pendaftar}')" title="Klik untuk melihat Detail">${data[i].id_status}</td>
+                <td class="w3-deep-orange pointerkan w3-center w3-large" onclick="detailpublikasicpdb('${data[i].baris_terminal}','${nourut}','${prioritas[a].nama_prioritas}')"><i class="fa fa-eye"></i></>
                         </tr>`;
             } else {
                 html += `<tr><td class="${warna}">${prioritas[a].nama_prioritas}</td>
@@ -5351,7 +5423,8 @@ const cek_real_prioritas = (zonasi) => {
                         <td>${data[i].cpdb_kel}</td>
                         <td>${data[i].cpdb_kec}</td>
                         <td>${data[i].cpdb_kota}</td>
-                        <td class="pointerkan w3-center w3-large" onclick="detailpendaftar('${data[i].id_pendaftar}')"><i class="fa fa-eye"></i></td>
+                        <td class="pointerkan w3-center" onclick="detailpendaftar('${data[i].id_pendaftar}')" title="Klik untuk melihat Detail">${data[i].id_status}</td>
+                        <td class="pointerkan w3-center w3-large" onclick="detailpublikasicpdb('${data[i].baris_terminal}','${nourut}','${prioritas[a].nama_prioritas}')"><i class="fa fa-eye"></i></>
                         </tr>`;
             }
         }
@@ -5377,7 +5450,8 @@ const cek_real_prioritas = (zonasi) => {
             <th rowspan="2">Nama CPDB</th>
             <th rowspan="2">Umur</th>
             <th colspan="5">Alamat</th>
-            <th rowspan="2">Detail</th>
+            <th rowspan="2">Status<br>di<br>Pendaftar</th>
+            <th rowspan="2">Status Publikasi</th>
         </tr>
         <tr>
             <th>RT</th>
@@ -5397,7 +5471,8 @@ const cek_real_prioritas = (zonasi) => {
                 <td>${db[x].cpdb_kec}</td>
                 <td>${db[x].cpdb_kota}</td>
                 
-                <td class="pointerkan w3-center w3-large" onclick="detailpendaftar('${db[x].id_pendaftar}')"><i class="fa fa-eye"></i></td>
+                <td class="pointerkan w3-center" onclick="detailpendaftar('${db[x].id_pendaftar}')" title="Klik untuk melihat Detail">${db[x].id_status}</td>
+                <td class="pointerkan w3-center w3-large" onclick="detailpublikasicpdb('${db[x].baris_terminal}','${(x+1)}','tidak lolos kriteria')"><i class="fa fa-eye"></i></td>
             </tr>`;
     }
     html += `    
@@ -5409,6 +5484,140 @@ const cek_real_prioritas = (zonasi) => {
     
     //console.log(count);
 };
+const detailpublikasicpdb = (id,urutjurnal, prior) =>{
+    let divid = document.getElementById("id_modal_info");
+    divid.style.display = "block"
+    let dividinfo = document.querySelector(".teks_info_modal");
+    
+    let html ="";
+    html +=`<div class="w3-center w3-margin-top w3-margin-bottom"><img src="/img/barloading.gif"></div>`;
+    dividinfo.innerHTML = html;
+    fetch(urlppdb+"?action=panggilDataCPDBTunggal&baris="+id)
+    .then(m => m.json()).then(r =>{
+        //console.log(r)
+   
+    db_pendaftar = r.records;
+            let data = r.records;
+            let d = data[0];//.filter(k => k.id_pendaftar == id)[0];
+    html = `<div class="w3-blue w3-center w3-padding w3-round-large w3-margin">Keterangan Pendaftaran</div>`;
+    html +=`<div class="w3-tiny w3-small" w3-center">Berikut ini data yang ditampilkan di Web Utama yang dapat diketahui oleh Pendaftar</div>`;
+    html +=`<div class="w3-container w3-card-4 w3-margin-bottom">`;
+        html +=`<table class="w3-table-all w3-small  w3-margin-top w3-margin-bottom">`;
+            html +=`<tr>`;
+                html+= `<td>ID Pendaftaran</td><td>:</td><td>${d.id_pendaftar}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Nama CPDB</td><td>:</td><td>${d.nama_cpdb}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>NIK CPDB</td><td>:</td><td>${d.cpdb_nik}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Status</td><td>:</td><td>${d.id_status}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Status</td><td>:</td><td>${d.ket_status}</td>`;
+            html +=`</tr>`;
+        html +=`</table>`;
+    html +=`</div>`;
+    html +=`<div class="w3-tiny w3-small w3-center">Beri Keterangan Status Pendaftaran untuk Pendaftar yang Diterima</div>`;
+    html +=`<div class="w3-tiny w3-small w3-margin-top w3-margin-bottom">`;
+        html+=`<div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding w3-center">
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_diterima" value="Diterima">
+        <label for="p_tolak">Diterima</label>
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_proses_jurnal" value="Proses Jurnal">
+        <label for="p_kembali">Proses Jurnal</label>
+        </div><p class="w3-tiny w3-small w3-center">Atau jika ini ditolak</p>
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding w3-center">
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_tolak" value="Ditolak">
+        <label for="p_tolak">Ditolak</label>
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_kembali" value="Dikembalikan">
+        <label for="p_kembali">Dikembalikan</label>
+        <input type="radio" class="w3-radio radio_pilihan_verif" name="p_kembali" id="p_keluar_jurnal" value="Keluar Jurnal">
+        <label for="p_kembali">Keluar Jurnal</label>
+        </div>`
+    html +=`</div>`;
+    html+=`<div class="w3-card-4 w3-container w3-center">KETERANGAN STATUS`;
+        html+=`<textarea class="w3-input w3-border w3-border-blue isian_alasan w3-margin-bottom" placeholder="Silakan isikan alasan mengapa Anda mengembalikan pendaftaran ini"></textarea>`
+    html +=`</div>`
+    html +=`<p class="w3-tiny w3-small w3-center">Tampilan Akhir Pengumuman Saat Pendaftar Mencari Data</p>`
+    html +=`<div class="w3-container w3-card-4 w3-margin-bottom">`;
+        html +=`<table class="w3-table-all w3-small w3-margin-top w3-margin-bottom">`;
+            html +=`<tr>`;
+                html+= `<td>ID Pendaftaran</td><td>:</td><td>${d.id_pendaftar}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Nama CPDB</td><td>:</td><td>${d.nama_cpdb}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>NIK CPDB</td><td>:</td><td>${d.cpdb_nik}</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Status</td><td>:</td><td class="status_resultfinal">Silakan Pilih Status di Menu</td>`;
+            html +=`</tr>`;
+            html +=`<tr>`;
+                html+= `<td>Status</td><td>:</td><td class="keterangan_resultfinal">Ketikkan Alasan di kolom Keterangan Status</td>`;
+            html +=`</tr>`;
+        html +=`</table>`;
+    html +=`</div>`;
+    html +=`<div class="w3-card-4 w3-round-large w3-small w3-center w3-padding">`;
+        html +=`<button class="w3-button w3-round-xlarge w3-yellow w3-bottombar w3-border w3-border-black w3-tiny kirimDataStatusFinalPPDB">Publikasikan Perubahan</button>`
+    html +=`</div>`;
+    dividinfo.innerHTML = html;
+    let rdd = document.querySelectorAll(".radio_pilihan_verif");
+    // console.log(rdd)
+    let td_status = document.querySelector(".status_resultfinal");
+    let td_keterangan = document.querySelector(".keterangan_resultfinal");
+    let isian_alasan = document.querySelector(".isian_alasan");
+    let kirimDataStatusFinalPPDB = document.querySelector(".kirimDataStatusFinalPPDB");
+    rdd.forEach(rd =>{
+        rd.addEventListener('change',(e)=>{
+            if(rd.checked){
+                    let status = e.target.value
+                    //console.log(status);
+                    if(status == "Diterima"){
+                        td_status.innerHTML = status;
+                        isian_alasan.value = "Diterima dengan  "+ prior +" di urutan Jurnal ke-" + urutjurnal;
+                        td_keterangan.innerHTML = isian_alasan.value;
+                    }else{
+                        td_status.innerHTML = status;
+                        isian_alasan.value = ""
+                        td_keterangan.innerHTML = isian_alasan.value;
+                    }
+            }
+        })
+    })
+    isian_alasan.oninput = function(e){
+        let isi = e.target.value;
+        rdd.forEach(rd =>{
+                if(rd.checked){
+                        let status = rd.value
+                        //console.log(status);
+                        if(status == "Diterima"){
+                            td_status.innerHTML = status;
+                            //isian_alasan.value = isi;//"Diterima dengan  "+ prior +" di urutan Jurnal ke-" + urutjurnal;
+                            td_keterangan.innerHTML = isi;//an_alasan.value;
+                        }else{
+                            td_status.innerHTML = status;
+                            //isian_alasan.value = isi;
+                            td_keterangan.innerHTML = isi;//an_alasan.value;
+                        }
+                }
+        })
+    };
+    kirimDataStatusFinalPPDB.onclick = function(e){
+        let elemen = e.target;
+        elemen.innerHTML = `<i class="fa fa-spin fa-spinner"></i> Proses Kirim ...`;
+        let data_status = td_status.innerHTML;
+        let data_keterangan=td_keterangan.innerHTML;
+        req_verifikasiDariTerminal2(id, data_status, data_keterangan, elemen);
+    }
+    }).catch(er => {
+        console.log(er);
+        dividinfo.innerHTML = `Gagal memanggil data, kode: `+ er;
+    })
+}
+
 const fn_prioritas_real = (arrObj, objfilter) => {
     let data = arrObj.filter(function (item) {
         for (var key in objfilter) {
@@ -5624,7 +5833,7 @@ const excelSeleksi = (kelas, teks) => {
     try {
         let zonasi = teks;
         let ket = (kelas.indexOf("tuS_") > -1) ? " JURNAL PROSES Proses Jurnal " + teks.toUpperCase() : "JURNAL TIDAK LOLOS PRIORITAS " + teks.toUpperCase() + ""
-        let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "Proses Jurnal");
+        let db = db_pendaftar.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && (k.id_status == "Proses Jurnal" || k.id_status == "Diterima"));
         let div = document.getElementById("frameexcel");
         //div.innerHTML = "";
 
@@ -6186,7 +6395,12 @@ const detailregister = (sumber, id) => {
     let data, html = ""
     if (sumber == "db_du") {
         data = db_udahdaftarulang.filter(k => k.id_registrasi == id)[0];
-        html = `<h3 class="w3-center">DATA PENDAFTAR REGISTRASI</h3>
+        let ibrste = data.id_pendaftar
+        html = `<div class="w3-center">
+        <button class="w3-button w3-yellow w3-bottombar w3-border w3-border-black w3-round-xlarge w3-tiny" onclick="format_dapodik('${id}')">FORMAT F-PD DAPODIK</button>
+        </div>`
+        // `<button class="w3-button w3-yellow w3-bottombar w3-border w3-border-black w3-round-xlarge w3-tiny" onclick="konfirmasiregister('${ibrste}')">BATAL DAFTAR ULANG</button>`
+        html += `<h3 class="w3-center">DATA PENDAFTAR REGISTRASI</h3>
         <h4 class="w3-card-4 w3-container w3-aqua">Keterangan Registrasi</h4>
         <table class="w3-table-all  w3-small" style="margin:0 auto">
             <tr>
@@ -6212,11 +6426,15 @@ const detailregister = (sumber, id) => {
 
     } else {
         data = db_pendaftar.filter(k => k.id_pendaftar == id)[0];
+        html = `<div class="w3-center">
+        <button class="w3-button w3-yellow w3-bottombar w3-border w3-border-black w3-round-xlarge w3-tiny" onclick="format_dapodik2('${id}')">FORMAT F-PD DAPODIK</button>
+        </div>`
     }
     let divid = document.getElementById("id_modal_info");
     let dividinfo = document.querySelector(".teks_info_modal");
     divid.style.display = "block";
     //keterangan registrasi
+    
     html += `<h4 class="w3-card-4 w3-container w3-aqua">Keterangan Pendaftaran</h4>
         <table class="w3-table-all  w3-small" style="margin:0 auto">
             <tr>
@@ -6285,7 +6503,11 @@ const detailregister = (sumber, id) => {
 
     dividinfo.innerHTML = html;
 };
-const konfirmasiregister = (id) => {
+const konfirmasiregister = async(id) => {
+    let param = "?action=getdatasheet&tab=respon";
+    await fetch(urlppdb + param).then(m => m.json()).then(r => {
+        db_pendaftar = r.records;
+    }).catch(er => console.log(er));
     let data = db_pendaftar.filter(k => k.id_pendaftar == id)[0];
 
     let html = "";
@@ -6425,7 +6647,7 @@ const konfirmasiregister = (id) => {
                 body: dataa
             }).then(m => m.json())
             .then(r => {
-                console.log(r);
+                //console.log(r);
                 dividinfo.innerHTML = "Data terkirim";
                 cek_daftarulang('belum');
             })
@@ -6564,7 +6786,7 @@ const konfirmasiregisterdarigagal = (id) => {
                 body: dataa
             }).then(m => m.json())
             .then(r => {
-                console.log(r);
+                //console.log(r);
                 dividinfo.innerHTML = "Data terkirim";
                 cek_daftarulang('belum');
             })
@@ -6996,7 +7218,7 @@ const save_alamat_sekolah = (el) => {
             body: data
         }).then(m => m.json())
         .then(r => {
-            console.log(r);
+            //console.log(r);
             el.innerHTML = "SIMPAN";
         }).catch(er => console.log(er));
     
@@ -7014,7 +7236,7 @@ const save_alamat_sekolah = (el) => {
     updatealamat.append("objek",JSON.stringify(ob));
     fetch(terminal,{method:"post",body:updatealamat})
     .then(m => m.json()).then(r =>{
-        console.log(r);
+        //console.log(r);
     }).catch(er => console.log(er));
 
 };
@@ -7466,7 +7688,7 @@ const set_info = () =>{
         }).then(m => m.json())
         .then(r => {
             //alert(r.result);
-            console.log(r);
+            //console.log(r);
             let bol = r.records[0].setingan_formdaftar;
             let teksbol = "";
             let boltombol = bol;
@@ -7547,7 +7769,7 @@ const set_akunverif = () =>{
     dataakun.append("id",id_sekolah);
     fetch(terminal,{method:"post",body:dataakun})
     .then(m => m.json()).then(r => {
-        console.log(r);
+        //console.log(r);
         let dataakun = r.setting
         let html = `<div class="w3-card-4 w3-round-large w3-border w3-container" style="overflow-x:auto">`;
             html +=`<h5 class="w3-center">Data Akun Admin</h5>`;
@@ -7648,7 +7870,7 @@ const publikasikannomorwa = (el)=>{
         body: data
     }).then(m => m.json())
     .then(r => {
-        console.log(r);
+        //console.log(r);
         el.innerHTML = `Publikasikan`;
     })
     .catch(er => console.log (er));
@@ -7665,7 +7887,7 @@ const publikasikannomorwa = (el)=>{
         body: dataa
     }).then(m => m.json())
     .then(r => {
-        console.log(r);
+        //console.log(r);
         
     })
     .catch(er => console.log (er));
@@ -7694,7 +7916,7 @@ const simpan_teksinfo = (el) =>{
             body: data
         }).then(m => m.json())
         .then(r => {
-            console.log(r);
+            //console.log(r);
             el.innerHTML = `Publikasikan Info`;
         })
         .catch(er => console.log (er))
@@ -7720,7 +7942,7 @@ const hiddenshow_tomboldaftar = (bol)=>{
             body: data
         }).then(m => m.json())
         .then(r => {
-            console.log(r);
+            //console.log(r);
             objek_settingpagu = r.records;
             let bolakses = objek_settingpagu[0].setingan_formdaftar;
 
@@ -7746,7 +7968,7 @@ const hiddenshow_tomboldaftar = (bol)=>{
     boleanformulirpendaftaran.append("objek",JSON.stringify(obj));
     fetch(terminal, {method:"post",body:boleanformulirpendaftaran})
     .then(m => m.json()).then(r => {
-        console.log(r)
+        //console.log(r)
     }).catch(er => console.log(er));
 };
 
@@ -7772,7 +7994,7 @@ fetch(urllogin, {
         body: data
     }).then(m => m.json())
     .then(r => {
-        console.log(r);
+        //console.log(r);
         objek_settingpagu = r.records;
         let formkembali = r.records[0].form_dikembalikan;
         let teksfk, htltmbl;
@@ -8479,3 +8701,2140 @@ function formattanggalinput(tgl) {
     return thn + "-" + addZero(bln) + "-" + addZero(tgl)
   };
   
+const rekap_tidakpakeaplikasi = () =>{
+    let divkonten = document.querySelector(".verif_resultseleksi");
+    let html = "";
+    html +=`<h3 class="w3-center">Cek Pendaftar dari Sekolah Lain yang Mendaftar dengan Aplikasi ini</h3>`;
+    html +=`(Dalam kasus tahun ini, SDN Citayam 1 tidak menggunakan Aplikasi, sehingga di sini akan melacak data Jurnal SDN Citayam 1 dengan data yang telah di Jurnal di masing-masing sekolah pengguna aplikasi)`;
+    html +=`<hr><div class="w3-center"><img src="/img/barloading.gif"></div>`
+    divkonten.innerHTML = html;
+    fetch(terminal+"?action=panggilsekolahasing").then(m=>m.json()).then(r=>{
+        let duplikatcitayam = r.duplikatcitayam;
+        let koleksi_idsekolah = r.koleksi_idsekolah;
+        let jurnlacitayam = r.jurnalciatyam;
+            html = "";
+            html +=`<h3 class="w3-center">Cek Pendaftar dari Sekolah Lain yang Mendaftar dengan Aplikasi ini</h3>`;
+            html +=`(Dalam kasus tahun ini, SDN Citayam 1 tidak menggunakan Aplikasi, sehingga di sini akan melacak data Jurnal SDN Citayam 1 dengan data yang telah di Jurnal di masing-masing sekolah pengguna aplikasi)`;
+            //Koleksi Data Pendaftar Citayam 1 yang mendaftar juga di Sekolah Lamaso
+            html +=`<h4 class="w3-center">Data Pendaftar SDN Citayam 1 yang Mendaftar Juga di SDN Lain</h4>`;
+            html +=`(Klik pada <b>kolom nama</b> untuk melihat detail di Jurnal SDN Citayam 1, atau klik <b>Status</b> untuk melihat detail dari Aplikasi PPDB ini)`
+            html +=`<table class="w3-table-all w3-tiny">`;
+            html +=`<head>`;
+                html +=`<tr>`;
+                    html +=`<th class="w3-khaki w3-border w3-center" colspan="3">Data Jurnal Citayam 1</th>`
+                    html +=`<th class="w3-pale-red w3-border w3-center"  colspan="4">Data Jurnal Webb PPDB</th>`
+                html +=`</tr>`
+                html +=`<tr>`;
+                    html +=`<th class="w3-border">No Urut</th>`;
+                    html +=`<th class="w3-khaki w3-border">No Form</th>`;
+                    html +=`<th class="w3-khaki w3-border">Nama CPDB</th>`;
+                    html +=`<th class="w3-pale-red w3-border">Mendaftar Selain di Citayam 1 di</th>`
+                    html +=`<th class="w3-pale-red w3-border">Status</th>`
+                    html +=`<th class="w3-pale-red w3-border">Keterangan Status</th>`
+                    html +=`<th class="w3-pale-red w3-border">ID Pendaftar</th>`
+                html +=`</tr>`;
+            html +=`</head>`;
+            html +=`<tbody>`;
+                for(let i = 0 ; i < duplikatcitayam.length ; i ++){
+                    let x = duplikatcitayam[i]
+                    let db = duplikatcitayam[i].nama_cpdb;
+                    let idsk = duplikatcitayam[i].tujuan_mendaftar;
+                    let namasekolah = koleksi_idsekolah.filter(s => s.id_sekolah == idsk)[0].nama_sekolah
+                    let nofor = jurnlacitayam.filter(s => s.nama_cpdb == db )[0].no_form;
+                    let no = jurnlacitayam.filter(s => s.nama_cpdb == db )[0].no;
+                    if(idsk == id_sekolah){
+                        html+=`<tr class="w3-pale-green">`;
+
+                    }else{
+                        html+=`<tr>`;
+
+                    }
+                        html +=`<td class="w3-border">${i+1}</td>`;
+                        html +=`<td class="w3-border">${nofor}</td>`;
+                        html +=`<td style="cursor:pointer" class="w3-border detailcitayam1" data-detailjurnalcitayam="${no}">${db}</td>`;
+                        html +=`<td class="w3-border">${namasekolah}</td>`;
+                        html +=`<td style="cursor:pointer" class="w3-border detaildatappdbbycitayam" data-detailjurnalWebcitayam="${x.baris_terminal}">${x.id_status}</td>`;
+                        html +=`<td class="w3-border">${x.ket_status}</td>`;
+                        html +=`<td class="w3-border">${x.id_pendaftar}</td>`;
+                    html+=`</tr>`;
+                }
+            html +=`</tbody>`;
+            html +=`</table><hr>`;
+
+        divkonten.innerHTML = html;
+        let details = document.querySelectorAll(".detailcitayam1");
+        for(let j = 0 ; j < details.length ; j++){
+            let klik = details[j];
+            klik.onclick = function (e) {
+                    let acuan = e.target.getAttribute("data-detailjurnalcitayam");
+                    console.log(acuan);
+                    let datajurnalcitayam = jurnlacitayam.filter(s => s.no == acuan)[0];
+                    console.log(acuan, datajurnalcitayam)
+                    let divid = document.getElementById("id_modal_info");
+                        divid.style.display = "block";
+                    let dividinfo = document.querySelector(".teks_info_modal");
+                    let html = `<h3 class="w3-center">Data Pendaftar Terjurnal di SDN Citayam 1</h3>`;
+                    html +=`<table class="w3-table-all w3-tiny w3-margin-bottom">`;
+                        html +=`<tr>`;
+                            html+=`<td>No Urut Jurnal</td><td>: ${datajurnalcitayam.no}</td>`
+                        html +=`</tr>`;
+                        html +=`<tr>`;
+                            html+=`<td>Nomor Form</td><td>: ${datajurnalcitayam.no_form}</td>`
+                        html +=`</tr>`;
+                        html +=`<tr>`;
+                            html+=`<td>Nama Anak</td><td>: ${datajurnalcitayam.nama_cpdb}</td>`
+                        html +=`</tr>`;
+                        html +=`<tr>`;
+                            html+=`<td>Tanggal Lahir</td><td>: ${tanggalfull(datajurnalcitayam.cpdb_tanggal_lahir)}</td>`
+                        html +=`</tr>`;
+                        html +=`<tr>`;
+                            html+=`<td>Nama Orang Tua</td><td>: ${datajurnalcitayam.ortu_nama_ayah}</td>`
+                        html +=`</tr>`;
+                    html +=`</table>`;
+                    dividinfo.innerHTML = html;
+            }
+
+        }
+        let detailss = document.querySelectorAll(".detaildatappdbbycitayam");
+        for(let j = 0 ; j < detailss.length ; j++){
+            let klik = detailss[j];
+            klik.onclick = function () {
+            let acuan = klik.getAttribute("data-detailjurnalWebcitayam");
+            let datajurnalcitayam = duplikatcitayam.filter(s => s.baris_terminal == acuan)[0];
+
+            
+                let divid = document.getElementById("id_modal_info");
+                    divid.style.display = "block";
+                let dividinfo = document.querySelector(".teks_info_modal");
+                let html = `<h3 class="w3-center">Data Pendaftar Terjurnal di SDN Citayam 1</h3>`;
+                html +=`<table class="w3-table-all w3-tiny w3-margin-bottom">`;
+                    html +=`<tr>`;
+                        html+=`<td>No Urut dB Terminal</td><td>: ${datajurnalcitayam.baris_terminal}</td>`
+                    html +=`</tr>`;
+                    html +=`<tr>`;
+                        html+=`<td>Status Pendaftaran</td><td>: ${datajurnalcitayam.id_status}</td>`
+                    html +=`</tr>`;
+                    html +=`<tr>`;
+                        html+=`<td>Nama Anak</td><td>: ${datajurnalcitayam.nama_cpdb}</td>`
+                    html +=`</tr>`;
+                    html +=`<tr>`;
+                        html+=`<td>Tanngal Lahir</td><td>: ${tanggalfull(datajurnalcitayam.cpdb_tanggal_lahir)}</td>`
+                    html +=`</tr>`;
+                    html +=`<tr>`;
+                        html+=`<td>Nama Orang Tua Ayah</td><td>: ${datajurnalcitayam.ortu_nama_ayah}</td>`
+                    html +=`</tr>`;
+                    html +=`<tr>`;
+                        html+=`<td>Nama Orang Tua Ibu</td><td>: ${datajurnalcitayam.ortu_nama_ibu}</td>`
+                    html +=`</tr>`;
+                    if(datajurnalcitayam.tujuan_mendaftar == id_sekolah){
+                        html +=`<tr>`;
+                            html+=`<td>Ubah Publikasi</td><td>: <button onclick="detailpublikasicpdb('${datajurnalcitayam.baris_terminal}','x','Prioritas tidak terdeteksi via fitur ini')">UBAH STATUS DI SEKOLAH INI</button></td>`
+                            
+                        html +=`</tr>`;
+                    }
+                html +=`</table><br>`;
+                dividinfo.innerHTML = html;
+            }
+
+        }
+    })
+}
+
+const format_dapodik = (reg) =>{
+    let divid = document.getElementById("id_modal_info");
+    let dividinfo = document.querySelector(".teks_info_modal");
+    divid.style.display = "block";
+
+    let html = "";
+    html +=`<div style="font-size:10px!important" class="areaprint_FPD">`
+    html +=`<h4 style="background-color:#FF5E4A;color:#fff;text-align:center;padding:5px">FORMULIR PESERTA DIDIK</h4>`;
+    html +=`<div style="border:.5pt solid #000;width:100px;float:right;padding:5px;text-align:center">F-PD</div>`;
+    html +=`<div style="clear:both"></div>`;
+    html +=`Tanggal:<span data-daftarulang="waktu_registrasi"></span>`;
+    html +=`<h5 style="background-color:blue;color:white;padding:1px 2px">DATA PRIBADI</h5>`;
+    html +=`<table style="border-collapse:collapse" border="0">`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">1.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left;">Nama Lengkap</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="nama_cpdb"></td>`
+        html +=`</tr>`;
+        //untuk keterangan di bawahnya
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama peserta didik sesuai dokumen resmi yang berlaku (Akta atau Ijazah sebelumnya ). Hanya bisa diubah melalui http://vervalpd.data.kemdikbud.go.id.`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">2.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Jenis Kelamin</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+                html +=`<input id="daftarulang_jk_l" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_jk" value="L">`;
+                html +=`<label for="daftarulang_jk_l">Laki-laki</label>`;
+                html +=`<input id="daftarulang_jk_p" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_jk" value="P">`;
+                html +=`<label for="daftarulang_jk_p">Perempuan</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">3.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NISN</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_nisn"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >Nomor Induk Siswa Nasional peserta didik (jika memiliki). Jika belum memiliki, maka wajib dikosongkan. NISN memiliki format 10 digit angka.<br>Contoh: 0009321234. Untuk memeriksa NISN, dapat mengunjungi laman http://nisn.data.kemdikbud.go.id/page/data</td>`
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">4.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK/No. KITAS(Untuk WNA)</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_nik"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga, Kartu Identitas Anak, atau KTP (jika sudah memiliki) bagi WNI. NIK memiliki format 16 digit angka. Contoh: 6112090906021104.<br><br>`
+                html +=`Pastikan NIK tidak tertukar dengan No. Kartu Keluarga, karena keduanya memiliki format yang sama. Bagi WNA, diisi dengan nomor Kartu Izin Tinggal Terbatas (KITAS)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">5.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">No KK</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_no_kk"></td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">6.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tempat Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_tempat_lahir"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tempat lahir peserta didik sesuai dokumen resmi yang berlaku`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">7.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tanggal Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_tanggal_lahir"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tanggal lahir peserta didik sesuai dokumen resmi yang berlaku. Hanya bisa diubah melalui http://vervalpd.data.kemdikbud.go.id`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">8.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">No Registrasi Akta lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_no_reg_akte"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor registrasi Akta Kelahiran. Nomor registrasi yang dimaksud umumnya tercantum pada bagian tengah atas lembar kutipan akta kelahiran`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">9.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Agama & Kepercayaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"><span data-daftarulang="cpdb_agama"></span><span style="margin-left:5px;color:black;padding:2px 5px;font-size:8px">01) Islam 02) Kristen/ Protestan 03) Katholik 04) Hindu 05) Budha 06) Khonghucu 07) Kepercayaan Kepada Tuhan YME</span></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Agama atau kepercayaan yang dianut oleh peserta didik. Apabila peserta didik adalah penghayat kepercayaan (misalnya pada daerah tertentu yang masih memiliki penganut kepercayaan), dapat memilih opsi Kepercayaan kpd Tuhan YME`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">10.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kewarganegaraan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_wni" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_wni" value="WNI">`;
+                html +=`<label for="daftarulang_wni">WNI</label>`;
+                html +=`<input id="daftarulang_wna" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_wni" value="WNA">`;
+                html +=`<label for="daftarulang_wna">WNA</label>`;
+                html +=`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama Negara : `;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kewarganegaraan peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">11.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="cpdb_abk"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan Khusus yang disandang peserta didik dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">12.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Alamat Jalan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee" data-daftarulang="cpdb_alamat_jalan"></td>`;
+        html +=`</tr>`;
+        
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Jalur tempat tinggal peserta didik, terdiri atas gang, kompleks, blok, nomor rumah, dan sebagainya selain informasi yang diminta oleh kolom-kolom 
+                yang lain pada bagian ini. Sebagai contoh, peserta didik tinggal di sebuah kompleks perumahan Griya Adam yang berada pada Jalan Kemanggisan, 
+                dengan nomor rumah 4-C, di lingkungan RT 005 dan RW 011, Dusun Cempaka, Desa Salatiga. Maka dapat diisi dengan Jl. Kemanggisan, Komp. Griya Adam, No. 4-C`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">13.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">RT</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee">`
+            html += `<div style="float:left" data-daftarulang="cpdb_rt"></div>`;
+            html += `<div style="float:left;color:#4CDEFF;font-size:8px" >Nomor RT tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan angka 5.</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+       
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">14.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">RW</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee">`
+                html += `<div style="float:left" data-daftarulang="cpdb_rw"></div>`
+                html += `<div style="float:left;color:#4CDEFF;font-size:8px" >Nomor RW tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan angka 11.</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">15.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Dusun</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama dusun tempat tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan Campak`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">16.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Nama Kelurahan/Desa</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_kel">`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama desa atau kelurahan tempat tinggal peserta didik saat ini. Dari contoh di atas, dapat diisi dengan Bayongbong`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">17.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kecamatan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_kec">`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kecamatan tempat tinggal peserta didik saat ini.`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">18.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kode Pos</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kode pos tempat tinggal peserta didik saat ini`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">19.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Lintang</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Titik Koordinat tempat tinggal siswa`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">20.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Bujur</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Titik Koordinat tempat tinggal siswa`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">21.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tempat Tinggal</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">01) Bersama orang tua 02) Wali 03) Kos 04) Asrama 05) Panti Asuhan</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kepemilikan tempat tinggal peserta didik saat ini (yang telah diisikan pada kolom-kolom sebelumnya di atas)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">22.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Moda Transportasi</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">01) Jalan kaki 02) Kendaraan pribadi 03) Kendaraan Umum/angkot/Pete-pete 04) Jemputan Sekolah 05) Kereta Api
+                06)Ojek 07)Andong/Bendi/Sado/ Dokar/Delman/Beca 08) Perahu penyebrangan/ Rakit/ Getek 99) Lainnya</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kepemilikan tempat tinggal peserta didik saat ini (yang telah diisikan pada kolom-kolom sebelumnya di atas)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">23.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Anak keberapa</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_anakke">`;
+                // html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="cpdb_anakke">&nbsp;&nbsp;</div>`;
+                //html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">01) Jalan kaki 02) Kendaraan pribadi 03) Kendaraan Umum/angkot/Pete-pete 04) Jemputan Sekolah 05) Kereta Api
+                  //      06)Ojek 07)Andong / Bendi / Sado / Dokar/Delman/Beca 08) Perahu penyebrangan/ Rakit/ Getek 99) Lainnya</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">24.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan (Diperuntukkan untuk warga belajar)</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">25.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Apakah punya KIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_punyakip_y" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_punyakip" value="Ya">`;
+                html +=`<label for="daftarulang_punyakip_y">Ya</label>`;
+                html +=`<input id="daftarulang_punyakip_t" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_punyakip" value="Tidak">`;
+                html +=`<label for="daftarulang_punyakip_t">Tidak</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pilih Ya apabila peserta didik memiliki Kartu Indonesia Pintar (KIP), pilih Tidak jikat tidak memiliki`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">26.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Apakah peserta didik tersebtu tetap akan menerima KIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_penerimakip_y" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_penerimakip" value="Ya">`;
+                html +=`<label for="daftarulang_penerimakip_y">Ya</label>`;
+                html +=`<input id="daftarulang_penerimakip_t" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_penerimakip" value="Tidak">`;
+                html +=`<label for="daftarulang_penerimakip_t">Tidak</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Status bahwa peserta didik sudah menerima atau belum menerima Kartu Indonesia Pintar secara fisik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">27.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Alasan menolak PIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Dilarang pemda karena menerima bantuan serupa 02)Menolak 03)Sudah Mampu`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Alasan utama peserta didik jika layak enerima manfaat PIP. Kolom ini akan muncul apabila dipilih Ya untuk mengisi kolom usulan dari sekolah (layak PIP)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        //Kecamatan tempat tinggal peserta didik saat ini.
+    // html +=`</table>`;
+    // html +=`<h5 style="background-color:blue;color:white;padding:1px 2px">DATA AYAH KANDUNG</h5>`;
+    // html +=`<table style="border-collapse:collapse" border="0">`;
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA AYAH KANDUNG</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">28.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama Ayah Kandung</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_ayah"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama ayah kandung peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">29.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK Ayah</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ayah kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">30.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir ayah kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">31.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_ayah">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">32.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_ayah">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila ayah kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">33.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_ayah">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">34.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="ortu_abk_ayah"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan khusus yang disandang oleh ayah peserta didik. Dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        //////////////ibu
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA IBU KANDUNG</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">35.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama ibu Kandung</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_ibu"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama ibu kandung peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">36.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK Ibu</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_ibu"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ibu kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">37.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_ibu"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir ibu kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">38.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_ibu">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">39.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_ibu">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila ibu kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">40.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_ibu">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">41.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="ortu_abk_ibu"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan khusus yang disandang oleh ibu peserta didik. Dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        ///wali
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA WALI</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">42.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama wali</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_wali"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama wali peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">43.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">NIK wali</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_wali"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">44.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_wali"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">45.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_wali">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">46.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_wali">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila wali kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">47.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_wali">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        //KONTAK
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">KONTAK</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">48.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Nomor Telepon Rumah</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Diisi nomor telepon rumah (milik pribadi, orang tua, atau wali) tanpa tanda baca`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">49.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Nomor HP</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_hp_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify"  data-daftarulang="ortu_hp_ibu" >`;
+                // html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                 html +=`Diisi nomor telepon selular (milik pribadi, orang tua, atau wali) tanpa tanda baca. (No HP Ayah/No. HP Ibu)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">50.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Email</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Diisi alamat surat elektronik (surel) peserta didik yang dapat dihubungi (milik pribadi, orang tua, atau wali)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+    html +=`</table><br><br>`;
+    html +=`<div style="float:left;width:49.9%;text-align:center">`;
+        html +=`........................2022<br>Wali Kelas<br><br><br><br>.............................`
+    html +=`</div>`;
+    html +=`<div style="float:right;width:49.9%;text-align:center">`;
+        html +=`........................2022<br>Orang Tua/Wali Siswa<br><br><br><br>.............................`
+    html +=`</div>`;
+    html +=`<div style="clear:both"></div>`
+    
+
+
+    html +=`</div><hr><hr class="w3-border-bottom w3-border w3-border-black">`;
+    html +=`<div class="w3-center"><button onclick="printF_PD('areaprint_FPD','Formulir Peserta Didik')">Print</button></div>`
+    dividinfo.innerHTML = html;
+    let data = new FormData();
+    data.append("action", "postgetumum");
+    data.append("idss", idsss);
+    data.append("tab", "daftarulang");
+    
+    fetch(urllogin, {method: 'post',body: data}).then(m => m.json()).then(r =>{
+        let db_du = r.records.filter(s => s.id_registrasi == reg)[0];
+        let elemens = document.querySelectorAll("[data-daftarulang]");
+        for(let a = 0 ; a < elemens.length ; a++){
+            let elemen = elemens[a]
+            let key = elemen.getAttribute("data-daftarulang");
+            let val = db_du[key];
+            if(key.indexOf("tanggal")>-1 || key.indexOf("tgl")>-1|| key.indexOf("waktu")>-1|| key.indexOf("ttl")>-1){
+                let t = new Date(val);
+                let d = t.getDate();
+                let m = t.getMonth()+1;
+                let y = t.getFullYear();
+                elemen.innerHTML = splitteks(addZero(d).toString()) +"   /   " + splitteks(addZero(m).toString()) + "   /   " + splitteks(addZero(y).toString());
+            }else if(key.indexOf("agama")>-1){
+                elemen.innerHTML = teksagama(val);
+            }else if(key.indexOf("_abk")>-1){
+                elemen.innerHTML = teks_abk(val);
+            }else if(key == "cpdb_alamat_jalan"){
+                elemen.innerHTML = val;
+            }else if(key.indexOf("pendidikan")>-1){
+                elemen.innerHTML = pendidikan_split(val);
+            }else if(key.indexOf("_rt")>-1 || key.indexOf("_rw")>-1){
+                elemen.innerHTML = `<span style="border:.5pt solid #000;padding:2px 5px;">0</span>` + splitteks(addZero(val.toString()));;
+            }else if(key.indexOf("anakke")>-1){
+                elemen.innerHTML = splitteks(addZero(addZero(val).toString()));;
+            }else if(key.indexOf("penghasilan")>-1){
+                elemen.innerHTML = penghasilan_split(val)
+            }else if(key.indexOf("pekerjaan")>-1){
+                elemen.innerHTML = pekerjaansplit(val)
+            }
+            //else if(key.indexOf("_hp")>-1){
+              //  elemen.innerHTML = `<span style="border:.5pt solid #000;padding:2px 5px;">+</span><span style="border:.5pt solid #000;padding:2px 5px;">6</span><span style="border:.5pt solid #000;padding:2px 5px;">2</span>`+splitteks(val.toString());
+            //}
+            else{
+                if(val == ""){
+                    let html = "";
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                    elemen.innerHTML = html ;//`<b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b>`;
+                }else{
+                    if(key.indexOf("_hp")>-1){
+                        elemen.innerHTML =`<span style="border:.5pt solid #000;padding:2px 5px;">+</span><span style="border:.5pt solid #000;padding:2px 5px;">6</span><span style="border:.5pt solid #000;padding:2px 5px;">2</span>`+splitteks(val.toString());
+                    }else{
+                        elemen.innerHTML = splitteks(val.toString());
+                    }
+
+                }
+            }
+        }
+        //khusus RADIO
+        //jk
+        let jk = db_du.cpdb_jk;
+        if(jk == "L"){
+            document.getElementById("daftarulang_jk_l").checked = true
+        }else{
+            document.getElementById("daftarulang_jk_p").checked = true
+        }
+
+    }).catch(er => console.log(er))
+
+}
+const format_dapodik2 = (reg) =>{
+    let divid = document.getElementById("id_modal_info");
+    let dividinfo = document.querySelector(".teks_info_modal");
+    divid.style.display = "block";
+
+    let html = "";
+    html +=`<div style="font-size:10px!important" class="areaprint_FPD">`
+    html +=`<h4 style="background-color:#FF5E4A;color:#fff;text-align:center;padding:5px">FORMULIR PESERTA DIDIK</h4>`;
+    html +=`<div style="border:.5pt solid #000;width:100px;float:right;padding:5px;text-align:center">F-PD</div>`;
+    html +=`<div style="clear:both"></div>`;
+    html +=`Tanggal: <span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>   /  <span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>   /   <span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+    html +=``;
+                
+    html +=`<h5 style="background-color:blue;color:white;padding:1px 2px">DATA PRIBADI</h5>`;
+    html +=`<table style="border-collapse:collapse" border="0">`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">1.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left;">Nama Lengkap</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="nama_cpdb"></td>`
+        html +=`</tr>`;
+        //untuk keterangan di bawahnya
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama peserta didik sesuai dokumen resmi yang berlaku (Akta atau Ijazah sebelumnya ). Hanya bisa diubah melalui http://vervalpd.data.kemdikbud.go.id.`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">2.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Jenis Kelamin</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+                html +=`<input id="daftarulang_jk_l" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_jk" value="L">`;
+                html +=`<label for="daftarulang_jk_l">Laki-laki</label>`;
+                html +=`<input id="daftarulang_jk_p" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_jk" value="P">`;
+                html +=`<label for="daftarulang_jk_p">Perempuan</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">3.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NISN</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_nisn"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >Nomor Induk Siswa Nasional peserta didik (jika memiliki). Jika belum memiliki, maka wajib dikosongkan. NISN memiliki format 10 digit angka.<br>Contoh: 0009321234. Untuk memeriksa NISN, dapat mengunjungi laman http://nisn.data.kemdikbud.go.id/page/data</td>`
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">4.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK/No. KITAS(Untuk WNA)</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_nik"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga, Kartu Identitas Anak, atau KTP (jika sudah memiliki) bagi WNI. NIK memiliki format 16 digit angka. Contoh: 6112090906021104.<br><br>`
+                html +=`Pastikan NIK tidak tertukar dengan No. Kartu Keluarga, karena keduanya memiliki format yang sama. Bagi WNA, diisi dengan nomor Kartu Izin Tinggal Terbatas (KITAS)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">5.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">No KK</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_no_kk"></td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">6.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tempat Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_tempat_lahir"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tempat lahir peserta didik sesuai dokumen resmi yang berlaku`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">7.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tanggal Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_tanggal_lahir"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tanggal lahir peserta didik sesuai dokumen resmi yang berlaku. Hanya bisa diubah melalui http://vervalpd.data.kemdikbud.go.id`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">8.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">No Registrasi Akta lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="cpdb_no_reg_akte"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor registrasi Akta Kelahiran. Nomor registrasi yang dimaksud umumnya tercantum pada bagian tengah atas lembar kutipan akta kelahiran`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">9.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Agama & Kepercayaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"><span data-daftarulang="cpdb_agama"></span><span style="margin-left:5px;color:black;padding:2px 5px;font-size:8px">01) Islam 02) Kristen/ Protestan 03) Katholik 04) Hindu 05) Budha 06) Khonghucu 07) Kepercayaan Kepada Tuhan YME</span></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Agama atau kepercayaan yang dianut oleh peserta didik. Apabila peserta didik adalah penghayat kepercayaan (misalnya pada daerah tertentu yang masih memiliki penganut kepercayaan), dapat memilih opsi Kepercayaan kpd Tuhan YME`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">10.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kewarganegaraan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_wni" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_wni" value="WNI">`;
+                html +=`<label for="daftarulang_wni">WNI</label>`;
+                html +=`<input id="daftarulang_wna" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_wni" value="WNA">`;
+                html +=`<label for="daftarulang_wna">WNA</label>`;
+                html +=`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama Negara : `;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kewarganegaraan peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">11.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="cpdb_abk"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan Khusus yang disandang peserta didik dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">12.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Alamat Jalan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee" data-daftarulang="cpdb_alamat_jalan"></td>`;
+        html +=`</tr>`;
+        
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Jalur tempat tinggal peserta didik, terdiri atas gang, kompleks, blok, nomor rumah, dan sebagainya selain informasi yang diminta oleh kolom-kolom 
+                yang lain pada bagian ini. Sebagai contoh, peserta didik tinggal di sebuah kompleks perumahan Griya Adam yang berada pada Jalan Kemanggisan, 
+                dengan nomor rumah 4-C, di lingkungan RT 005 dan RW 011, Dusun Cempaka, Desa Salatiga. Maka dapat diisi dengan Jl. Kemanggisan, Komp. Griya Adam, No. 4-C`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">13.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">RT</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee">`
+            html += `<div style="float:left" data-daftarulang="cpdb_rt"></div>`;
+            html += `<div style="float:left;color:#4CDEFF;font-size:8px" >Nomor RT tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan angka 5.</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+       
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">14.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">RW</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;border-bottom:.5pt solid #eee">`
+                html += `<div style="float:left" data-daftarulang="cpdb_rw"></div>`
+                html += `<div style="float:left;color:#4CDEFF;font-size:8px" >Nomor RW tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan angka 11.</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">15.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Dusun</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama dusun tempat tinggal peserta didik saat ini. Dari contoh di atas, misalnya dapat diisi dengan Campak`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">16.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Nama Kelurahan/Desa</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_kel">`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama desa atau kelurahan tempat tinggal peserta didik saat ini. Dari contoh di atas, dapat diisi dengan Bayongbong`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">17.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kecamatan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_kec">`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kecamatan tempat tinggal peserta didik saat ini.`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">18.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Kode Pos</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`;
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kode pos tempat tinggal peserta didik saat ini`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">19.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Lintang</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Titik Koordinat tempat tinggal siswa`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">20.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Bujur</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Titik Koordinat tempat tinggal siswa`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">21.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tempat Tinggal</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">01) Bersama orang tua 02) Wali 03) Kos 04) Asrama 05) Panti Asuhan</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kepemilikan tempat tinggal peserta didik saat ini (yang telah diisikan pada kolom-kolom sebelumnya di atas)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">22.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Moda Transportasi</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">01) Jalan kaki 02) Kendaraan pribadi 03) Kendaraan Umum/angkot/Pete-pete 04) Jemputan Sekolah 05) Kereta Api
+                06)Ojek 07)Andong/Bendi/Sado/ Dokar/Delman/Beca 08) Perahu penyebrangan/ Rakit/ Getek 99) Lainnya</span>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kepemilikan tempat tinggal peserta didik saat ini (yang telah diisikan pada kolom-kolom sebelumnya di atas)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">23.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Anak keberapa</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left" data-daftarulang="cpdb_anakke">`;
+                // html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="cpdb_anakke">&nbsp;&nbsp;</div>`;
+                //html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">01) Jalan kaki 02) Kendaraan pribadi 03) Kendaraan Umum/angkot/Pete-pete 04) Jemputan Sekolah 05) Kereta Api
+                  //      06)Ojek 07)Andong / Bendi / Sado / Dokar/Delman/Beca 08) Perahu penyebrangan/ Rakit/ Getek 99) Lainnya</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">24.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan (Diperuntukkan untuk warga belajar)</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">25.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Apakah punya KIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_punyakip_y" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_punyakip" value="Ya">`;
+                html +=`<label for="daftarulang_punyakip_y">Ya</label>`;
+                html +=`<input id="daftarulang_punyakip_t" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_punyakip" value="Tidak">`;
+                html +=`<label for="daftarulang_punyakip_t">Tidak</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pilih Ya apabila peserta didik memiliki Kartu Indonesia Pintar (KIP), pilih Tidak jikat tidak memiliki`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">26.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Apakah peserta didik tersebtu tetap akan menerima KIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<input id="daftarulang_penerimakip_y" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_penerimakip" value="Ya">`;
+                html +=`<label for="daftarulang_penerimakip_y">Ya</label>`;
+                html +=`<input id="daftarulang_penerimakip_t" type="radio" style="width:10px;height:10px;position:relative;margin:2px 5px" name="daftarulang_penerimakip" value="Tidak">`;
+                html +=`<label for="daftarulang_penerimakip_t">Tidak</label>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Status bahwa peserta didik sudah menerima atau belum menerima Kartu Indonesia Pintar secara fisik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">27.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Alasan menolak PIP</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+            html +=`<span style="margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Dilarang pemda karena menerima bantuan serupa 02)Menolak 03)Sudah Mampu`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Alasan utama peserta didik jika layak enerima manfaat PIP. Kolom ini akan muncul apabila dipilih Ya untuk mengisi kolom usulan dari sekolah (layak PIP)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        //Kecamatan tempat tinggal peserta didik saat ini.
+    // html +=`</table>`;
+    // html +=`<h5 style="background-color:blue;color:white;padding:1px 2px">DATA AYAH KANDUNG</h5>`;
+    // html +=`<table style="border-collapse:collapse" border="0">`;
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA AYAH KANDUNG</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">28.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama Ayah Kandung</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_ayah"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama ayah kandung peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">29.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK Ayah</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ayah kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">30.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir ayah kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">31.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_ayah">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">32.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_ayah">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila ayah kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">33.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_ayah">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">34.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="ortu_abk_ayah"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan khusus yang disandang oleh ayah peserta didik. Dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        //////////////ibu
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA IBU KANDUNG</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">35.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama ibu Kandung</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_ibu"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama ibu kandung peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">36.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">NIK Ibu</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_ibu"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP ibu kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">37.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_ibu"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir ibu kandung peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">38.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_ibu">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">39.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_ibu">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila ibu kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">40.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_ibu">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">41.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Berkebutuhan Khusus</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify">`;
+            html +=`<div style="float:left;" data-daftarulang="ortu_abk_ibu"></div>
+            <div style="float:right;margin-left:5px;color:black;padding:2px 5px;font-size:8px">
+                01)Tidak 02)Netra(A) 03)Rungu(B) 04)Grahita Ringan(C) 05)Grahita Sedang(C1) 
+                06)Daksa Ringan(D) 07)Daksa Sedang(D1) 08)Laras 09)Wicara(F) 10)Tuna Ganda(G) 
+                11)Hiperaktif(H) 12)Cerdas Istimewa(i) 13)Bakat Istimewa (J) 14)Kesulitan Belajar (K) 
+                15)Narkoba(N) 16)Indigo(O) 17)Down Sindrome(P) 18)Autis(Q) 
+            </div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Kebutuhan khusus yang disandang oleh ibu peserta didik. Dapat dipilih lebih dari satu`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        ///wali
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">DATA WALI</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">42.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left;">Nama wali</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left;line-height:20px" data-daftarulang="ortu_nama_wali"></td>`
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nama wali peserta didik sesuai dokumen resmi yang berlaku. Hindari penggunaan gelar akademik atau sosial (seperti Alm., Dr., Drs., S.Pd, dan H.)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">43.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">NIK wali</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_nik_wali"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">44.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Tahun Lahir</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_ttl_wali"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Tahun lahir wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`; 
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">45.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pendidikan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+                html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pendidikan_wali">&nbsp;&nbsp;</div>`;
+                html +=`<div style="float:left;width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+                    01)Tidak Sekolah 02)Putus SD 03)SD Sederajat 04)SMP Sederajat 05)SMA Sederajat 
+                        06)D1 07)D2 08)D3 09)D4/S1 10)S1 11)S2</div>`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Sesuaikan dengan urutan pada kartu Keluarga`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">46.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Pekerjaan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_pekerjaan_wali">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01)Tidak bekerja 02)Nelayan 03)Petani 04)Peternak 05)PNS/TNI/POLRI 06)Karyawan Swasta 07)Pedagang kecil 08)Pedagang Besar 09)Wiraswasta 10)Wirausaha 11)Buruh 12)Pensiunan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Pekerjaan utama yah kandung peserta didik. Pilih Meninggal Dunia apabila wali kandung peserrta didik telah meninggal dunia`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html+=`<tr>`;
+            html +=`<td style="width:5px;padding:2px 5px;vertical-align:top;text-align:center">47.</td>`
+            html +=`<td style="width:205px;padding:2px 5px;vertical-align:top;text-align:left">Penghasilan Bulanan</td>`;
+            html +=`<td style="width:1px;vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:left">`;
+            html +=`<div style="float:left;padding:2px 5px;" data-daftarulang="ortu_penghasilan_wali">&nbsp;&nbsp;</div>`;
+            html +=`<div style="float:left; width:95%;margin-left:5px;font-size:8px;padding:2px 5px;">
+            01) < Rp. 500.000 02) Rp. 500.000-Rp.999.999 03) Rp. 1.000.000-Rp.1.999.999  04) Rp.2.000.000-Rp.4.999.999 05) Rp.5.000.000-Rp.20.000.000 06) > Rp.20.000.000 07) Tidak Berpenghasilan</div>`
+            html +=`</td>`;
+        html +=`</tr>`;
+        //KONTAK
+        html +=`<tr><td colspan="4"><h5 style="background-color:blue;color:white;padding:1px 2px">KONTAK</h5></td></tr>`
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">48.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Nomor Telepon Rumah</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Diisi nomor telepon rumah (milik pribadi, orang tua, atau wali) tanpa tanda baca`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">49.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Nomor HP</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify" data-daftarulang="ortu_hp_ayah"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify"  data-daftarulang="ortu_hp_ibu" >`;
+                // html +=`Nomor Induk Kependudukan yang tercantum pada Kartu Keluarga atau KTP wali peserta didik`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                 html +=`Diisi nomor telepon selular (milik pribadi, orang tua, atau wali) tanpa tanda baca. (No HP Ayah/No. HP Ibu)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+        html+=`<tr>`;
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:center">50.</td>`
+            html +=`<td style="padding:2px 5px;vertical-align:top;text-align:left">Email</td>`;
+            html +=`<td style="vertical-align:top">:</td>`
+            html +=`<td style="vertical-align:top;text-align:justify"></td>`;
+        html +=`</tr>`;
+        html +=`<tr>`;
+            html +=`<td colspan="3"></td>`;
+            html +=`<td style="vertical-align:top;text-align:justify;color:#4CDEFF;font-size:8px" >`;
+                html +=`Diisi alamat surat elektronik (surel) peserta didik yang dapat dihubungi (milik pribadi, orang tua, atau wali)`;
+            html +=`</td>`;
+        html +=`</tr>`;
+        
+    html +=`</table><br><br>`;
+    html +=`<div style="float:left;width:49.9%;text-align:center">`;
+        html +=`........................2022<br>Wali Kelas<br><br><br><br>.............................`
+    html +=`</div>`;
+    html +=`<div style="float:right;width:49.9%;text-align:center">`;
+        html +=`........................2022<br>Orang Tua/Wali Siswa<br><br><br><br>.............................`
+    html +=`</div>`;
+    html +=`<div style="clear:both"></div>`
+    
+
+
+    html +=`</div><hr><hr class="w3-border-bottom w3-border w3-border-black">`;
+    html +=`<div class="w3-center"><button onclick="printF_PD('areaprint_FPD','Formulir Peserta Didik')">Print</button></div>`
+    dividinfo.innerHTML = html;
+    let data = new FormData();
+    data.append("action", "postgetumum");
+    data.append("idss", idsss);
+    data.append("tab", "respon");
+    
+    fetch(urllogin, {method: 'post',body: data}).then(m => m.json()).then(r =>{
+        let db_du = r.records.filter(s => s.id_pendaftar == reg)[0];
+        let elemens = document.querySelectorAll("[data-daftarulang]");
+        for(let a = 0 ; a < elemens.length ; a++){
+            let elemen = elemens[a]
+            let key = elemen.getAttribute("data-daftarulang");
+            let val = db_du[key];
+            if(key.indexOf("tanggal")>-1 || key.indexOf("tgl")>-1|| key.indexOf("waktu")>-1|| key.indexOf("ttl")>-1){
+                let t = new Date(val);
+                let d = t.getDate();
+                let m = t.getMonth()+1;
+                let y = t.getFullYear();
+                elemen.innerHTML = splitteks(addZero(d).toString()) +"   /   " + splitteks(addZero(m).toString()) + "   /   " + splitteks(addZero(y).toString());
+            }else if(key.indexOf("agama")>-1){
+                elemen.innerHTML = teksagama(val);
+            }else if(key.indexOf("_abk")>-1){
+                elemen.innerHTML = teks_abk(val);
+            }else if(key == "cpdb_alamat_jalan"){
+                elemen.innerHTML = val;
+            }else if(key.indexOf("pendidikan")>-1){
+                elemen.innerHTML = pendidikan_split(val);
+            }else if(key.indexOf("_rt")>-1 || key.indexOf("_rw")>-1){
+                elemen.innerHTML = `<span style="border:.5pt solid #000;padding:2px 5px;">0</span>` + splitteks(addZero(val.toString()));;
+            }else if(key.indexOf("anakke")>-1){
+                elemen.innerHTML = splitteks(addZero(addZero(val).toString()));;
+            }else if(key.indexOf("penghasilan")>-1){
+                elemen.innerHTML = penghasilan_split(val)
+            }else if(key.indexOf("pekerjaan")>-1){
+                elemen.innerHTML = pekerjaansplit(val)
+            }
+            //else if(key.indexOf("_hp")>-1){
+              //  elemen.innerHTML = `<span style="border:.5pt solid #000;padding:2px 5px;">+</span><span style="border:.5pt solid #000;padding:2px 5px;">6</span><span style="border:.5pt solid #000;padding:2px 5px;">2</span>`+splitteks(val.toString());
+            //}
+            else{
+                if(val == ""){
+                    let html = "";
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span><span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+                    elemen.innerHTML = html ;//`<b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b><b style="border:.5pt solid #eee;padding:2px 5px">&nbsp;</b>`;
+                }else{
+                    if(key.indexOf("_hp")>-1){
+                        elemen.innerHTML =`<span style="border:.5pt solid #000;padding:2px 5px;">+</span><span style="border:.5pt solid #000;padding:2px 5px;">6</span><span style="border:.5pt solid #000;padding:2px 5px;">2</span>`+splitteks(val.toString());
+                    }else{
+                        elemen.innerHTML = splitteks(val.toString());
+                    }
+
+                }
+            }
+        }
+        //khusus RADIO
+        //jk
+        let jk = db_du.cpdb_jk;
+        if(jk == "L"){
+            document.getElementById("daftarulang_jk_l").checked = true
+        }else{
+            document.getElementById("daftarulang_jk_p").checked = true
+        }
+
+    }).catch(er => console.log(er))
+
+}
+const splitteks = (tek) =>{
+    let html = ""
+    for(let i = 0 ; i < tek.length ; i++){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">${tek[i]}</span>`;
+    }
+    
+    return html
+}
+const teksagama = (val) =>{
+    let html = ""
+    if(val == "ISLAM"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "KRISTEN"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else if(val == "KATHOLIK"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "HINDU"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "BUDHA"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">5</span>`;
+    }else if(val == "KHONGHUCU"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "LAINNYA"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else{
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;"> </span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;"> </span>`;
+    }
+    return html;
+}
+const teks_abk = (val)=>{
+    let html ="";
+    // html +=`01)Tidak 02)Netra (A)  03)Rungu (B) 05)Grahita Ringan (C) 06)Grahita Sedang (C1) 
+    // 07)Daksa Ringan (D) 08)Daksa Sedang (D1) 09)Indigo (O) 09)Down Sindrome (P) 10)Autis (Q) 
+    // 11)Laras ( E) 12)Wicara (F) 13)Tuna Ganda (G) 14)Hiperaktif (H) 15)Cerdas Istimewa (i) 
+    // 16)Bakat Istimewa (J) 17)Kesulitan Belajar (K)`
+    if(val == "BELUM PILIH"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+    }else if(val == "TIDAK"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "NETRA (A)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else if(val == "RUNGU (B)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "GRAHITA RINGAN (C)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "GRAHITA SEDANG (C1)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">5</span>`;
+    }else if(val == "DAKSA RINGAN (D)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "DAKSA SEDANG (D1)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else if(val == "LARAS (E)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">8</span>`;
+    }else if(val == "WICARA (F)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">9</span>`;
+    }else if(val == "TUNA GANDA (G)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+    }else if(val == "HIPERAKTIF (H)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "CERDAS ISTIMEWA (I)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "KESULITAN BELAJAR (K)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "INDIGO (O)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "DOWN SINDROME (P)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else if(val == "AUTIS (Q)"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">8</span>`;
+    }else{
+        let tek = val.toString();
+        for(let i = 0 ; i < tek.length ; i++){
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">${tek[i]}</span>`;
+        }
+    }
+   return html
+}
+
+const pekerjaansplit = (val) =>{
+    let html ="";
+    if(val == "Belum Memilih"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+    }else if(val == "Tidak Bekerja"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "Nelayan"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else if(val == "Petani"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "Peternak"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "PNS/TNI/Polri"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">5</span>`;
+    }else if(val == "Karyawan Swasta"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "Pedagang Kecil"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else if(val == "Pedagang Besar"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">8</span>`;
+    }else if(val == "Wiraswasta"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">9</span>`;
+    }else if(val == "Wirausaha"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+    }else if(val == "Buruh"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "Pensiunan"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else{
+        let tek = val.toString();
+        for(let i = 0 ; i < tek.length ; i++){
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">${tek[i]}</span>`;
+        }
+    }
+    return html
+}
+const pendidikan_split = (val) =>{
+    let html ="";
+    if(val == "Tidak Sekolah"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "Putus SD"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else if(val == "SD Sederajat"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "SMP Sederajat"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "SMA Sederajat"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">5</span>`;
+    }else if(val == "D1"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "D2"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else if(val == "D3"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">8</span>`;
+    }else if(val == "D4/S1"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">9</span>`;
+    }else if(val == "S2"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+    }else if(val == "S3"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else{
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+    }
+    return html
+}
+const penghasilan_split = (val) =>{
+    let html ="";
+    if(val == "Belum Memilih"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">&nbsp;&nbsp;</span>`;
+    }else if(val == "Kurang dari Rp. 500.000"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">1</span>`;
+    }else if(val == "Rp. 500.000 - Rp. 999.999"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">2</span>`;
+    }else if(val == "Rp. 1.000.000 - Rp. 1.999.999"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">3</span>`;
+    }else if(val == "Rp. 2.000.000 - Rp. 4.999.999"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">4</span>`;
+    }else if(val == "Rp. 5.000.000 - Rp. 20.000.000"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">5</span>`;
+    }else if(val == "Lebih dari Rp.20.000.000"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">6</span>`;
+    }else if(val == "Tidak Berpenghasilan"){
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">0</span>`;
+        html +=`<span style="border:.5pt solid #000;padding:2px 5px;">7</span>`;
+    }else{
+         let tek = val.toString();
+        for(let i = 0 ; i < tek.length ; i++){
+            html +=`<span style="border:.5pt solid #000;padding:2px 5px;">${tek[i]}</span>`;
+        }
+    }
+    return html
+}
+const printF_PD = (kelas,judul)=>{
+    let isibody = document.querySelector("." + kelas).innerHTML;
+    //let judul;
+    // if (kelas =="nTB_tidaklolosseleksi"){
+    //     judul ="DATA PENDAFTAR TIDAK LOLOS SELEKSI<br/>(DIKEMBALIKAN, DITOLAK, dan MENDAFTAR GANDA)";
+    // }else{
+    //     judul ="DATA PENDAFTAR YANG MENDAFTAR LEBIH DARI SATU SEKOLAH";
+    // };
+
+
+    //let tabel2 = document.querySelector("." + kelasgagal).outerHTML;
+    let el = document.getElementById("iframeprint");
+    let doc =  el.contentDocument || el.contentWindow.document;;//el.contentDocument;
+    // head, body
+    let head = doc.head;
+    let body = doc.body;
+    //isikan HEAD dengan title, style, link, dll.
+    head.innerHTML = `<title>${judul}</title>`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link href="https://fonts.googleapis.com/css?family=Raleway">`;
+    head.innerHTML += `<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>`;
+    head.innerHTML += `<style type="text/css"> .versii-table{width:950px;max-width:100%;border-collapse:collapse}.versi-table{width:auto;max-width:100%;border-collapse:collapse}.versi-table td,.versi-table th,.versi-table tr,.versii-table td,.versii-table th,.versii-table tr{border:1px solid #000;color:#000;padding:5px 10px 5px 10px}.versi-table th,.versii-table th{background-color:#eee;color:#00f;vertical-align:middle;text-align:center}.versi-table tr:nth-of-type(even) td,.versii-table tr:nth-of-type(even) td{border:0;background-color:#fff;border:1px solid #000}.versi-table tr:nth-of-type(odd) td,.versii-table tr:nth-of-type(odd) td{border:0;background-color:#eef;border:1px solid #000} .garis td,.garis th,.garis tr{border:0.5px solid rgb(119, 116, 116)} .garis th{border:1px solid #000;text-align:center;vertical-align:middle} </style>`;
+
+    head.innerHTML += `<style type="text/css" media="print">
+    @media print {
+        html,body{margin:0;padding:0}
+        
+         @page {
+            size: A4 portrait;
+            max-height:100%;
+            max-width:100%;
+            
+            }
+    }
+    </style>`;
+
+
+
+    // body.innerHTML = `<h3 class="w3-center">PPDB ${val_namasekolah.toUpperCase()} TAHUN PELAJARAN 2021/2022</h3>`;
+    // body.innerHTML += `<h4 class="w3-center">${judul.toUpperCase()}</h4>`;
+    // body.innerHTML += `<table class="w3-table-all garis ntnt_new">${isibody}</table>`;
+    body.innerHTML = isibody;
+    // let asal = document.querySelector("."+kelas)
+    // let cekradio_JK = asal.querySelectorAll("[daftarulang_jk]")
+    // let jk
+    // cekradio_JK.forEach(el =>{
+    //     if(el.checked){
+    //         let id = el.getAttribute("id");
+    //         doc.getElementById(id).checked = true
+    //         console.log(doc.getElementById(id))
+    //     }
+    // })
+
+
+
+    window.frames["iframeprint"].focus();
+    window.frames["iframeprint"].print();
+}

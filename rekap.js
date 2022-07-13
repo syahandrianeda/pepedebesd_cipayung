@@ -19,7 +19,7 @@ const rekap_panggilsemuadata = async () => {
       </div>
       <div class="tabelrekappengawas w3-border w3-border-blue w3-round-large w3-margin w3-white" style="overflow-x: auto;">
         <h4 class="w3-center" contenteditable="true">DATA PESERTA DIDIDK BARU SD NEGERI KECAMATAN CIPAYUNG</h4>
-        <h5 class="w3-center" contenteditable="true">TAHUN PELAJARAN 2021/2022</h5> 
+        <h5 class="w3-center" contenteditable="true">TAHUN PELAJARAN 2022/2023</h5> 
         <table class="w3-table-all garis rekaptabelsekecamatan w3-tiny">
           <thead >
             <tr class="w3-light-grey">
@@ -50,7 +50,7 @@ const rekap_panggilsemuadata = async () => {
         <br>
         <br>
         <div class="w3-cente w3-small" style="float:right;margin-right: 30px;">
-          Depok, <span contenteditable="true"> Juli 2021</span><br>
+          Depok, <span contenteditable="true"> Juli 2022</span><br>
           <span contenteditable="true">Koordintor Pengawas Kec. Cipayung</span>
           <br>
           <br>
@@ -67,146 +67,153 @@ const rekap_panggilsemuadata = async () => {
       <br>
     </div>`
 
-    let urlscript = [{
-        "sekolah": "SDN RATUJAYA 1",
-        "kelas": "kuota_ratujaya1",
-        "url": "https://script.google.com/macros/s/AKfycbzpl-CIjAjTVOwlpf7ZKQ34hELzrPupKNF1v94yz9nU4AKY5RfUaMg3pP70lYd3iYkk/exec",
-        "idss": "1U65gnNh7bRfZlD0B3JxZ6B5j6RFgyD77ro67jvrQ1Hg",
-        "ppdb": "https://script.google.com/macros/s/AKfycbw_CxeurtA5idnQukkl7-xtnFWITXc-tgrqQ7F6OKiKUepV0gWUA5Jl4lR4sBDFC8j6/exec"
-    }, {
-        "sekolah": "SDN RATUJAYA 2",
-        "kelas": "kuota_ratujaya2",
-        "url": "https://script.google.com/macros/s/AKfycbyomW88hiqeaM6EKAr3nul28QoXcukop3E61r9Byf10NJtE3xkybat0v9kqSh3-ySahVA/exec",
-        "idss": "1avLVXKt-LVXs3XB_Q452L0a4-bjmZDEjEr1npKzdigY",
-        "ppdb": "https://script.google.com/macros/s/AKfycbwBzMzpHXe4tt-t0ZkINwF65cPcPAfonUMAHb3FO7BfXZVSO0drotC_S2HzYnBpJfeGBw/exec"
-    }, {
-        "sekolah": "SDN PONDOK TERONG 1",
-        "kelas": "kuota_ponter1",
-        "idss": "10ikKaNupSl6Ssww0KEWw9o8sQJQ1RpA1c3U8po4LYuQ",
-        "url": "https://script.google.com/macros/s/AKfycbyZOmnGVRMZfoopwLIoQ2LeDmayjdP7_wTU53HOBwGfiM_ylU0wKuzJyzGjcJs_9ySmgA/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbyfogeCk3qiRblZA0cnwujJqdHoNKwkHveEfw7WyeFdfDOFL6FuOe0Wf1P-oPVlsBoe/exec"
-    }, {
-        "sekolah": "SDN PONDOK TERONG 3",
-        "kelas": "kuota_ponter3",
-        "url": "https://script.google.com/macros/s/AKfycbx4UVsESvnS-HFQOLZ1HPHtuYWI9K1aApAc_yxmDZQpEImXUKNH9ZWL-ex_lmyNppzj/exec",
-        "idss": "1zKMNI-AhN4ziGhZ20p_bMZAOjE50HMBJ6-NG_QqobDc",
-        "ppdb": "https://script.google.com/macros/s/AKfycbzYMPW4a9VJUVLC5OKjUwYiJYjyaq8HLaih1IWOxTqa04nOyVByLJQIdpLeukZx5py3/exec"
-    }, {
-        "sekolah": "SDN PONDOK TERONG 4",
-        "kelas": "kuota_ponter4",
-        "url": "https://script.google.com/macros/s/AKfycbzgtCkGubK9ANlTswcRHzaP-xqQd8lqxZLjT3DkAb1KZ-CJ_b80dNcTMqdcyHUOdACv0A/exec",
-        "idss": "1bKxTClpqJ34IkAo_gVuCl__u6CprEGBMWPJFh5c8KN4",
-        "ppdb": "https://script.google.com/macros/s/AKfycbyLkRUvG9_gtuBh3UNhICNjifkhOnSj9ObX-EYYX51R3OW81PREN857jHyRTU5WDQm7/exec"
-    }, {
-        "sekolah": "SDN RATUJAYA 3",
-        "kelas": "kuota_ratujaya3",
-        "url": "https://script.google.com/macros/s/AKfycbyZEMq50GvQBFlPTeO06vwI9fpxgGL4wedkYqw8kodK8TFvIejHE5AbPfoS7XPaRvs4jg/exec",
-        "idss": "1AkJ2PYsAGLE6PQu9DMJP48R5NXOxu-ipdueyJC4Akrs",
-        "ppdb": "https://script.google.com/macros/s/AKfycbwUy4hxy6xB3toKOJp1cvHtS99zJrQ8pfvg1foA9KFUtjdti08rGk-uuyZIX9Fdp87O/exec"
-    }, {
-        "sekolah": "SDN UTAN JAYA",
-        "kelas": "kuota_utanjaya",
-        "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
-        "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
-        "ppdb": "https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
-    }, {
-        "sekolah": "SDN CIPAYUNG 1",
-        "kelas": "kuota_cipayung1",
-        "url": "https://script.google.com/macros/s/AKfycbysXu3g6jkD-OAdjzAmSjvkpFdCYOmqbPPcfvCWpNMPTBA6GyaggTvg3o6n3c2ymI-d/exec",
-        "idss": "1E1LoeoUXVn7raLQFHeUtpvrt2Ns1ZWFziZahV-UoZO0",
-        "ppdb": "https://script.google.com/macros/s/AKfycbzY3E6aNSCnrgFV4hbT03Xd_VOhSWfK83GZRc7fMLQlZB_199KZVxNIMCdjGFymyh0E1g/exec"
-    }, {
-        "sekolah": "SDN CIPAYUNG 2",
-        "kelas": "kuota_cipayung2",
-        "idss": "10OOIxTrPAakmnYpgKsyQjTf41B-u9T-f6BrPqxTimPY",
-        "url": "https://script.google.com/macros/s/AKfycbw2kv0h79eThXl_20XVSWyZYKeTpCUqBs-Bvlz-q9R6y1FOB-vziybrq-BiaZvhxZ11/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbzyN2wqEuyYfryuBqQg8s2HHNy4ES2aWkuqAtJPO2Gr1Pxn4154o-pNEmgRnQJHOU80/exec"
-    }, {
-        "sekolah": "SDN CIPAYUNG 3",
-        "kelas": "kuota_cipayung3",
-        "idss": "1G3fff9ybmPwGVFaR_oqunI0BMTZ1b-75HMAsk8QbA6c",
-        "url": "https://script.google.com/macros/s/AKfycbzWHfR_CcExF9FWANc5nakR1-4iHEpleW6zPdU0qjHt9_tiBqt_tYH9yCXTUG7C0uLKmQ/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbxApSIpLIZf6bNWgpKwh9YOoq7RFS91F99ol_dclrbM1Dy2nnBmj24nm_0ccy4iFC60Gg/exec"
-    }, {
-        "sekolah": "SDN CIPAYUNG 4",
-        "kelas": "kuota_cipayung4",
-        "idss": "1YTBSa8rurPsJQKb-qRLIRw3b7H8RXmxfcBQLtrqosyk",
-        "url": "https://script.google.com/macros/s/AKfycbzgk2nUK447BUNrZ729BH9vCU1DYnE4U1pT0_myBxz6n_LUVZiRgFp4v6wtXMvN9pN3/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbwYIVjnZxB_Wc2cSRVh9ekKFley8f_ZzTei5vI5tOUXJMOdMFDgR6Vr4vIISISGtysmsA/exec"
-    }, {
-        "sekolah": "SDN CITAYAM 1",
-        "idss": "1Zs7AU-lWKvXUrwjgqTHlTe0EE6jCkafiG2yDCJFRQDI",
-        "url": "https://script.google.com/macros/s/AKfycbx_QKugHrnQHwFZAVrpcvI7FPCEpnMUfM_nJyLIPvREySE7j05J5T37n2yJu7ZRjytn/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbwSFZslGYKE9YybQ47ecw9NyHfO2Brg1Ij82aKpdssG9OSjOTzoeWapUeo6gGxvnHwtEg/exec"
-    }, {
-        "sekolah": "SDN CITAYAM 4",
-        "kelas": "kuota_citayam4",
-        "idss": "1e2KCLdvmD7js72Yrb6h3PMjos4bfnpGFMdiqXq0lKeE",
-        "url": "https://script.google.com/macros/s/AKfycby5m9iXQt_fYT61eezYS9I2knGFC3aLtJyX3OdL39IciXV1XyVHU9N1i1cBYPVaiFRi/exec",
-        "ppdb": "https://script.google.com/macros/s/AKfycbxNIrTDAsJVJ8qwrcrnBCDW1zyF3zMrhQe3-94Aj148lQseM5y-1c_q0AVvFHNwMler/exec"
-    }];
-    let html = "";
-    let tbody = document.querySelector(".rekaptabelsekecamatan").getElementsByTagName("tbody")[0];
-    for (i = 0; i < urlscript.length; i++) {
-        let urlppdb = urlscript[i].ppdb;
-        let namasekolah = urlscript[i].sekolah;
-        let urllogin = urlscript[i].url;
-        let idss = urlscript[i].idss;
+    // let urlscript = [{
+    //     "sekolah": "SDN RATUJAYA 1",
+    //     "kelas": "kuota_ratujaya1",
+    //     "url": "https://script.google.com/macros/s/AKfycbzpl-CIjAjTVOwlpf7ZKQ34hELzrPupKNF1v94yz9nU4AKY5RfUaMg3pP70lYd3iYkk/exec",
+    //     "idss": "1U65gnNh7bRfZlD0B3JxZ6B5j6RFgyD77ro67jvrQ1Hg",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbw_CxeurtA5idnQukkl7-xtnFWITXc-tgrqQ7F6OKiKUepV0gWUA5Jl4lR4sBDFC8j6/exec"
+    // }, {
+    //     "sekolah": "SDN RATUJAYA 2",
+    //     "kelas": "kuota_ratujaya2",
+    //     "url": "https://script.google.com/macros/s/AKfycbyomW88hiqeaM6EKAr3nul28QoXcukop3E61r9Byf10NJtE3xkybat0v9kqSh3-ySahVA/exec",
+    //     "idss": "1avLVXKt-LVXs3XB_Q452L0a4-bjmZDEjEr1npKzdigY",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbwBzMzpHXe4tt-t0ZkINwF65cPcPAfonUMAHb3FO7BfXZVSO0drotC_S2HzYnBpJfeGBw/exec"
+    // }, {
+    //     "sekolah": "SDN PONDOK TERONG 1",
+    //     "kelas": "kuota_ponter1",
+    //     "idss": "10ikKaNupSl6Ssww0KEWw9o8sQJQ1RpA1c3U8po4LYuQ",
+    //     "url": "https://script.google.com/macros/s/AKfycbyZOmnGVRMZfoopwLIoQ2LeDmayjdP7_wTU53HOBwGfiM_ylU0wKuzJyzGjcJs_9ySmgA/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbyfogeCk3qiRblZA0cnwujJqdHoNKwkHveEfw7WyeFdfDOFL6FuOe0Wf1P-oPVlsBoe/exec"
+    // }, {
+    //     "sekolah": "SDN PONDOK TERONG 3",
+    //     "kelas": "kuota_ponter3",
+    //     "url": "https://script.google.com/macros/s/AKfycbx4UVsESvnS-HFQOLZ1HPHtuYWI9K1aApAc_yxmDZQpEImXUKNH9ZWL-ex_lmyNppzj/exec",
+    //     "idss": "1zKMNI-AhN4ziGhZ20p_bMZAOjE50HMBJ6-NG_QqobDc",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbzYMPW4a9VJUVLC5OKjUwYiJYjyaq8HLaih1IWOxTqa04nOyVByLJQIdpLeukZx5py3/exec"
+    // }, {
+    //     "sekolah": "SDN PONDOK TERONG 4",
+    //     "kelas": "kuota_ponter4",
+    //     "url": "https://script.google.com/macros/s/AKfycbzgtCkGubK9ANlTswcRHzaP-xqQd8lqxZLjT3DkAb1KZ-CJ_b80dNcTMqdcyHUOdACv0A/exec",
+    //     "idss": "1bKxTClpqJ34IkAo_gVuCl__u6CprEGBMWPJFh5c8KN4",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbyLkRUvG9_gtuBh3UNhICNjifkhOnSj9ObX-EYYX51R3OW81PREN857jHyRTU5WDQm7/exec"
+    // }, {
+    //     "sekolah": "SDN RATUJAYA 3",
+    //     "kelas": "kuota_ratujaya3",
+    //     "url": "https://script.google.com/macros/s/AKfycbyZEMq50GvQBFlPTeO06vwI9fpxgGL4wedkYqw8kodK8TFvIejHE5AbPfoS7XPaRvs4jg/exec",
+    //     "idss": "1AkJ2PYsAGLE6PQu9DMJP48R5NXOxu-ipdueyJC4Akrs",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbwUy4hxy6xB3toKOJp1cvHtS99zJrQ8pfvg1foA9KFUtjdti08rGk-uuyZIX9Fdp87O/exec"
+    // }, {
+    //     "sekolah": "SDN UTAN JAYA",
+    //     "kelas": "kuota_utanjaya",
+    //     "url": "https://script.google.com/macros/s/AKfycbwIJK3JGkczKEawtP6qAdx-b_DtNq5T0NPYRiyCbiFwC7_XOHgGSalMW67IHhE4h__4eQ/exec",
+    //     "idss": "19siwvo-vFhJuhU12iwU_diF36EGLUzs1v6anJ0xwhfk",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycby1IAT32XXre0kd6_O9UWWanql-vkVGhnef9Q1D0m2QcyCBlg8DboA2CviNU1MSho7LOA/exec"
+    // }, {
+    //     "sekolah": "SDN CIPAYUNG 1",
+    //     "kelas": "kuota_cipayung1",
+    //     "url": "https://script.google.com/macros/s/AKfycbysXu3g6jkD-OAdjzAmSjvkpFdCYOmqbPPcfvCWpNMPTBA6GyaggTvg3o6n3c2ymI-d/exec",
+    //     "idss": "1E1LoeoUXVn7raLQFHeUtpvrt2Ns1ZWFziZahV-UoZO0",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbzY3E6aNSCnrgFV4hbT03Xd_VOhSWfK83GZRc7fMLQlZB_199KZVxNIMCdjGFymyh0E1g/exec"
+    // }, {
+    //     "sekolah": "SDN CIPAYUNG 2",
+    //     "kelas": "kuota_cipayung2",
+    //     "idss": "10OOIxTrPAakmnYpgKsyQjTf41B-u9T-f6BrPqxTimPY",
+    //     "url": "https://script.google.com/macros/s/AKfycbw2kv0h79eThXl_20XVSWyZYKeTpCUqBs-Bvlz-q9R6y1FOB-vziybrq-BiaZvhxZ11/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbzyN2wqEuyYfryuBqQg8s2HHNy4ES2aWkuqAtJPO2Gr1Pxn4154o-pNEmgRnQJHOU80/exec"
+    // }, {
+    //     "sekolah": "SDN CIPAYUNG 3",
+    //     "kelas": "kuota_cipayung3",
+    //     "idss": "1G3fff9ybmPwGVFaR_oqunI0BMTZ1b-75HMAsk8QbA6c",
+    //     "url": "https://script.google.com/macros/s/AKfycbzWHfR_CcExF9FWANc5nakR1-4iHEpleW6zPdU0qjHt9_tiBqt_tYH9yCXTUG7C0uLKmQ/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbxApSIpLIZf6bNWgpKwh9YOoq7RFS91F99ol_dclrbM1Dy2nnBmj24nm_0ccy4iFC60Gg/exec"
+    // }, {
+    //     "sekolah": "SDN CIPAYUNG 4",
+    //     "kelas": "kuota_cipayung4",
+    //     "idss": "1YTBSa8rurPsJQKb-qRLIRw3b7H8RXmxfcBQLtrqosyk",
+    //     "url": "https://script.google.com/macros/s/AKfycbzgk2nUK447BUNrZ729BH9vCU1DYnE4U1pT0_myBxz6n_LUVZiRgFp4v6wtXMvN9pN3/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbwYIVjnZxB_Wc2cSRVh9ekKFley8f_ZzTei5vI5tOUXJMOdMFDgR6Vr4vIISISGtysmsA/exec"
+    // }, {
+    //     "sekolah": "SDN CITAYAM 1",
+    //     "idss": "1Zs7AU-lWKvXUrwjgqTHlTe0EE6jCkafiG2yDCJFRQDI",
+    //     "url": "https://script.google.com/macros/s/AKfycbx_QKugHrnQHwFZAVrpcvI7FPCEpnMUfM_nJyLIPvREySE7j05J5T37n2yJu7ZRjytn/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbwSFZslGYKE9YybQ47ecw9NyHfO2Brg1Ij82aKpdssG9OSjOTzoeWapUeo6gGxvnHwtEg/exec"
+    // }, {
+    //     "sekolah": "SDN CITAYAM 4",
+    //     "kelas": "kuota_citayam4",
+    //     "idss": "1e2KCLdvmD7js72Yrb6h3PMjos4bfnpGFMdiqXq0lKeE",
+    //     "url": "https://script.google.com/macros/s/AKfycby5m9iXQt_fYT61eezYS9I2knGFC3aLtJyX3OdL39IciXV1XyVHU9N1i1cBYPVaiFRi/exec",
+    //     "ppdb": "https://script.google.com/macros/s/AKfycbxNIrTDAsJVJ8qwrcrnBCDW1zyF3zMrhQe3-94Aj148lQseM5y-1c_q0AVvFHNwMler/exec"
+    // }];
+    let urlscript
+    await fetch(terminal + "?action=settingPerSekolah")
+      .then(m => m.json())
+      .then(r => {
+        
+        urlscript = r.setting;
+    }).catch(er => console.log(er))
+            let html = "";
+            let tbody = document.querySelector(".rekaptabelsekecamatan").getElementsByTagName("tbody")[0];
+            for (i = 0; i < urlscript.length; i++) {
+                let urlppdb = urlscript[i].url_pendaftar;
+                let namasekolah = urlscript[i].nama_sekolah;
+                let urllogin = urlscript[i].url_settingppdb;
+                let idss = urlscript[i].ss_pendaftar;
 
-        let param = "?action=getdatasheet&tab=respon";
-        await fetch(urlppdb + param).then(m => m.json()).then(r => {
-            db_pendaftarrekap = r.records;
-        }).catch(er => console.log(er));
+                let param = "?action=getdatasheet&tab=respon";
+                await fetch(urlppdb + param).then(m => m.json()).then(r => {
+                    db_pendaftarrekap = r.records;
+                }).catch(er => console.log(er));
 
 
-        let link = urllogin + "?action=getsistemseleksi&idss=" + idss;
-        await fetch(link).then(m => m.json()).then(r => {
-            objek_settingseleksirekap = r.records;
-        }).catch(er => console.log(er))
+                let link = urllogin + "?action=getsistemseleksi&idss=" + idss;
+                await fetch(link).then(m => m.json()).then(r => {
+                    objek_settingseleksirekap = r.records;
+                }).catch(er => console.log(er))
 
 
-        let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
-        await fetch(linkpagu).then(m => m.json()).then(r => {
-            objek_settingpagurekap = r.records;
-        }).catch(er => console.log(er))
-        let datazonasi = fungsi_html_jurnalrekap("kuota_zonasi");
-        let dataafirmasi = fungsi_html_jurnalrekap("kuota_afirmasi");
-        let dataptk = fungsi_html_jurnalrekap("kuota_ptk");
+                let linkpagu = urllogin + "?action=getpagu&idss=" + idss;
+                await fetch(linkpagu).then(m => m.json()).then(r => {
+                    objek_settingpagurekap = r.records;
+                }).catch(er => console.log(er))
+                let datazonasi = fungsi_html_jurnalrekap("kuota_zonasi");
+                let dataafirmasi = fungsi_html_jurnalrekap("kuota_afirmasi");
+                let dataptk = fungsi_html_jurnalrekap("kuota_ptk");
 
-        let loloszonasi = datazonasi["lolos_zonasi"];
-        let lolosafirmasi = dataafirmasi["lolos_afirmasi"];
-        let lolosptk = dataptk["lolos_ptk"];
+                let loloszonasi = datazonasi["lolos_zonasi"];
+                let lolosafirmasi = dataafirmasi["lolos_afirmasi"];
+                let lolosptk = dataptk["lolos_ptk"];
 
-        let ga_zonasi = datazonasi["tidaklolos_zonasi"];
-        let ga_afirmasi = dataafirmasi["tidaklolos_afirmasi"];
-        let ga_ptk = dataptk["tidaklolos_ptk"];
+                let ga_zonasi = datazonasi["tidaklolos_zonasi"];
+                let ga_afirmasi = dataafirmasi["tidaklolos_afirmasi"];
+                let ga_ptk = dataptk["tidaklolos_ptk"];
 
-        let kr_zonasi = datazonasi["nonkriteria_zonasi"]
-        let kr_afirmasi = dataafirmasi["nonkriteria_afirmasi"]
-        let kr_ptk = dataptk["nonkriteria_ptk"]
+                let kr_zonasi = datazonasi["nonkriteria_zonasi"]
+                let kr_afirmasi = dataafirmasi["nonkriteria_afirmasi"]
+                let kr_ptk = dataptk["nonkriteria_ptk"]
 
-        let ade = loloszonasi.concat(lolosafirmasi);
-        let eda = ade.concat(lolosptk);
-        let rekapcpdblolos = eda;
+                let ade = loloszonasi.concat(lolosafirmasi);
+                let eda = ade.concat(lolosptk);
+                let rekapcpdblolos = eda;
 
-        html += `<tr>
-        <td>${i + 1}</td>
-        <td>${namasekolah}</td>
-        <td contenteditable="true">${db_pendaftarrekap.filter(l => l.cpdb_jk == "L").length}</td>
-        <td contenteditable="true">${db_pendaftarrekap.filter(l => l.cpdb_jk == "P").length}</td>
-        <td contenteditable="true">${db_pendaftarrekap.length}</td>
-        <td contenteditable="true">${rekapcpdblolos.filter(l => l.cpdb_jk == "L").length}</td>
-        <td contenteditable="true">${rekapcpdblolos.filter(l => l.cpdb_jk == "P").length}</td>
-        <td contenteditable="true">${rekapcpdblolos.length}</td>
-        <td contenteditable="true" class="w3-center">${objek_settingpagurekap[0].kuota_kelas}</td>
-        <td contenteditable="true"></td>
-    </tr>`;
-        console.log(i)
-        tbody.innerHTML = `<tr><td colspan="10" class="w3-center"><img src="/app/barloading.gif" alt="proses loading"> Memproses data ${namasekolah}</td></tr>`;
-    };
+                html += `<tr>
+                <td>${i + 1}</td>
+                <td>${namasekolah}</td>
+                <td contenteditable="true">${db_pendaftarrekap.filter(l => l.cpdb_jk == "L").length}</td>
+                <td contenteditable="true">${db_pendaftarrekap.filter(l => l.cpdb_jk == "P").length}</td>
+                <td contenteditable="true">${db_pendaftarrekap.length}</td>
+                <td contenteditable="true">${rekapcpdblolos.filter(l => l.cpdb_jk == "L").length}</td>
+                <td contenteditable="true">${rekapcpdblolos.filter(l => l.cpdb_jk == "P").length}</td>
+                <td contenteditable="true">${rekapcpdblolos.length}</td>
+                <td contenteditable="true" class="w3-center">${objek_settingpagurekap[0].kuota_kelas}</td>
+                <td contenteditable="true"></td>
+            </tr>`;
+                console.log(i)
+                tbody.innerHTML = `<tr><td colspan="10" class="w3-center"><img src="/app/barloading.gif" alt="proses loading"> Memproses data ${namasekolah}</td></tr>`;
+            };
 
-    tbody.innerHTML = html;
-
+            tbody.innerHTML = html;
+    
 };
 
 
@@ -223,7 +230,7 @@ const fungsi_html_jurnalrekap = (zonasi) => {
     let html = ``;
     let htmlnonkuota = ``;
     let prioritas = objek_settingseleksirekap;
-    let db = db_pendaftarrekap.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && k.id_status == "TAHAP SELEKSI");
+    let db = db_pendaftarrekap.filter(k => k.jalur_cpdb == zonasi.replace("kuota_", "").toUpperCase() && (k.id_status == "Proses Jurnal"||k.id_status == "Diterima"));
     let count = 0;
     let urut = 1;
 
@@ -362,7 +369,7 @@ const xlPengawsrekap = () => {
     let db = nama_tabel;
     let html = `<table><tr>
     <td colspan="${db.rows[2].cells.length}">DATA PESERTA DIDIDK BARU SD NEGERI KECAMATAN CIPAYUNG</td></tr>
-    <tr><td colspan="${db.rows[2].cells.length}">TAHUN PELAJARAN 2021/2022</td>
+    <tr><td colspan="${db.rows[2].cells.length}">TAHUN PELAJARAN 2022/2023</td>
     </tr>
     ${nama_tabel.innerHTML}
     </table>`;
