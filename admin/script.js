@@ -6147,6 +6147,7 @@ const fn_finalppdb = async () => {
     <button class="w3-button tabverifsa " onclick="pindahTabFinal(this,'final_daftarulang')">Daftar Ulang</button>
     <button class="w3-button tabverifsa " onclick="pindahTabFinal(this,'final_nomorinduk')">Penomoran Induk</button>
     <button class="w3-button tabverifsa " onclick="pindahTabFinal(this,'final_pembagiankelas')">Pembagian Kelas</button>
+    <button class="w3-button tabverifsa " onclick="pindahTabFinal(this,'final_pembagiankelasstatistik')">Data Statistik PDB</button>
     </div>
     <div class="final_resultppdb w3-border w3-container" style="overflow-x:auto">
    
@@ -6187,6 +6188,10 @@ const pindahTabFinal = (el, a) => {
 
     } else if (a == "final_pembagiankelas") {
         data_final_indukpembagiankelas()
+
+        // cekpendaftarganda();
+    }  else if (a == "final_pembagiankelasstatistik") {
+        final_pembagiankelasstatistik()
 
         // cekpendaftarganda();
     } else {
@@ -6339,56 +6344,61 @@ const data_daftarulang = () => {
     data.append("tab", "daftarulang");
 
     fetch(urllogin, {
+    // fetch("https://script.google.com/macros/s/AKfycbxmDpTSnTneUmnBVT4um7-vvWR0PYvkKkXWoW2IUUENo51IIECbVE__lpCjuirk3AGFvA/exec", {
             method: 'post',
             body: data
         })
         .then(m => m.json())
         .then(r => {
-            //console.log(r);
+            console.log(r);
             let db_du = r.records;
             db_udahdaftarulang = r.records;
             if (r.jumlahdata == 1) {
                 divdaftarulang.innerHTML = `<h3 class="w3-center">Belum ada pendaftar yang telah melakukan registrasi/Daftar Ulang</h3>`;
             } else {
-                let html = `<h3 class="w3-center trdu0">Data CPDB yang telah Registrasi Daftar Ulang</h3>
-                <table class="w3-table garis w3-small trdu">
-                <thead>
-                    <th>No.</th>
-                    <th>ID Registrasi</th>
-                    <th>Status Registrasi</th>
-                    <th>Sumber Data</th>
-                    <th>Nama PDB</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tempat, Tanggal Lahir</th>
-                    <th>Nama Ayah</th>
-                    <th>Nama Ibu</th>
-                    <th>Detail</th>
+                divdaftarulang.innerHTML ="cek"
+                // let html = `<h3 class="w3-center trdu0">Data CPDB yang telah Registrasi Daftar Ulang</h3>
+                // <table class="w3-table garis w3-small trdu">
+                // <thead>
+                //     <th>No.</th>
+                //     <th>ID Registrasi</th>
+                //     <th>Status Registrasi</th>
+                //     <th>Sumber Data</th>
+                //     <th>Nama PDB</th>
+                //     <th>Jenis Kelamin</th>
+                //     <th>Tempat, Tanggal Lahir</th>
+                //     <th>Nama Ayah</th>
+                //     <th>Nama Ibu</th>
+                //     <th>Detail</th>
 
-                </thead>
-                <tbody>`
-                for (let i = 0; i < db_du.length; i++) {
-                    html += `<tr>
-                        <td>${i + 1}</td>
-                        <td>${db_du[i].id_registrasi}</td>
-                        <td>${db_du[i].ket_registrasi}</td>
-                        <td>${db_du[i].datadata_jalur}</td>
-                        <td>${db_du[i].nama_cpdb}</td>
-                        <td>${(db_du[i].cpdb_jk == "L") ? "Laki-laki" : "Perempuan"}</td>
-                        <td>${db_du[i].cpdb_tempat_lahir}, ${tanggalfull(db_du[i].cpdb_tanggal_lahir)}</td>
-                        <td>${db_du[i].ortu_nama_ayah}</td>
-                        <td>${db_du[i].ortu_nama_ibu}</td>
-                        <td class="pointerkan w3-center" onclick="detailregister('db_du','${db_du[i].id_registrasi}')"><i class="fa fa-eye"></i></td>
-                    </tr>`
-                }
-                html += `</tbody>
-                </table>
-                `;
+                // </thead>
+                // <tbody>`
+                // for (let i = 0; i < db_du.length; i++) {
+                //     html += `<tr>
+                //         <td>${i + 1}</td>
+                //         <td>${db_du[i].id_registrasi}</td>
+                //         <td>${db_du[i].ket_registrasi}</td>
+                //         <td>${db_du[i].datadata_jalur}</td>
+                //         <td>${db_du[i].nama_cpdb}</td>
+                //         <td>${(db_du[i].cpdb_jk == "L") ? "Laki-laki" : "Perempuan"}</td>
+                //         <td>${db_du[i].cpdb_tempat_lahir}, ${tanggalfull(db_du[i].cpdb_tanggal_lahir)}</td>
+                //         <td>${db_du[i].ortu_nama_ayah}</td>
+                //         <td>${db_du[i].ortu_nama_ibu}</td>
+                //         <td class="pointerkan w3-center" onclick="detailregister('db_du','${db_du[i].id_registrasi}')"><i class="fa fa-eye"></i></td>
+                //     </tr>`
+                // }
+                // html += `</tbody>
+                // </table>
+                // `;
 
-                divdaftarulang.innerHTML = html;
-                document.querySelector(".btn_export_reduksi").setAttribute("onclick", "final_excel('trdu','db_du')");
+                // divdaftarulang.innerHTML = html;
+                // document.querySelector(".btn_export_reduksi").setAttribute("onclick", "final_excel('trdu','db_du')");
             }
         })
-        .catch(er => console.log(er))
+        .catch(er =>{
+             console.log(er)
+             divdaftarulang.innerHTML = er
+            })
 
 };
 const detailregister = (sumber, id) => {
@@ -7502,7 +7512,7 @@ const pilihrombellll = () => {
         for (let i = 0; i < namaurut.length; i++) {
             html2 += `<tr>
                     <td>${i + 1}</td>
-                    <td>212201${nomor3digit(i + 1)}</td>
+                    <td>222301${nomor3digit(i + 1)}</td>
                     <td>${namaurut[i].rombel}</td>
                     <td>${namaurut[i].nama_cpdb}</td>
                     <td>${namaurut[i].cpdb_tempat_lahir}, ${(namaurut[i].cpdb_tanggal_lahir == "") ? "" : tanggalfull(namaurut[i].cpdb_tanggal_lahir)}</td>
@@ -7554,7 +7564,7 @@ const pilihrombellll = () => {
         for (let i = 0; i < namaurut.length; i++) {
             html3 += `<tr>
                 <td>${i + 1}</td>
-                <td>212201${nomor3digit(i + 1)}</td>
+                <td>222301${nomor3digit(i + 1)}</td>
                 <td>${namaurut[i].rombel}</td>
                 <td>${namaurut[i].nama_cpdb}</td>
                 <td>${namaurut[i].cpdb_tempat_lahir}, ${(namaurut[i].cpdb_tanggal_lahir == "") ? "" : tanggalfull(namaurut[i].cpdb_tanggal_lahir)}</td>
@@ -8096,7 +8106,7 @@ const data_final_indukpembagiankelas = async () => {
         for (let y = 0; y < dbbaruu.length; y++) {
             let obj = {}
             obj = dbbaruu[y];
-            obj["noinduksiswa"] = `212201${nomor3digit(y + 1)}`;
+            obj["noinduksiswa"] = `222301${nomor3digit(y + 1)}`;
             dbinduk.push(obj);
         };
         //console.log(dbinduk)
@@ -8287,7 +8297,7 @@ const data_final_induk = async () => {
         for (let y = 0; y < dbbaruu.length; y++) {
             let obj = {}
             obj = dbbaruu[y];
-            obj["noinduksiswa"] = `212201${nomor3digit(y + 1)}`;
+            obj["noinduksiswa"] = `222301${nomor3digit(y + 1)}`;
             dbinduk.push(obj);
         };
         //console.log(dbinduk)
@@ -10837,4 +10847,124 @@ const printF_PD = (kelas,judul)=>{
 
     window.frames["iframeprint"].focus();
     window.frames["iframeprint"].print();
+}
+const final_pembagiankelasstatistik = () =>{
+    let div = document.querySelector(".final_resultppdb");
+        div.innerHTML = `<img src="/app/barloading.gif" alt="proses loading">`;
+        let db_daftarulang
+        let param = "?action=getdatasheet&tab=daftarulang";
+        fetch(urlppdb + param).then(m => m.json()).then(r => {
+            
+            db_daftarulang = r.records.filter(s => s.ket_registrasi == "MENDAFTAR ULANG");
+
+            // console.log(db_daftarulang.filter(s=> !(parseFloat(s.cpdb_umur)>=parseFloat(8.0000)&&(parseFloat(s.cpdb_umur)>=parseFloat(7.0000) && parseFloat(s.cpdb_umur)<=parseFloat(7.1131)&&parseFloat(s.cpdb_umur)>=parseFloat(6.0000) && parseFloat(s.cpdb_umur)<=parseFloat(6.1131))) && s.cpdb_jk == "L").map(m => m.cpdb_umur))
+            // console.log(db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(7.0000) && parseFloat(s.cpdb_umur)<=parseFloat(7.1131) && s.cpdb_jk == "L").map(m => m.cpdb_umur))
+            // console.log(db_daftarulang.filter(s=>  parseFloat(s.cpdb_umur)>=parseFloat(6.0000) && parseFloat(s.cpdb_umur)<=parseFloat(6.1131) && s.cpdb_jk == "L").map(m => m.cpdb_umur))
+            // console.log(db_daftarulang.filter(s=>   s.cpdb_jk == "").map(m => m.cpdb_umur))
+
+            let d_L_8 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(8.0000) && s.cpdb_jk == "L").length;
+            let d_L_7 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(7.0000) && parseFloat(s.cpdb_umur)<=parseFloat(7.9999) && s.cpdb_jk == "L").length;
+            let d_L_6 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(6.0000) && parseFloat(s.cpdb_umur)<=parseFloat(6.9999) && s.cpdb_jk == "L").length;
+            let d_L_T = db_daftarulang.filter(s=> s.cpdb_jk == "L").length;
+
+            let d_P_8 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(8.0000) && s.cpdb_jk == "P").length;
+            let d_P_7 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(7.0000) && parseFloat(s.cpdb_umur)<=parseFloat(7.9999) && s.cpdb_jk == "P").length;
+            let d_P_6 = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(6.0000) && parseFloat(s.cpdb_umur)<=parseFloat(6.9999) && s.cpdb_jk == "P").length;
+            let d_P_T = db_daftarulang.filter(s=> s.cpdb_jk == "P").length;
+            let d_8  = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(8.0000)).length;
+            let d_7  = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(7.0000) && parseFloat(s.cpdb_umur)<=parseFloat(7.9999)).length;
+            let d_6  = db_daftarulang.filter(s=> parseFloat(s.cpdb_umur)>=parseFloat(6.0000) && parseFloat(s.cpdb_umur)<=parseFloat(6.9999)).length;
+            let html ="";
+                html +=`<div class="areaprint_statistikPDB">`
+                html +=`<h3 class="w3-center">Data Statistik Peserta Didik Baru</h3>`;
+                html +=`<h3 class="w3-center">Tahun Pelajaran 2022/2023</h3><br><br>`;
+                html +=`<table class="w3-table-all w3-tiny w3-centered">`;
+                html +=`<thead>`;
+                    html +=`<tr class="w3-dark-gray">`;
+                        html +=`<th rowspan="2" class="w3-border">Keterangan</th>`
+                        html +=`<th class="w3-border" colspan="3">Jumlah Berdasarkan Rentang Usia</th>`;
+                        html +=`<th rowspan="2">Total</th>`
+                    html +=`</tr>`;
+                    html +=`<tr  class="w3-dark-gray">`;
+                        html+=`<th class="w3-border"> &plusmn; 8 Tahun</th>`
+                        html+=`<th class="w3-border"> &plusmn; 7 Tahun</th>`
+                        html+=`<th class="w3-border"> &plusmn; 6 Tahun</th>`
+                    html +=`</tr>`;
+                html +=`</thead>`;
+                html +=`<tbody>`;
+                    html+=`<tr>`;
+                        html+=`<td class="w3-border">Laki-Laki</td>`
+                        html+=`<td class="w3-border">${d_L_8}</td>`
+                        html+=`<td class="w3-border">${d_L_7}</td>`
+                        html+=`<td class="w3-border">${d_L_6}</td>`
+                        html+=`<td class="w3-border">${d_L_T}</td>`
+                    html+=`</tr>`;
+                    html+=`<tr>`;
+                        html+=`<td class="w3-border">Perempuan</td>`
+                        html+=`<td class="w3-border">${d_P_8}</td>`
+                        html+=`<td class="w3-border">${d_P_7}</td>`
+                        html+=`<td class="w3-border">${d_P_6}</td>`
+                        html+=`<td class="w3-border">${d_P_T}</td>`
+                    html+=`</tr>`;
+                    html+=`<tr>`;
+                        html+=`<td class="w3-border">Total</td>`
+                        html+=`<td class="w3-border">${d_8}</td>`
+                        html+=`<td class="w3-border">${d_7}</td>`
+                        html+=`<td class="w3-border">${d_6}</td>`
+                        html+=`<td class="w3-border">${db_daftarulang.length}</td>`
+                    html+=`</tr>`;
+                html +=`</tbody>`;
+                html +=`</table><br><br>`;
+                html +=`</div>`
+                html +=`<div class="w3-round-xlarge w3-padding w3-card-4 w3-center">`;
+                    html +=`<button class="w3-btn w3-round-xxlarge w3-pale-blue w3-tiny w3-bottombar w3-border w3-border-black" onclick="printAwi('areaprint_statistikPDB')">PRINT</button>`;
+                html +=`</div>`
+
+                div.innerHTML = html;
+
+
+    }).catch(er =>{
+         console.log(er)
+         div.innerHTML = er;
+        });
+
+}
+const printAwi = (kelas)=>{
+        //alert(kelas)
+    //tabelprintnomorinduk
+    let isibody = document.querySelector("."+kelas).innerHTML;
+    
+
+
+    //let tabel2 = document.querySelector("." + kelasgagal).outerHTML;
+    let el = document.getElementById("iframeprint");
+    let doc = el.contentDocument;
+    // head, body
+    let head = doc.head;
+    let body = doc.body;
+    //isikan HEAD dengan title, style, link, dll.
+    head.innerHTML = `<title>DATA STATISTIKA PDB</title>`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">`;
+    head.innerHTML += `<link href="https://fonts.googleapis.com/css?family=Raleway">`;
+    head.innerHTML += `<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>`;
+    head.innerHTML += `<style type="text/css"> .versii-table{width:950px;max-width:100%;border-collapse:collapse}.versi-table{width:auto;max-width:100%;border-collapse:collapse}.versi-table td,.versi-table th,.versi-table tr,.versii-table td,.versii-table th,.versii-table tr{border:1px solid #000;color:#000;padding:5px 10px 5px 10px}.versi-table th,.versii-table th{background-color:#eee;color:#00f;vertical-align:middle;text-align:center}.versi-table tr:nth-of-type(even) td,.versii-table tr:nth-of-type(even) td{border:0;background-color:#fff;border:1px solid #000}.versi-table tr:nth-of-type(odd) td,.versii-table tr:nth-of-type(odd) td{border:0;background-color:#eef;border:1px solid #000} .garis td,.garis th,.garis tr{border:0.5px solid rgb(119, 116, 116)} .garis th{border:1px solid #000;text-align:center;vertical-align:middle} </style>`;
+
+    head.innerHTML += `<style type="text/css" media="print">
+    @media print {
+        html,body{margin:0;padding:0}
+        
+         @page {
+            size: A4 portrait;
+            
+            }
+    }
+    </style>`;
+    body.innerHTML = isibody;
+
+
+
+    window.frames["iframeprint"].focus();
+    window.frames["iframeprint"].print();
+
 }
