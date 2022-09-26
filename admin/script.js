@@ -5010,6 +5010,7 @@ const verif_seleksi = async () => {
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'all_tahap_seleksi')">Rekapitulasi Seleksi</button>
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'all_publikasi_seleksi')">Info Publikasi</button>
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'tahap_laporan_rekap')">Rekap Laporan</button>
+    <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'tahap_laporan_harian')">Rekap Harian</button>
     <button class="w3-button tabverifs " onclick="pindahTabSeleksi(this,'tidakpakaiaplikasi')">Cek Sekolah Lan</button>
 
     </div>
@@ -5054,6 +5055,8 @@ const pindahTabSeleksi = (el, a) => {
         rekap_jalur();
     } else if( a=="tahap_laporan_rekap"){
         rekap_panggilsemuadata()
+    }else if( a=="tahap_laporan_harian"){
+        rekap_panggilsemuadataharian()
     }else if( a=="tidakpakaiaplikasi"){
         rekap_tidakpakeaplikasi()
     }else {
